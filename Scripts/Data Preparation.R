@@ -1,6 +1,5 @@
 ### Data Preparation Script for Analysis ###
 
-
 # Loading the libraries ----------------------------------------------------------
 
 # installing packages
@@ -12,6 +11,7 @@ library(ndjson) # For reading ndjson files
 library(dplyr)
 library(ggplot2)
 library(tidyverse) # For data manipulation
+
 
 # Reading the data -----------------------------------------------------------
 
@@ -78,6 +78,37 @@ library(tibble)
 #head(data_tibble)
 #class(data_tibble)
 
+is_tibble(df1_ct_off) # FALSE
+df1_ct_off_tibble <- as_tibble(df1_ct_off)
+is_tibble(df1_ct_off_tibble) # TRUE
+head(df1_ct_off_tibble)
+class(df1_ct_off_tibble)
+
+# function to convert all data frames to tibbles
+convert_to_tibble <- function(df) {
+  if (!is_tibble(df)) {
+    return(as_tibble(df))
+  } else {
+    return(df)
+  }
+}
+
+# Applying the function to all data frames
+df1_ct_off_tibble <- convert_to_tibble(df1_ct_off)
+df2_ct_off_tibble <- convert_to_tibble(df2_ct_off)
+df3_ct_off_tibble <- convert_to_tibble(df3_ct_off)
+df4_ct_on_tibble <- convert_to_tibble(df4_ct_on)
+df5_ct_on_tibble <- convert_to_tibble(df5_ct_on)
+df6_ct_on_tibble <- convert_to_tibble(df6_ct_on)
+df7_ct_on_tibble <- convert_to_tibble(df7_ct_on)
+df8_ct_off_tibble <- convert_to_tibble(df8_ct_off)
+df9_ct_off_tibble <- convert_to_tibble(df9_ct_off)
+df10_ct_unknown_tibble <- convert_to_tibble(df10_ct_unknown)
+df11_ct_unknown_tibble <- convert_to_tibble(df11_ct_unknown)
+
+head(df1_ct_off_tibble)
+head(df3_ct_off_tibble)
+head(df11_ct_unknown_tibble)
 
 
 # Unnest Data -------------------------------------------------------------
@@ -97,3 +128,394 @@ library(tidyr)
 #summary(data_unnested)
 #glimpse(data_unnested)
 
+names(df1_ct_off_tibble)
+df1_ct_off_unnested <- unnest(df1_ct_off_tibble, cols = c("accessCount", "accessor.identifier", "accessor.identifierType", 
+                                                            "category", "identifier", "kind", "timeStamp", "type", 
+                                                            "outOfProcess", "bundleID", "context", "contextVerificationType", 
+                                                            "domain", "domainClassification", "domainOwner", "domainType", 
+                                                            "firstTimeStamp", "hits", "initiatedType"))
+head(df1_ct_off_unnested)
+class(df1_ct_off_unnested)
+summary(df1_ct_off_unnested)
+glimpse(df1_ct_off_unnested)
+
+# Unnesting all data frames
+names(df2_ct_off_tibble)
+df2_ct_off_unnested <- unnest(df2_ct_off_tibble, cols = c("accessCount", "accessor.identifier", "accessor.identifierType", 
+                                                            "category", "identifier", "kind", "timeStamp", "type", 
+                                                            "outOfProcess", "bundleID", "context", "contextVerificationType", 
+                                                            "domain", "domainClassification", "domainOwner", "domainType", 
+                                                            "firstTimeStamp", "hits", "initiatedType"))
+names(df3_ct_off_tibble)
+df3_ct_off_unnested <- unnest(df3_ct_off_tibble, cols = c("accessCount", "accessor.identifier", "accessor.identifierType", 
+                                                            "category", "identifier", "kind", "timeStamp", "type", 
+                                                            "outOfProcess", "broadcaster.identifier", "broadcaster.identifierType",
+                                                            "bundleID", "context", "contextVerificationType", 
+                                                            "domain", "domainClassification", "domainOwner", "domainType", 
+                                                            "firstTimeStamp", "hits", "initiatedType"))
+names(df4_ct_on_tibble)
+df4_ct_on_unnested <- unnest(df4_ct_on_tibble, cols = c("accessCount", "accessor.identifier", "accessor.identifierType", 
+                                                            "category", "identifier", "kind", "timeStamp", "type", 
+                                                            "broadcaster.identifier", "broadcaster.identifierType", "outOfProcess",
+                                                            "bundleID", "context", "contextVerificationType", 
+                                                            "domain", "domainClassification", "domainOwner", "domainType", 
+                                                            "firstTimeStamp", "hits", "initiatedType"))
+names(df5_ct_on_tibble)
+df5_ct_on_unnested <- unnest(df5_ct_on_tibble, cols = c("accessCount", "accessor.identifier", "accessor.identifierType", 
+                                                            "category", "identifier", "kind", "timeStamp", "type", 
+                                                            "outOfProcess", "bundleID", "context", "contextVerificationType", 
+                                                            "domain", "domainClassification", "domainOwner", "domainType", 
+                                                            "firstTimeStamp", "hits", "initiatedType"))
+names(df6_ct_on_tibble)
+df6_ct_on_unnested <- unnest(df6_ct_on_tibble, cols = c("accessCount", "accessor.identifier", "accessor.identifierType", 
+                                                            "category", "identifier", "kind", "timeStamp", "type", 
+                                                            "outOfProcess", "bundleID", "context", "contextVerificationType", 
+                                                            "domain", "domainClassification", "domainOwner", "domainType", 
+                                                            "firstTimeStamp", "hits", "initiatedType"))
+names(df7_ct_on_tibble)
+df7_ct_on_unnested <- unnest(df7_ct_on_tibble, cols = c("accessCount", "accessor.identifier", "accessor.identifierType", 
+                                                            "category", "identifier", "kind", "timeStamp", "type", 
+                                                            "outOfProcess", "bundleID", "context", "contextVerificationType", 
+                                                            "domain", "domainClassification", "domainOwner", "domainType", 
+                                                            "firstTimeStamp", "hits", "initiatedType"))
+names(df8_ct_off_tibble)
+df8_ct_off_unnested <- unnest(df8_ct_off_tibble, cols = c("accessCount", "accessor.identifier", "accessor.identifierType", 
+                                                            "category", "identifier", "kind", "timeStamp", "type", 
+                                                            "outOfProcess", "bundleID", "context", "contextVerificationType", 
+                                                            "domain", "domainClassification", "domainOwner", "domainType", 
+                                                            "firstTimeStamp", "hits", "initiatedType"))
+names(df9_ct_off_tibble)
+df9_ct_off_unnested <- unnest(df9_ct_off_tibble, cols = c("accessCount", "accessor.identifier", "accessor.identifierType", 
+                                                            "category", "identifier", "kind", "timeStamp", "type", 
+                                                            "outOfProcess", "bundleID", "context", "contextVerificationType", 
+                                                            "domain", "domainClassification", "domainOwner", "domainType", 
+                                                            "firstTimeStamp", "hits", "initiatedType"))
+names(df10_ct_unknown_tibble)
+df10_ct_unknown_unnested <- unnest(df10_ct_unknown_tibble, cols = c("accessCount", "accessor.identifier", "accessor.identifierType", 
+                                                            "category", "identifier", "kind", "timeStamp", "type", 
+                                                            "outOfProcess", "bundleID", "context", "contextVerificationType", 
+                                                            "domain", "domainClassification", "domainOwner", "domainType", 
+                                                            "firstTimeStamp", "hits", "initiatedType"))
+names(df11_ct_unknown_tibble)
+df11_ct_unknown_unnested <- unnest(df11_ct_unknown_tibble, cols = c("accessCount", "accessor.identifier", "accessor.identifierType", 
+                                                            "category", "identifier", "kind", "timeStamp", "type", 
+                                                            "bundleID", "context", "contextVerificationType", 
+                                                            "domain", "domainClassification", "domainOwner", "domainType", 
+                                                            "firstTimeStamp", "hits", "initiatedType"))
+
+
+
+# Selecting only rows and columns relevant to "networkActivity" ----------------------------------------
+
+# Selecting only the relevant columns for analysis that concern "networkActivity"
+df1_ct_off_relevant <- df1_ct_off_unnested %>%
+  filter(type == "networkActivity") %>%
+  select(firstTimeStamp, timeStamp, hits,
+         bundleID, domain, domainOwner, domainType, domainClassification,
+         initiatedType)
+
+df2_ct_off_relevant <- df2_ct_off_unnested %>%
+  filter(type == "networkActivity") %>%
+  select(firstTimeStamp, timeStamp, hits,
+         bundleID, domain, domainOwner, domainType, domainClassification,
+         initiatedType)
+
+df3_ct_off_relevant <- df3_ct_off_unnested %>%
+  filter(type == "networkActivity") %>%
+  select(firstTimeStamp, timeStamp, hits,
+         bundleID, domain, domainOwner, domainType, domainClassification,
+         initiatedType)
+
+df4_ct_on_relevant <- df4_ct_on_unnested %>%
+  filter(type == "networkActivity") %>%
+  select(firstTimeStamp, timeStamp, hits,
+         bundleID, domain, domainOwner, domainType, domainClassification,
+         initiatedType)
+
+df5_ct_on_relevant <- df5_ct_on_unnested %>%
+  filter(type == "networkActivity") %>%
+  select(firstTimeStamp, timeStamp, hits,
+         bundleID, domain, domainOwner, domainType, domainClassification,
+         initiatedType)
+
+df6_ct_on_relevant <- df6_ct_on_unnested %>%
+  filter(type == "networkActivity") %>%
+  select(firstTimeStamp, timeStamp, hits,
+         bundleID, domain, domainOwner, domainType, domainClassification,
+         initiatedType)
+
+df7_ct_on_relevant <- df7_ct_on_unnested %>%
+  filter(type == "networkActivity") %>%
+  select(firstTimeStamp, timeStamp, hits,
+         bundleID, domain, domainOwner, domainType, domainClassification,
+         initiatedType)
+
+df8_ct_off_relevant <- df8_ct_off_unnested %>%
+  filter(type == "networkActivity") %>%
+  select(firstTimeStamp, timeStamp, hits,
+         bundleID, domain, domainOwner, domainType, domainClassification,
+         initiatedType)
+
+df9_ct_off_relevant <- df9_ct_off_unnested %>%
+  filter(type == "networkActivity") %>%
+  select(firstTimeStamp, timeStamp, hits,
+         bundleID, domain, domainOwner, domainType, domainClassification,
+         initiatedType)
+
+df10_ct_unknown_relevant <- df10_ct_unknown_unnested %>%
+  filter(type == "networkActivity") %>%
+  select(firstTimeStamp, timeStamp, hits,
+         bundleID, domain, domainOwner, domainType, domainClassification,
+         initiatedType)
+
+df11_ct_unknown_relevant <- df11_ct_unknown_unnested %>%
+  filter(type == "networkActivity") %>%
+  select(firstTimeStamp, timeStamp, hits,
+         bundleID, domain, domainOwner, domainType, domainClassification,
+         initiatedType)
+
+
+# Getting an overview by showing some rankings ----------------------------
+
+# specified domain accessed during network activity
+# CT OFF
+df1_ct_off_relevant %>%
+  group_by(domain) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+df2_ct_off_relevant %>%
+  group_by(domain) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+df3_ct_off_relevant %>%
+  group_by(domain) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+# CT ON
+df4_ct_on_relevant %>%
+  group_by(domain) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+df5_ct_on_relevant %>%
+  group_by(domain) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+df6_ct_on_relevant %>%
+  group_by(domain) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+df7_ct_on_relevant %>%
+  group_by(domain) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+
+# application responsible for network activity
+# CT OFF
+df1_ct_off_relevant %>%
+  group_by(bundleID) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+df2_ct_off_relevant %>%
+  group_by(bundleID) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+df3_ct_off_relevant %>%
+  group_by(bundleID) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+df4_ct_on_relevant %>%
+  group_by(bundleID) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+df5_ct_on_relevant %>%
+  group_by(bundleID) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+df6_ct_on_relevant %>%
+  group_by(bundleID) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+df7_ct_on_relevant %>%
+  group_by(bundleID) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+
+# domain owner
+# CT OFF
+df1_ct_off_relevant %>%
+  group_by(domainOwner) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+df2_ct_off_relevant %>%
+  group_by(domainOwner) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+df3_ct_off_relevant %>%
+  group_by(domainOwner) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+# CT ON
+df4_ct_on_relevant %>%
+  group_by(domainOwner) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+df5_ct_on_relevant %>%
+  group_by(domainOwner) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+df6_ct_on_relevant %>%
+  group_by(domainOwner) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+df7_ct_on_relevant %>%
+  group_by(domainOwner) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+
+# Merging data frames -----------------------------------------------------
+
+# Merging all relevant data frames into one
+merged_data_all <- bind_rows(
+  df1_ct_off_relevant,
+  df2_ct_off_relevant,
+  df3_ct_off_relevant,
+  df4_ct_on_relevant,
+  df5_ct_on_relevant,
+  df6_ct_on_relevant,
+  df7_ct_on_relevant,
+  df8_ct_off_relevant,
+  df9_ct_off_relevant,
+  df10_ct_unknown_relevant,
+  df11_ct_unknown_relevant
+)
+
+# 2 df with distinction between Cross-Tracking ON and OFF
+
+1646 + 1879 + 2057
+
+2827 + 1255 + 996 + 862
+
+merged_data_ct_off <- bind_rows(
+  df1_ct_off_relevant,
+  df2_ct_off_relevant,
+  df3_ct_off_relevant,
+  #df8_ct_off_relevant,
+  #df9_ct_off_relevant
+)
+
+merged_data_ct_on <- bind_rows(
+  df4_ct_on_relevant,
+  df5_ct_on_relevant,
+  df6_ct_on_relevant,
+  df7_ct_on_relevant
+)
+
+#merged_data_ct_unknown <- bind_rows(
+  #df10_ct_unknown_relevant,
+  #df11_ct_unknown_relevant
+#)
+
+
+# Another Overview --------------------------------------------------------
+
+# domain accessed during network activity
+merged_data_all %>%
+  group_by(domain) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=30)
+
+merged_data_ct_off %>%
+  group_by(domain) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+merged_data_ct_on %>%
+  group_by(domain) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+# application responsible for network activity
+merged_data_all %>%
+  group_by(bundleID) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+merged_data_ct_off %>%
+  group_by(bundleID) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+merged_data_ct_on %>%
+  group_by(bundleID) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+# domain owner
+merged_data_all %>%
+  group_by(domainOwner) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=30)
+
+merged_data_ct_off %>%
+  group_by(domainOwner) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+merged_data_ct_on %>%
+  group_by(domainOwner) %>%
+  summarise(total_accesses = n()) %>%
+  arrange(desc(total_accesses)) %>%
+  print(n=20)
+
+
+### Fin du script ###
