@@ -776,7 +776,7 @@ merged_data_all <- merged_data_all %>%
     str_detect(domainOwner, "WarnerMedia, LLC") ~ "WarnerMedia",
     str_detect(domainOwner, "Wingify") ~ "Wingify",
     str_detect(domainOwner, "Yieldlove GmbH") ~ "Yieldlove",
-    #TRUE ~ "Other"
+
     # adding via domains
     str_detect(domain, "google") ~ "Google",
     str_detect(domain, "youtube") ~ "Google", 
