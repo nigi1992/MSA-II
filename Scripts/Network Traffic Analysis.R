@@ -829,6 +829,22 @@ merged_data_all <- merged_data_all %>%
     str_detect(domain, "qq.com") ~ "Tencent Holdings Limited",
     str_detect(domain, "wechat.com") ~ "Tencent Holdings Limited",
     str_detect(domain, "tencent") ~ "Tencent Holdings Limited",
+    str_detect(domain, "twint") ~ "TWINT AG",
+    str_detect(domain, "20min") ~ "TX Group AG",
+    str_detect(domain, "migro") ~ "Migros-Genossenschafts-Bund (MGB)",
+    str_detect(domain, "srgssr") ~ "SRG SRF",
+    str_detect(domain, "digitec") ~ "Digitec Galaxus AG",
+    str_detect(domain, "galaxus") ~ "Digitec Galaxus AG",
+    str_detect(domain, "sbb.ch") ~ "SBB CFF FFS",
+    str_detect(domain, "adnxs") ~ "Microsoft",
+    str_detect(domain, "doubleclick") ~ "Google",
+    str_detect(domain, "bsky") ~ "Bluesky Social PBC",
+    str_detect(domain, "doubleverify") ~ "DoubleVerify Holdings Inc.",
+    str_detect(domain, "lencr") ~ "Let's Encrypt",
+    str_detect(domain, "onesignal") ~ "OneSignal",
+    
+    
+    
     
     
     TRUE ~ "Other"
