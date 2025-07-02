@@ -699,6 +699,8 @@ length(unique(merged_data_all$domainOwner))
 # create new data frame with new column "DomainOwnerName" that renames all the domains that contain strings like "google", "apple", "facebook", "amazon", to that string
 library(tidyverse) # For data manipulation
 
+
+# Creating new column DomainOwnerName ---------------------------------------------------------
 merged_data_all <- merged_data_all %>%
   mutate(DomainOwnerName = case_when(
     str_detect(domainOwner, "Microsoft Corporation") ~ "Microsoft",
@@ -842,6 +844,19 @@ merged_data_all <- merged_data_all %>%
     str_detect(domain, "doubleverify") ~ "DoubleVerify Holdings Inc.",
     str_detect(domain, "lencr") ~ "Let's Encrypt",
     str_detect(domain, "onesignal") ~ "OneSignal",
+    str_detect(domain, "api3.branch.io") ~ "Branch",
+    str_detect(domain, "app.usercentrics.eu") ~ "Usercentrics GmbH",
+    str_detect(domain, "cacerts.digicert.com") ~ "DigiCert",
+    str_detect(domain, "cdn.branch.io") ~ "Branch",
+    str_detect(domain, "cdn.cookielaw.org") ~ "OneTrust",
+    str_detect(domain, "census-app-x.scorecardresearch.com") ~ "comScore",
+    str_detect(domain, "config.mapbox.com") ~ "Mapbox",
+    str_detect(domain, "ocsp.digicert.com") ~ "DigiCert",
+    str_detect(domain, "outlook.office365.com") ~ "Microsoft",
+    str_detect(domain, "prod-mediate-events.applovin.com") ~ "AppLovin",
+    str_detect(domain, "region1.app-analytics-services-att.com") ~ "AT&T Inc.",
+    str_detect(domain, "static.zdassets.com") ~ "Zendesk",
+    
     
     
     
@@ -852,7 +867,7 @@ merged_data_all <- merged_data_all %>%
 merged_data_all <- merged_data_all %>% 
   select(firstTimeStamp, timeStamp, hits, bundleID, AppName, domain, domainOwner, DomainOwnerName, everything()) -> merged_data_all
 
-# Print DomainOwnerName summary
+# Printing DomainOwnerName summaries ------------------------------------------------------
 merged_data_all %>%
   group_by(DomainOwnerName) %>%
   summarise(total_accesses = n()) %>%
@@ -863,12 +878,44 @@ merged_data_all %>%
   group_by(domain) %>%
   summarise(total_accesses = n()) %>%
   arrange(desc(total_accesses)) %>%
-  print(n=100) 
+  print(n=150) 
+
+# Filtered Df -------------------------------------------------------------
+
+# New df with domains that have more than 10 accesses
+merged_data_all_domain_10plus <- merged_data_all %>%
+  group_by(domain) %>%
+  summarise(total_accesses = n()) %>%
+  filter(total_accesses > 10) %>%
+  arrange(desc(total_accesses)) %>%
+  # add DomainOwnerName and domainType columns
+  left_join(merged_data_all %>% 
+              select(domain, domainOwner, DomainOwnerName, domainType, domainClassification, initiatedType) %>%
+              distinct(), by = "domain") %>%
+  # add new empty "notes" column
+  mutate(notes = case_when(
+    TRUE ~ "" # Default case for all other domains
+  )) %>%
+  print(n=150)
+
+# Save df as CSV
+write.csv(merged_data_all_domain_10plus, "Output/Tables/most_accessed_domains_10plus.csv", row.names = TRUE)
+
+
+# New df with domains that have more than 10 accesses and all selected columns
+merged_data_all_domain_10plus_full <- merged_data_all %>%
+  filter(domain %in% merged_data_all_domain_10plus$domain) %>%
+  select(firstTimeStamp, timeStamp, hits, bundleID, AppName, domain, domainOwner, DomainOwnerName, everything()) %>%
+  arrange(desc(timeStamp)) 
+
+# Save df as CSV
+write.csv(merged_data_all_domain_10plus_full, "Output/Tables/most_accessed_domains_10plus_full.csv", row.names = TRUE)
+
+
 
 
 # Next steps: 
-# Take most frequent domains (n > 10) and try to find out the domain owner
-# Look through the "other" domainOwners and see if there are obvious owners
+# Do the analysis in the CSV file. Use tools like WHOIS, EastList, DNS lookup, and other tools to find out more about the domains.
 # Do the same for CT OFF and CT ON data frames
 
 # Same for CT OFF ---------------------------------------------------------
