@@ -849,30 +849,37 @@ merged_data_all <- merged_data_all %>%
     str_detect(domain, "cacerts.digicert.com") ~ "DigiCert",
     str_detect(domain, "cdn.branch.io") ~ "Branch",
     str_detect(domain, "cdn.cookielaw.org") ~ "OneTrust",
-    str_detect(domain, "census-app-x.scorecardresearch.com") ~ "comScore",
+    str_detect(domain, "census-app-x.scorecardresearch.com") ~ "comScore Inc.",
     str_detect(domain, "config.mapbox.com") ~ "Mapbox",
     str_detect(domain, "ocsp.digicert.com") ~ "DigiCert",
     str_detect(domain, "outlook.office365.com") ~ "Microsoft",
-    str_detect(domain, "prod-mediate-events.applovin.com") ~ "AppLovin",
+    str_detect(domain, "prod-mediate-events.applovin.com") ~ "AppLovin Corp.",
     str_detect(domain, "region1.app-analytics-services-att.com") ~ "AT&T Inc.",
     str_detect(domain, "static.zdassets.com") ~ "Zendesk",
     
     
     
-    
-    
-    
     TRUE ~ "Other"
   ))
+
 merged_data_all <- merged_data_all %>% 
   select(firstTimeStamp, timeStamp, hits, bundleID, AppName, domain, domainOwner, DomainOwnerName, everything()) -> merged_data_all
+
+# Save df as CSV
+write.csv(merged_data_all, "Output/Tables/merged_data_all_df.csv", row.names = TRUE)
 
 # Printing DomainOwnerName summaries ------------------------------------------------------
 merged_data_all %>%
   group_by(DomainOwnerName) %>%
   summarise(total_accesses = n()) %>%
   arrange(desc(total_accesses)) %>%
-  print(n=40)   
+  print(n=40) %>%
+  # add new empty "notes" column
+  mutate(notes = case_when(
+    TRUE ~ "" # Default case for all other domains
+  )) %>%
+  write.csv("Output/Tables/DomainOwnerName_summary.csv", row.names = TRUE)
+
 
 merged_data_all %>%
   group_by(domain) %>%
@@ -880,7 +887,7 @@ merged_data_all %>%
   arrange(desc(total_accesses)) %>%
   print(n=150) 
 
-# Filtered Df -------------------------------------------------------------
+# Filtered Df domain > 10 -------------------------------------------------------------
 
 # New df with domains that have more than 10 accesses
 merged_data_all_domain_10plus <- merged_data_all %>%
@@ -911,6 +918,26 @@ merged_data_all_domain_10plus_full <- merged_data_all %>%
 # Save df as CSV
 write.csv(merged_data_all_domain_10plus_full, "Output/Tables/most_accessed_domains_10plus_full.csv", row.names = TRUE)
 
+
+# new df's with domain Owners ---------------------------------------
+
+# New df for domain Owner Names with domains that have more than 10 accesses
+merged_data_all_domain_10plus_domainOwners <- merged_data_all_domain_10plus %>%
+  #group_by(domainOwner) %>%
+  group_by(DomainOwnerName) %>%
+  summarise(total_accesses = n()) %>%
+  #filter(total_accesses > 10) %>%
+  arrange(desc(total_accesses)) %>%
+  mutate(notes = case_when(   # add new empty "notes" column
+    TRUE ~ "" # Default case for all other domains
+  )) %>%
+  print(n=150) %>%
+  write.csv("Output/Tables/DomainOwnerName_summary_10plus.csv", row.names = TRUE)
+
+
+# Count domainType
+table(merged_data_all$domainType)
+table(merged_data_all_domain_10plus$domainType)
 
 
 
