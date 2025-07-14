@@ -207,6 +207,7 @@ df11_ct_unknown_unnested <- unnest(df11_ct_unknown_tibble, cols = c("accessCount
 
 # Selecting only rows and columns relevant to "networkActivity" ----------------------------------------
 
+library(dplyr)
 # Selecting only the relevant columns for analysis that concern "networkActivity"
 df1_ct_off_relevant <- df1_ct_off_unnested %>%
   filter(type == "networkActivity") %>%

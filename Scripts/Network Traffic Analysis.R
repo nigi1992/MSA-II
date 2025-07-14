@@ -73,6 +73,8 @@ merged_data_all %>%
   arrange(desc(total_accesses)) %>%
   print(n=184)
 
+library(dplyr)
+
 merged_data_all <- merged_data_all %>%
   mutate(AppName = case_when(
     bundleID == "com.9gag.ios.mobile" ~ "9GAG",
@@ -269,9 +271,12 @@ merged_data_all <- merged_data_all %>%
     bundleID == "com.grailr.CARROTweather" ~ "CARROT Weather",
     #
     TRUE ~ bundleID
-  ) %>% # moving AppName column next to bundleID column
-  select(firstTimeStamp, timeStamp, hits, bundleID, AppName, domain, domainOwner, everything())    
   )
+  )
+
+merged_data_all <- merged_data_all %>% # moving AppName column next to bundleID column
+  select(firstTimeStamp, timeStamp, hits, bundleID, AppName, domain, domainOwner, everything())    
+  
 
 # Same for CT off ------------------------------------------------
 
@@ -471,9 +476,9 @@ merged_data_ct_off <- merged_data_ct_off %>%
     bundleID == "com.grailr.CARROTweather" ~ "CARROT Weather",
     #
     TRUE ~ bundleID #))
-  ) #%>% # moving AppName column next to bundleID column
-  #select(firstTimeStamp, timeStamp, hits, bundleID, AppName, domain, domainOwner, everything())  
+  ) 
   )  
+
 merged_data_ct_off <- merged_data_ct_off %>%
   select(firstTimeStamp, timeStamp, hits, bundleID, AppName, domain, domainOwner, everything())    
   
@@ -674,10 +679,10 @@ merged_data_ct_on <- merged_data_ct_on %>%
     bundleID == "com.blinkslabs.Blinkist" ~ "Blinkist",
     bundleID == "com.grailr.CARROTweather" ~ "CARROT Weather",
     #
-    TRUE ~ bundleID #))
-  ) #%>% # moving AppName column next to bundleID column
-  #select(firstTimeStamp, timeStamp, hits, bundleID, AppName, domain, domainOwner, everything())  
-  )  
+    TRUE ~ bundleID
+  )
+  )
+
 merged_data_ct_on <- merged_data_ct_on %>%
   select(firstTimeStamp, timeStamp, hits, bundleID, AppName, domain, domainOwner, everything())
 
@@ -931,9 +936,9 @@ merged_data_all_domain_10plus_domainOwners <- merged_data_all_domain_10plus %>%
   mutate(notes = case_when(   # add new empty "notes" column
     TRUE ~ "" # Default case for all other domains
   )) %>%
-  print(n=150) %>%
-  write.csv("Output/Tables/DomainOwnerName_summary_10plus.csv", row.names = TRUE)
-
+  print(n=150)
+  
+write.csv(merged_data_all_domain_10plus_domainOwners, "Output/Tables/DomainOwnerName_summary_10plus.csv", row.names = TRUE)
 
 # Count domainType
 table(merged_data_all$domainType)
