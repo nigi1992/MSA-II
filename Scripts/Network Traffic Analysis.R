@@ -874,11 +874,12 @@ merged_data_all <- merged_data_all %>%
 write.csv(merged_data_all, "Output/Tables/merged_data_all_df.csv", row.names = TRUE)
 
 # Printing DomainOwnerName summaries ------------------------------------------------------
+library(dplyr)
 merged_data_all %>%
   group_by(DomainOwnerName) %>%
   summarise(total_accesses = n()) %>%
   arrange(desc(total_accesses)) %>%
-  print(n=40) %>%
+  print(n=104) %>%
   # add new empty "notes" column
   mutate(notes = case_when(
     TRUE ~ "" # Default case for all other domains
@@ -944,7 +945,16 @@ write.csv(merged_data_all_domain_10plus_domainOwners, "Output/Tables/DomainOwner
 table(merged_data_all$domainType)
 table(merged_data_all_domain_10plus$domainType)
 
+13375 / 100
+1718/133.75
 
+# unique number of domains where domainType = 1
+length(unique(merged_data_all$domain[merged_data_all$domainType == 1])) # 246
+
+length(unique(merged_data_all$domain[merged_data_all$domainType == 2])) # 4218
+
+# unique number of bundleIDs
+length(unique(merged_data_all$bundleID)) # 184
 
 # Next steps: 
 # Do the analysis in the CSV file. Use tools like WHOIS, EastList, DNS lookup, and other tools to find out more about the domains.
