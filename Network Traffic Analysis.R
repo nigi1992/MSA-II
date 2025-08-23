@@ -1036,13 +1036,13 @@ blacklist_domains <- read_lines(I(blacklist_txt))
 # make into a data frame
 blacklist_df <- data.frame(domain = blacklist_domains, stringsAsFactors = FALSE)
 
-# csv
+## csv
 library(readr)
 
 blacklist_url <- "https://example.com/tracker_blacklist.csv"
 blacklist_df <- read_csv(blacklist_url)
 
-# json
+## json
 library(jsonlite)
 
 blacklist_url <- "https://example.com/tracker_blacklist.json"
@@ -1051,7 +1051,7 @@ blacklist_json <- fromJSON(blacklist_url)
 # assuming JSON is a simple array of domains
 blacklist_df <- data.frame(domain = unlist(blacklist_json), stringsAsFactors = FALSE)
 
-# embedded in html
+## embedded in html
 library(rvest)
 library(dplyr)
 
@@ -1098,9 +1098,20 @@ combined_blacklist <- map_df(urls, read_blacklist) %>%
 
 # Cross-Referencing DFs with black and white lists ------------------------
 
-# example code:
-# Read in black and white lists
-blacklist <- read.csv("Input/blacklist_domains.csv")
+library(httr)
+library(readr)
+# txt
+# URL of the blacklist
+easylist_easyprivacy_url <- "https://easylist.to/easylist/easyprivacy.txt"
+
+# download the file as plain text
+easylist_easyprivacy_txt <- content(GET(easylist_easyprivacy_url), as = "text")
+
+# convert into vector of domains
+easylist_easyprivacy_domains <- read_lines(I(easylist_easyprivacy_txt))
+
+# make into a data frame
+easylist_easyprivacy_df <- data.frame(domain = easylist_easyprivacy_domains, stringsAsFactors = FALSE)
 
 # Same for CT OFF ---------------------------------------------------------
 
