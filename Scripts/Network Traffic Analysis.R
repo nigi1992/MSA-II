@@ -957,13 +957,416 @@ length(unique(merged_data_all$domain[merged_data_all$domainType == 2])) # 4218
 length(unique(merged_data_all$bundleID)) # 184
 
 # Next steps: 
-# Do the analysis in the CSV file. Use tools like WHOIS, EastList, DNS lookup, and other tools to find out more about the domains.
+# Do the analysis in the CSV file. Use tools like WHOIS, EasyList, DNS lookup, and other tools to find out more about the domains.
 # Do the same for CT OFF and CT ON data frames
+
+# Prep for Cross-Referencing DFs with black and white lists ------------------------
+
+library(dplyr)
+# remove leading www. from domain in merged_data_all
+merged_data_all <- merged_data_all %>%
+  mutate(domain = str_remove(domain, "^www\\."))
+
+
+# example code for reading in blacklists and url --------------------------
+
+## upload:
+# reading a plain text blacklist
+blacklist <- readLines("tracker_blacklist.txt")
+
+# convert to a data frame
+blacklist_df <- data.frame(domain = blacklist, stringsAsFactors = FALSE)
+
+library(readr)
+
+# reading a csv file with a column 'domain'
+blacklist_df <- read_csv("tracker_blacklist.csv")
+
+library(jsonlite)
+
+# reading json file
+blacklist_json <- fromJSON("tracker_blacklist.json")
+
+# assume JSON has a vector/list of domains
+blacklist_df <- data.frame(domain = blacklist_json, stringsAsFactors = FALSE)
+
+library(dplyr)
+library(stringr)
+
+## Data Cleaning
+# lowercase all domains and remove leading "www."
+blacklist_df <- blacklist_df %>%
+  mutate(domain = str_to_lower(domain),
+         domain = str_remove(domain, "^www\\."))
+
+networkActivity_df <- networkActivity_df %>%
+  mutate(domain = str_to_lower(domain),
+         domain = str_remove(domain, "^www\\."))
+
+## Cross-referencing
+# find all network activity entries that match blacklist
+matched_activity <- networkActivity_df %>%
+  semi_join(blacklist_df, by = "domain")
+
+# check the results
+print(matched_activity, n = 50)
+
+# Or: add a tracker flag to the network activity data
+net
+workActivity_df <- networkActivity_df %>%
+  mutate(is_tracker = domain %in% blacklist_df$domain)
+
+## Summary
+tracker_summary <- networkActivity_df %>%
+  filter(is_tracker) %>%
+  group_by(domain) %>%
+  summarise(total_hits = n(), .groups = "drop") %>%
+  arrange(desc(total_hits))
+
+print(tracker_summary, n = 20)
+
+
+# Scrapping ---------------------------------------------------------------
+
+library(httr)
+library(readr)
+# txt
+# URL of the blacklist
+blacklist_url <- "https://example.com/tracker_blacklist.txt"
+
+# download the file as plain text
+blacklist_txt <- content(GET(blacklist_url), as = "text")
+
+# convert into vector of domains
+blacklist_domains <- read_lines(I(blacklist_txt))
+
+# make into a data frame
+blacklist_df <- data.frame(domain = blacklist_domains, stringsAsFactors = FALSE)
+
+## csv
+library(readr)
+
+blacklist_url <- "https://example.com/tracker_blacklist.csv"
+blacklist_df <- read_csv(blacklist_url)
+
+## json
+library(jsonlite)
+
+blacklist_url <- "https://example.com/tracker_blacklist.json"
+blacklist_json <- fromJSON(blacklist_url)
+
+# assuming JSON is a simple array of domains
+blacklist_df <- data.frame(domain = unlist(blacklist_json), stringsAsFactors = FALSE)
+
+## embedded in html
+library(rvest)
+library(dplyr)
+
+blacklist_url <- "https://example.com/blacklist-page"
+
+# read page
+page <- read_html(blacklist_url)
+
+# extract table or text nodes
+blacklist_df <- page %>%
+  html_nodes("table") %>%   # adjust selector if necessary
+  html_table() %>%
+  .[[1]] %>%
+  rename(domain = 1)        # assume first column has domains
+
+## mutliple lists
+# assuming multiple lists in different data frames: bl1, bl2, bl3
+combined_blacklist <- bind_rows(bl1, bl2, bl3) %>%
+  distinct(domain, .keep_all = TRUE)
+
+# automation
+library(purrr)
+library(dplyr)
+library(readr)
+
+urls <- c(
+  "https://example.com/tracker_blacklist.txt",
+  "https://example.com/tracker_blacklist.csv"
+)
+
+# function to read text or csv automatically
+read_blacklist <- function(url) {
+  if (grepl("\\.csv$", url)) {
+    df <- read_csv(url)
+  } else {
+    txt <- read_lines(url)
+    df <- data.frame(domain = txt, stringsAsFactors = FALSE)
+  }
+  return(df)
+}
+
+combined_blacklist <- map_df(urls, read_blacklist) %>%
+  distinct(domain, .keep_all = TRUE)
+
+# EasyList EasyPrivacy ------------------------
+
+library(httr)
+library(readr)
+
+# URL of the blacklist
+easylist_easyprivacy_url <- "https://easylist.to/easylist/easyprivacy.txt"
+
+# download the file as plain text
+easylist_easyprivacy_txt <- content(GET(easylist_easyprivacy_url), as = "text")
+
+# convert into vector of domains
+easylist_easyprivacy_domains <- read_lines(I(easylist_easyprivacy_txt))
+
+# make into a data frame
+easylist_easyprivacy_df <- data.frame(domain = easylist_easyprivacy_domains, stringsAsFactors = FALSE)
+
+
+# Data Cleaning EasyList-----------------------------------------------------------
+library(dplyr)
+# Clean the domains (remove comments, wildcards, etc.)
+easylist_easyprivacy_df_filtered <- easylist_easyprivacy_df %>%
+  slice(-1:-18) %>% # remove first 17 lines (header info)
+  
+  filter(!str_starts(domain, "!")) %>%  # remove comments
+  filter(!str_detect(domain, "\\*\\*\\*")) %>%  # remove comments
+  filter(!str_starts(domain, "\\@\\@")) %>%  # remove exceptions 
+  filter(!str_detect(domain, "\\*")) %>% # remove wildcards
+  #filter(!str_starts(domain, "/")) %>%  # remove rules starting with /
+  filter(!str_detect(domain, ";")) %>%  # remove anything with ;
+  #filter(!str_detect(domain, "?")) %>%  # remove anything with ?
+  #filter(!str_detect(domain, "=")) %>%  # remove anything with =
+  
+  mutate(domain = str_remove_all(domain, "^\\/\\/")) %>%     # remove //
+  mutate(domain = str_remove_all(domain, "^\\/")) %>%     # remove /
+  mutate(domain = str_remove_all(domain, "^:\\|\\|")) %>% # remove leading :||
+  mutate(domain = str_remove_all(domain, "^\\:")) %>%        # remove :
+  mutate(domain = str_remove_all(domain, "^\\|\\|")) %>% # remove leading ||
+  mutate(domain = str_remove_all(domain, "^\\|")) %>%    # remove leading |
+  
+  mutate(domain = str_remove_all(domain, "^\\.")) %>%        # remove .
+  mutate(domain = str_remove_all(domain, "^\\_\\_")) %>%     # remove _ _
+  mutate(domain = str_remove_all(domain, "^\\_")) %>%     # remove _
+  mutate(domain = str_remove_all(domain, "^\\?")) %>%     # remove ?
+  mutate(domain = str_remove_all(domain, "^\\%")) %>%     # remove %
+  mutate(domain = str_remove_all(domain, "^\\&")) %>%        # remove &
+  mutate(domain = str_remove_all(domain, "^\\&\\&")) %>%       # remove &&
+  mutate(domain = str_remove_all(domain, "^\\/\\/")) %>%     # remove //
+  
+  mutate(domain = str_remove(domain, "^www\\.")) %>%     # remove leading www.
+  mutate(domain = str_remove(domain, "^http\\:\\/\\/")) %>%     # remove leading http://
+  mutate(domain = str_remove(domain, "^https\\:\\/\\/")) %>% # remove leading https://
+  
+  mutate(domain = str_remove_all(domain, "^\\^")) %>%     # remove ^
+  mutate(domain = str_remove_all(domain, "^\\&")) %>%     # remove &
+  
+  mutate(domain = str_remove_all(domain, "\\^$")) %>%    # remove trailing ^
+  mutate(domain = str_remove_all(domain, "\\^\\$third-party")) %>%    # remove trailing ^$ third-party
+  mutate(domain = str_remove_all(domain, ",domain.*$")) %>%    # remove ,domain ..
+  mutate(domain = str_remove_all(domain, ",xmlhttprequest.*$")) %>%    # remove ,xmlhttprequest ..
+  mutate(domain = str_remove_all(domain, "/.*$")) %>%     # remove anything after /
+  mutate(domain = str_remove_all(domain, "#+.*$")) %>%     # remove anything after #
+  mutate(domain = str_remove_all(domain, "\\?.*$")) %>%     # remove anything after ?
+  mutate(domain = str_remove_all(domain, "\\_.*$")) %>%     # remove anything after _
+  mutate(domain = str_remove_all(domain, "\\=.*$")) %>%     # remove anything after =
+  mutate(domain = str_remove_all(domain, "\\$.*$")) %>%     # remove anything after $
+  mutate(domain = str_remove_all(domain, "\\~.*$")) %>%     # remove anything after ~
+  mutate(domain = str_remove_all(domain, "\\%.*$")) %>%     # remove anything after %
+  mutate(domain = str_remove_all(domain, "\\^$")) %>%    # remove trailing ^
+  mutate(domain = str_remove_all(domain, "\\.$")) %>%    # remove trailing .
+  mutate(domain = str_to_lower(domain)) #%>%               # lowercase
+  #filter(!str_starts(domain, "[")) %>%  # remove section headers
+
+# remove empty rows
+easylist_easyprivacy_df_filtered <- easylist_easyprivacy_df_filtered %>%
+  filter(domain != "")
+
+# remove duplicates
+easylist_easyprivacy_df_filtered <- easylist_easyprivacy_df_filtered %>%
+  distinct(domain, .keep_all = TRUE)
+
+
+# Cross-referencing with EasyList EasyPrivacy -----------------------------
+
+library(dplyr)
+# find all network activity entries that match EasyList EasyPrivacy
+#matched_activity_easylist <- merged_data_all %>%
+ # semi_join(easylist_easyprivacy_df_filtered, by = "domain")
+#rm(matched_activity)
+
+
+# Or: add a tracker flag 
+merged_data_all <- merged_data_all %>%
+  mutate(EasyListTracker = domain %in% easylist_easyprivacy_df_filtered$domain)
+
+#count number of TRUE in easylist_tracker
+table(merged_data_all$EasyListTracker)
+
+table(merged_data_all$domainType)
+
+table(merged_data_all$domainType, merged_data_all$EasyListTracker)
+
+
+## Summary
+tracker_summary_easylist <- merged_data_all %>%
+  filter(EasyListTracker) %>%
+  group_by(domain) %>%
+  summarise(total_hits = n(), .groups = "drop") %>%
+  arrange(desc(total_hits))
+
+print(tracker_summary, n = 50)
+
+
+# Ready to run script -----------------------------------------------------
+
+# --- Load required packages ---
+library(httr)
+library(readr)
+library(jsonlite)
+library(dplyr)
+library(stringr)
+library(purrr)
+
+# --- URLs of well-known tracker lists ---
+tracker_urls <- list(
+  easyprivacy = "https://easylist.to/easylist/easyprivacy.txt",
+  stevenblack = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts",
+  disconnect_me = "https://raw.githubusercontent.com/disconnectme/disconnect-tracking-protection/master/services.json"
+)
+
+# --- Helper function: clean and normalize domains ---
+clean_domains <- function(domains) {
+  domains %>%
+    str_remove_all("^\\|\\|") %>%  # remove leading ||
+    str_remove_all("^\\|") %>%     # remove leading |
+    str_remove_all("\\^$") %>%     # remove trailing ^
+    str_remove_all("/.*$") %>%     # remove anything after /
+    str_to_lower() %>%             # lowercase
+    str_remove("^www\\.") %>%         # remove leading www.
+    
+    #filter(!str_detect(domain, "?")) %>%  # remove anything with ?
+    #filter(!str_detect(domain, "=")) %>%  # remove anything with =
+    
+    mutate(domain = str_remove_all(domain, "^\\/\\/")) %>%     # remove //
+    mutate(domain = str_remove_all(domain, "^\\/")) %>%     # remove /
+    mutate(domain = str_remove_all(domain, "^:\\|\\|")) %>% # remove leading :||
+    mutate(domain = str_remove_all(domain, "^\\:")) %>%        # remove :
+    mutate(domain = str_remove_all(domain, "^\\|\\|")) %>% # remove leading ||
+    mutate(domain = str_remove_all(domain, "^\\|")) %>%    # remove leading |
+    
+    mutate(domain = str_remove_all(domain, "^\\.")) %>%        # remove .
+    mutate(domain = str_remove_all(domain, "^\\_\\_")) %>%     # remove _ _
+    mutate(domain = str_remove_all(domain, "^\\_")) %>%     # remove _
+    mutate(domain = str_remove_all(domain, "^\\?")) %>%     # remove ?
+    mutate(domain = str_remove_all(domain, "^\\%")) %>%     # remove %
+    mutate(domain = str_remove_all(domain, "^\\&")) %>%        # remove &
+    mutate(domain = str_remove_all(domain, "^\\&\\&")) %>%       # remove &&
+    mutate(domain = str_remove_all(domain, "^\\/\\/")) %>%     # remove //
+    
+    mutate(domain = str_remove(domain, "^www\\.")) %>%     # remove leading www.
+    mutate(domain = str_remove(domain, "^http\\:\\/\\/")) %>%     # remove leading http://
+    mutate(domain = str_remove(domain, "^https\\:\\/\\/")) %>% # remove leading https://
+    
+    mutate(domain = str_remove_all(domain, "^\\^")) %>%     # remove ^
+    mutate(domain = str_remove_all(domain, "^\\&")) %>%     # remove &
+    
+    mutate(domain = str_remove_all(domain, "\\^$")) %>%    # remove trailing ^
+    mutate(domain = str_remove_all(domain, "\\^\\$third-party")) %>%    # remove trailing ^$ third-party
+    mutate(domain = str_remove_all(domain, ",domain.*$")) %>%    # remove ,domain ..
+    mutate(domain = str_remove_all(domain, ",xmlhttprequest.*$")) %>%    # remove ,xmlhttprequest ..
+    mutate(domain = str_remove_all(domain, "/.*$")) %>%     # remove anything after /
+    mutate(domain = str_remove_all(domain, "#+.*$")) %>%     # remove anything after #
+    mutate(domain = str_remove_all(domain, "\\?.*$")) %>%     # remove anything after ?
+    mutate(domain = str_remove_all(domain, "\\_.*$")) %>%     # remove anything after _
+    mutate(domain = str_remove_all(domain, "\\=.*$")) %>%     # remove anything after =
+    mutate(domain = str_remove_all(domain, "\\$.*$")) %>%     # remove anything after $
+    mutate(domain = str_remove_all(domain, "\\~.*$")) %>%     # remove anything after ~
+    mutate(domain = str_remove_all(domain, "\\%.*$")) %>%     # remove anything after %
+    mutate(domain = str_remove_all(domain, "\\^$")) %>%    # remove trailing ^
+    mutate(domain = str_remove_all(domain, "\\.$")) %>%    # remove trailing .
+    mutate(domain = str_to_lower(domain)) #%>%               # lowercase
+  #filter(!str_starts(domain, "[")) %>%  # remove section headers
+}
+
+# --- Scraper functions for each source ---
+get_easyprivacy <- function(url) {
+  txt <- content(GET(url), as = "text")
+  raw <- read_lines(I(txt))
+  df <- data.frame(domain = raw, stringsAsFactors = FALSE) %>%
+    filter(!str_starts(domain, "!")) %>%  # remove comments
+    mutate(domain = clean_domains(domain)) %>%
+    filter(domain != "")
+  return(df)
+}
+
+get_stevenblack <- function(url) {
+  txt <- content(GET(url), as = "text")
+  raw <- read_lines(I(txt))
+  df <- data.frame(line = raw, stringsAsFactors = FALSE) %>%
+    filter(str_detect(line, "^0\\.0\\.0\\.0\\s+")) %>% # lines with "0.0.0.0 domain"
+    mutate(domain = str_remove(line, "^0\\.0\\.0\\.0\\s+")) %>%
+    select(domain) %>%
+    mutate(domain = clean_domains(domain))
+  return(df)
+}
+
+get_disconnect <- function(url) {
+  json <- fromJSON(url)
+  all_domains <- map(json, ~.x$domains) %>% unlist()
+  df <- data.frame(domain = all_domains, stringsAsFactors = FALSE) %>%
+    mutate(domain = clean_domains(domain))
+  return(df)
+}
+
+
+# URL
+disconnect_url <- "https://raw.githubusercontent.com/disconnectme/disconnect-tracking-protection/master/services.json"
+
+# Read JSON
+disconnect_json <- fromJSON(disconnect_url)
+
+# disconnect_json is a named list: each service has elements like name, domains, license, etc.
+# We only want the domains
+disconnect_domains <- map(disconnect_json, function(x) x$domains) %>%
+  unlist() %>%             # flatten all into a single character vector
+  unique()                 # remove duplicates
+
+# Put into a data frame and clean
+disconnect_df <- data.frame(domain = disconnect_domains, stringsAsFactors = FALSE) %>%
+  mutate(domain = str_to_lower(domain),
+         domain = str_remove(domain, "^www\\."),  # optional cleaning
+        domain = str_remove_all("^\\|\\|"), # remove leading ||
+        domain = str_remove_all("^\\|"),     # remove leading |
+        domain = str_remove_all("\\^$"),   # remove trailing ^
+        domain = str_remove_all("/.*$"),     # remove anything after /
+        domain = str_remove("^www\\."))          # remove leading www.
+
+
+# --- Download and combine all lists ---
+easyprivacy_df <- get_easyprivacy(tracker_urls$easyprivacy)
+stevenblack_df <- get_stevenblack(tracker_urls$stevenblack)
+disconnect_df  <- get_disconnect(tracker_urls$disconnect_me)
+
+blacklist_df <- bind_rows(
+  easyprivacy_df,
+  stevenblack_df,
+  #disconnect_df
+) %>%
+  distinct(domain, .keep_all = TRUE) %>%
+  filter(domain != "" & !is.na(domain))
+
+# --- Preview results ---
+head(blacklist_df, 20)
+nrow(blacklist_df)
 
 # Same for CT OFF ---------------------------------------------------------
 
-
+# remove leading www. from domain in merged_data_ct_off
+merged_data_ct_off <- merged_data_ct_off %>%
+  mutate(domain = str_remove(domain, "^www\\."))
 # Same for CT ON ----------------------------------------------------------
 
+# remove leading www. from domain in merged_data_ct_on
+merged_data_ct_on <- merged_data_ct_on %>%
+  mutate(domain = str_remove(domain, "^www\\."))
 
 ### Fin du Script ###
