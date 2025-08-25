@@ -1012,8 +1012,7 @@ matched_activity <- networkActivity_df %>%
 print(matched_activity, n = 50)
 
 # Or: add a tracker flag to the network activity data
-net
-workActivity_df <- networkActivity_df %>%
+networkActivity_df <- networkActivity_df %>%
   mutate(is_tracker = domain %in% blacklist_df$domain)
 
 ## Summary
@@ -1199,12 +1198,18 @@ library(purrr)
 tracker_urls <- list(
   easyprivacy = "https://easylist.to/easylist/easyprivacy.txt",
   stevenblack = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts",
-  disconnect_me = "https://raw.githubusercontent.com/disconnectme/disconnect-tracking-protection/master/services.json"
+  disconnect_me = "https://raw.githubusercontent.com/disconnectme/disconnect-tracking-protection/master/services.json",
+  masked_domain = "https://raw.githubusercontent.com/GoogleChrome/ip-protection/refs/heads/main/Masked-Domain-List.md",
+  prigent_ads = "https://v.firebog.net/hosts/Prigent-Ads.txt",
+  fademind = "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.2o7Net/hosts",
+  frogeye = "https://hostfiles.frogeye.fr/firstparty-trackers-hosts.txt",
+  notrack = "https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-blocklist.txt"
 )
 
 tracker_paths <- list(
   disconnect_me = '/Users/nicolaswaser/New-project-GitHub-first/R/MSA II/Input Data/disconnect.txt'
 )
+
 
 # --- Helper function: clean and normalize domains ---
 clean_domains <- function(domains) {
@@ -1214,14 +1219,18 @@ clean_domains <- function(domains) {
     str_remove_all("\\^$") %>%     # remove trailing ^
     str_remove_all("/.*$") %>%     # remove anything after /
     str_to_lower() %>%             # lowercase
-    str_remove("^www\\.") %>%         # remove leading www.
+    str_remove("^www\\.") %>%     # remove leading www.
     str_remove_all("^\\&") %>%     # remove &
     str_remove_all("^\\.") %>%     # remove .
     str_remove_all("^\\?") %>%     # remove ?
-    str_remove_all("^\\_")     # remove _
+    str_remove_all("^\\_")          # remove _
+    str_remove_all("\\?.*$") %>%      # remove query strings
+    str_remove_all("#+.*$") %>%       # remove selectors like ## or ###
+    str_remove_all(",domain.*$") %>%  # remove ,domain and anything after
+    str_remove_all("\\.$")            # remove trailing dot
 }
 
-# --- Scraper functions for each source ---
+# --- Parser for EasyPrivacy ---
 get_easyprivacy <- function(url) {
   txt <- content(GET(url), as = "text")
   raw <- read_lines(I(txt))
@@ -1234,6 +1243,8 @@ get_easyprivacy <- function(url) {
   return(df)
 }
 
+
+# --- Parser for StevenBlack hosts file ---
 get_stevenblack <- function(url) {
   txt <- content(GET(url), as = "text")
   raw <- read_lines(I(txt))
@@ -1246,34 +1257,187 @@ get_stevenblack <- function(url) {
 }
 
 
-## json
+# --- Generic parser for plain text lists (ads/tracker hosts) ---
+get_plainlist <- function(url) {
+  txt <- content(GET(url), as = "text")
+  raw <- read_lines(I(txt))
+  df <- data.frame(line = raw, stringsAsFactors = FALSE) %>%
+    # Remove comments and blank lines
+    filter(!str_starts(line, "#")) %>%
+    filter(line != "") %>%
+    # Remove "0.0.0.0 " or "127.0.0.1 " if present
+    mutate(domain = str_remove(line, "^(0\\.0\\.0\\.0|127\\.0\\.0\\.1)\\s+")) %>%
+    select(domain) %>%
+    #mutate(domain = clean_domains(domain)) %>%
+    filter(domain != "")
+  return(df)
+}
+
+# Parser for Disconnect.me JSON -------------------------------------------
 library(jsonlite)
 
-disconnect_url <- "https://raw.githubusercontent.com/disconnectme/disconnect-tracking-protection/master/services.json"
-disconnect_json <- fromJSON(disconnect_url)
+#disconnect_url <- "https://raw.githubusercontent.com/disconnectme/disconnect-tracking-protection/master/services.json"
+#disconnect_json <- fromJSON(disconnect_url)
 
 # assuming JSON is a simple array of domains
-disconnect_json <- data.frame(domain = unlist(disconnect_json), stringsAsFactors = FALSE)
+#disconnect_json <- data.frame(domain = unlist(disconnect_json), stringsAsFactors = FALSE)
 
 # keep only the domain column
-disconnect_df <- disconnect_json %>%
-  select(domain) %>%
-  mutate(domain = clean_domains(domain)) %>%
-  filter(domain != "")
+#disconnect_json <- disconnect_json %>%
+  #slice(-1:-1) %>% # remove first line (header info)
+  #select(domain) %>%
+  #mutate(domain = clean_domains(domain)) %>%
+  #filter(domain != "")
 
 
-# --- Download and combine all lists ---
+# Disconnect.me from File ----------------------------------------------------
+
+# Loading necessary libraries
+library(jsonlite)
+library(tidyverse)
+
+# Parsing the JSON data
+# Assuming the file is in your working directory
+json_data <- fromJSON("Input Data/disconnect.txt", simplifyVector = FALSE)
+
+# Creating an empty dataframe to store results
+disconnect_df <- tibble()
+
+# Iterating through each category
+for (category_name in names(json_data$categories)) {
+  category_array <- json_data$categories[[category_name]]
+  
+  # Iterating through each organization in the category
+  for (org_obj in category_array) {
+    # Getting the organization name (first key in the object)
+    org_name <- names(org_obj)[1]
+    
+    # Getting the URL data for this organization
+    url_obj <- org_obj[[org_name]]
+    
+    # Getting the URL (first key in the URL object)
+    url <- names(url_obj)[1]
+    
+    # Getting the domains (array of domains for this URL)
+    disconnect_domains <- url_obj[[url]]
+    
+    # Creating a temporary dataframe for this organization's domains
+    disconnect_temp_df <- tibble(
+      category = category_name,
+      organisation = org_name,
+      url = url,
+      domain = disconnect_domains
+    )
+    
+    # Adding to the result dataframe
+    disconnect_df <- bind_rows(disconnect_df, disconnect_temp_df)
+  }
+}
+
+# Viewing the first few rows to check the result
+head(disconnect_df)
+
+
+# Downloading and combing all lists ---------------------------------------
+
 easyprivacy_df <- get_easyprivacy(tracker_urls$easyprivacy)
 stevenblack_df <- get_stevenblack(tracker_urls$stevenblack)
-#disconnect_df  <- get_disconnect(disconnect_json)
+masked_domain_df <- get_plainlist(tracker_urls$masked_domain)
+prigent_df <- get_plainlist(tracker_urls$prigent_ads)
+fademind_df <- get_plainlist(tracker_urls$fademind)
+frogeye_df <- get_plainlist(tracker_urls$frogeye)
+notrack_df <- get_plainlist(tracker_urls$notrack)
+
+
+# Modifying these dfs -----------------------------------------------------
+
+## notrack
+notrack_df <- notrack_df %>%
+  mutate(domain = str_squish(domain)) %>%                       # trim stray spaces
+  separate(
+    domain,
+    into = c("domain", "DomainOwnerNoTrack"),
+    sep = "\\s*#\\s*",                                          # split on '#' with optional spaces
+    fill = "right",
+    extra = "merge"                                             # keep everything after '#' together
+  ) %>%
+  mutate(DomainOwnerNoTrack = str_squish(DomainOwnerNoTrack))
+
+notrack_df <- notrack_df %>%
+  mutate(DomainOwnerNoTrack = str_squish(DomainOwnerNoTrack)) %>%                       
+  separate(
+    DomainOwnerNoTrack,
+    into = c("DomainOwnerNoTrack", "CategoryNoTrack"),
+    sep = "\\s*-\\s*",                                          
+    fill = "right",
+    extra = "merge"                                             
+  ) %>%
+  mutate(CategoryNoTrack = str_squish(CategoryNoTrack))
+
+
+## masked_domain 
+masked_domain_df <- masked_domain_df %>%
+  slice(-1:-31) %>% # remove first line (header info)
+  mutate(domain = str_squish(domain)) %>%                       # trim stray spaces
+  separate(
+    domain,
+    into = c("domain", "DomainOwnerMaskedD"),
+    sep = "\\s*\\|\\s*",                                        # split on '|' with optional spaces
+    fill = "right",
+    extra = "merge"                                             # keep everything after '|' together
+  ) %>%
+  mutate(DomainOwnerMaskedD = str_squish(DomainOwnerMaskedD))
+
+masked_domain_df <- masked_domain_df %>%
+  mutate(DomainOwnerMaskedD = str_squish(DomainOwnerMaskedD)) %>%                       
+  separate(
+    DomainOwnerMaskedD,
+    into = c("DomainOwnerMaskedD", "NotesMaskedD"),
+    sep = "\\s*\\|\\s*",                                          
+    fill = "right",
+    extra = "merge"                                             
+  ) %>%
+  mutate(NotesMaskedD = str_squish(NotesMaskedD))
+
+# Structures of the DFs
+str(easyprivacy_df)
+str(stevenblack_df)
+str(disconnect_df)
+str(masked_domain_df)
+str(prigent_df)
+str(fademind_df)
+str(frogeye_df)
+str(notrack_df)
+
+# Data Clean Disconnect.me df --------------------------------------------
+# convert disconnect tibble into df
+disconnect_df <- as.data.frame(disconnect_df)
+str(disconnect_df)
+
+# convert domain values to character
+disconnect_df$domain <- as.character(disconnect_df$domain)
+str(disconnect_df)
+# rename Category column to CategoryDisconnect
+colnames(disconnect_df)[colnames(disconnect_df) == "category"] <- "CategoryDisconnect"
+colnames(disconnect_df)[colnames(disconnect_df) == "organisation"] <- "OrganisationDisconnect"
+colnames(disconnect_df)[colnames(disconnect_df) == "url"] <- "URLDisconnect"
+
+
+# Combining all dfs into one master blacklist -----------------------------
 
 blacklist_df <- bind_rows(
   easyprivacy_df,
   stevenblack_df,
-  disconnect_df
+  disconnect_df,
+  masked_domain_df,
+  prigent_df,
+  fademind_df,
+  frogeye_df,
+  notrack_df
 ) %>%
   distinct(domain, .keep_all = TRUE) %>%
   filter(domain != "" & !is.na(domain))
+
 
 # --- Preview results ---
 head(blacklist_df, 20)
