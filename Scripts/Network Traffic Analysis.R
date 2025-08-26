@@ -1351,7 +1351,7 @@ notrack_df <- get_plainlist(tracker_urls$notrack)
 
 # Modifying these dfs -----------------------------------------------------
 
-## notrack
+# NoTrack
 notrack_df <- notrack_df %>%
   mutate(domain = str_squish(domain)) %>%                       # trim stray spaces
   separate(
@@ -1375,7 +1375,7 @@ notrack_df <- notrack_df %>%
   mutate(CategoryNoTrack = str_squish(CategoryNoTrack))
 
 
-## masked_domain 
+## Masked_domain 
 masked_domain_df <- masked_domain_df %>%
   slice(-1:-31) %>% # remove first line (header info)
   mutate(domain = str_squish(domain)) %>%                       # trim stray spaces
@@ -1408,6 +1408,7 @@ str(prigent_df)
 str(fademind_df)
 str(frogeye_df)
 str(notrack_df)
+
 
 # Data Clean Disconnect.me df --------------------------------------------
 # convert disconnect tibble into df
@@ -1452,21 +1453,22 @@ library(dplyr)
 # semi_join(easylist_easyprivacy_df_filtered, by = "domain")
 #rm(matched_activity)
 
+merged_data_all_more_info <- merged_data_all
 
 # add a tracker flag 
-merged_data_all <- merged_data_all %>%
+merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(EasyListTracker = domain %in% easylist_easyprivacy_df_filtered$domain)
 
 #count number of TRUE in easylist_tracker
-table(merged_data_all$EasyListTracker)
+table(merged_data_all_more_info$EasyListTracker)
 
-table(merged_data_all$domainType)
+table(merged_data_all_more_info$domainType)
 
-table(merged_data_all$domainType, merged_data_all$EasyListTracker)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$EasyListTracker)
 
 
 ## Summary
-tracker_summary_easylist <- merged_data_all %>%
+tracker_summary_easylist <- merged_data_all_more_info %>%
   filter(EasyListTracker) %>%
   group_by(domain) %>%
   summarise(total_hits = n(), .groups = "drop") %>%
@@ -1477,42 +1479,121 @@ print(tracker_summary, n = 50)
 
 # Cross-ref stevenblack ---------------------------------------------------
 
-merged_data_all <- merged_data_all %>%
+merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(stevenblackTracker = domain %in% stevenblack_df$domain)
 
 #count number of TRUE in easylist_tracker
-table(merged_data_all$stevenblackTracker)
+table(merged_data_all_more_info$stevenblackTracker)
 
-table(merged_data_all$domainType)
+table(merged_data_all_more_info$domainType)
 
-table(merged_data_all$domainType, merged_data_all$stevenblackTracker)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$stevenblackTracker)
 
 
 # Cross-ref disconnect ----------------------------------------------------
 
-merged_data_all <- merged_data_all %>%
+library(dplyr)
+merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(DisconnectTracker = domain %in% disconnect_df$domain)
 
+merged_data_all_more_info <- merged_data_all_more_info %>%
+  left_join(
+    disconnect_df %>% 
+      select(domain, OrganisationDisconnect, CategoryDisconnect),
+    by = "domain"
+  ) %>%
+  distinct()
+
 #count number of TRUE in disconnect_tracker
-table(merged_data_all$DisconnectTracker)
-table(merged_data_all$domainType)
-table(merged_data_all$domainType, merged_data_all$DisconnectTracker)
+table(merged_data_all_more_info$DisconnectTracker)
+table(merged_data_all_more_info$domainType)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$DisconnectTracker)
+
+
+# Cross-ref Masked Domain -------------------------------------------------
+
+merged_data_all_more_info <- merged_data_all_more_info %>%
+  mutate(MaskedDomainTracker = domain %in% masked_domain_df$domain) %>%
+  # add DomainOwnerMaskedD info column
+  left_join(masked_domain_df %>% 
+              select(domain, DomainOwnerMaskedD),
+            by = "domain"
+            ) %>%
+              distinct()
+
+#count number of TRUE in masked_domain_tracker
+table(merged_data_all_more_info$MaskedDomainTracker)
+table(merged_data_all_more_info$domainType)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$MaskedDomainTracker)
+
+
+# Cross-ref NoTrack -------------------------------------------------------
+
+merged_data_all_more_info <- merged_data_all_more_info %>%
+  mutate(NoTrackTracker = domain %in% notrack_df$domain)
+
+merged_data_all_more_info <- merged_data_all_more_info %>%
+  left_join(
+    notrack_df %>% 
+      select(domain, DomainOwnerNoTrack, CategoryNoTrack),
+    by = "domain"
+  ) %>%
+  distinct()
+
+#count number of TRUE in notrack_tracker
+table(merged_data_all_more_info$NoTrackTracker)
+table(merged_data_all_more_info$domainType)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$NoTrackTracker)
+
+
+# Cross-ref Prigent -------------------------------------------------------
+
+merged_data_all_more_info <- merged_data_all_more_info %>%
+  mutate(PrigentTracker = domain %in% prigent_df$domain)
+
+#count number of TRUE in prigent_tracker
+table(merged_data_all_more_info$PrigentTracker)
+table(merged_data_all_more_info$domainType)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$PrigentTracker)
+
+
+# Cross-ref Fademind -------------------------------------------------------
+
+merged_data_all_more_info <- merged_data_all_more_info %>%
+  mutate(FademindTracker = domain %in% fademind_df$domain)
+
+#count number of TRUE in fademind_tracker
+table(merged_data_all_more_info$FademindTracker)
+table(merged_data_all_more_info$domainType)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$FademindTracker)
+
+
+# Cross-ref Frogeye -------------------------------------------------------
+
+merged_data_all_more_info <- merged_data_all_more_info %>%
+  mutate(FrogeyeTracker = domain %in% frogeye_df$domain)
+
+#count number of TRUE in frogeye_tracker
+table(merged_data_all_more_info$FrogeyeTracker)
+table(merged_data_all_more_info$domainType)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$FrogeyeTracker)
 
 
 # Cross-reference all with network activity data --------------------------
-merged_data_all <- merged_data_all %>%
+
+merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(TrackerBlackList = domain %in% blacklist_df$domain)
 
 #count number of TRUE in easylist_tracker
-table(merged_data_all$TrackerBlackList)
+table(merged_data_all_more_info$TrackerBlackList)
 
-table(merged_data_all$domainType)
+table(merged_data_all_more_info$domainType)
 
-table(merged_data_all$domainType, merged_data_all$TrackerBlackList)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$TrackerBlackList)
 
 
 ## Summary
-tracker_summary <- merged_data_all %>%
+tracker_summary <- merged_data_all_more_info %>%
   filter(TrackerBlackList) %>%
   group_by(domain) %>%
   summarise(total_hits = n(), .groups = "drop") %>%
@@ -1521,11 +1602,14 @@ tracker_summary <- merged_data_all %>%
 print(tracker_summary, n = 50)
 
 # Create new df with only tracker entries
-merged_data_all_trackers <- merged_data_all %>%
+merged_data_all_trackers <- merged_data_all_more_info %>%
   filter(TrackerBlackList == TRUE) %>%
-  select(firstTimeStamp, timeStamp, hits,
-         bundleID, AppName, domainOwner, DomainOwnerName, initiatedType, domainClassification, domain,
-         domainType, TrackerBlackList, EasyListTracker, stevenblackTracker, DisconnectTracker)
+  select(domainOwner, DomainOwnerName, DomainOwnerNoTrack, DomainOwnerMaskedD, 
+        AppName, domain, domainType, TrackerBlackList, CategoryNoTrack, CategoryDisconnect, OrganisationDisconnect, 
+        TrackerBlackList, EasyListTracker, stevenblackTracker, DisconnectTracker, MaskedDomainTracker, 
+        NoTrackTracker, FademindTracker, FrogeyeTracker, PrigentTracker,
+        firstTimeStamp, timeStamp, hits, bundleID, initiatedType, domainClassification)
+
 
 
 # Same for CT OFF ---------------------------------------------------------
