@@ -956,9 +956,6 @@ length(unique(merged_data_all$domain[merged_data_all$domainType == 2])) # 4218
 # unique number of bundleIDs
 length(unique(merged_data_all$bundleID)) # 184
 
-# Next steps: 
-# Do the analysis in the CSV file. Use tools like WHOIS, EasyList, DNS lookup, and other tools to find out more about the domains.
-# Do the same for CT OFF and CT ON data frames
 
 # Prep for Cross-Referencing DFs with black and white lists ------------------------
 
@@ -967,142 +964,9 @@ library(dplyr)
 merged_data_all <- merged_data_all %>%
   mutate(domain = str_remove(domain, "^www\\."))
 
+merged_data_all_more_info <- merged_data_all
 
-# example code for reading in blacklists and url --------------------------
-
-## upload:
-# reading a plain text blacklist
-blacklist <- readLines("tracker_blacklist.txt")
-
-# convert to a data frame
-blacklist_df <- data.frame(domain = blacklist, stringsAsFactors = FALSE)
-
-library(readr)
-
-# reading a csv file with a column 'domain'
-blacklist_df <- read_csv("tracker_blacklist.csv")
-
-library(jsonlite)
-
-# reading json file
-blacklist_json <- fromJSON("tracker_blacklist.json")
-
-# assume JSON has a vector/list of domains
-blacklist_df <- data.frame(domain = blacklist_json, stringsAsFactors = FALSE)
-
-library(dplyr)
-library(stringr)
-
-## Data Cleaning
-# lowercase all domains and remove leading "www."
-blacklist_df <- blacklist_df %>%
-  mutate(domain = str_to_lower(domain),
-         domain = str_remove(domain, "^www\\."))
-
-networkActivity_df <- networkActivity_df %>%
-  mutate(domain = str_to_lower(domain),
-         domain = str_remove(domain, "^www\\."))
-
-## Cross-referencing
-# find all network activity entries that match blacklist
-matched_activity <- networkActivity_df %>%
-  semi_join(blacklist_df, by = "domain")
-
-# check the results
-print(matched_activity, n = 50)
-
-# Or: add a tracker flag to the network activity data
-networkActivity_df <- networkActivity_df %>%
-  mutate(is_tracker = domain %in% blacklist_df$domain)
-
-## Summary
-tracker_summary <- networkActivity_df %>%
-  filter(is_tracker) %>%
-  group_by(domain) %>%
-  summarise(total_hits = n(), .groups = "drop") %>%
-  arrange(desc(total_hits))
-
-print(tracker_summary, n = 20)
-
-
-# Example Scrapping ---------------------------------------------------------------
-
-library(httr)
-library(readr)
-# txt
-# URL of the blacklist
-blacklist_url <- "https://example.com/tracker_blacklist.txt"
-
-# download the file as plain text
-blacklist_txt <- content(GET(blacklist_url), as = "text")
-
-# convert into vector of domains
-blacklist_domains <- read_lines(I(blacklist_txt))
-
-# make into a data frame
-blacklist_df <- data.frame(domain = blacklist_domains, stringsAsFactors = FALSE)
-
-## csv
-library(readr)
-
-blacklist_url <- "https://example.com/tracker_blacklist.csv"
-blacklist_df <- read_csv(blacklist_url)
-
-## json
-library(jsonlite)
-
-blacklist_url <- "https://example.com/tracker_blacklist.json"
-blacklist_json <- fromJSON(blacklist_url)
-
-# assuming JSON is a simple array of domains
-blacklist_df <- data.frame(domain = unlist(blacklist_json), stringsAsFactors = FALSE)
-
-## embedded in html
-library(rvest)
-library(dplyr)
-
-blacklist_url <- "https://example.com/blacklist-page"
-
-# read page
-page <- read_html(blacklist_url)
-
-# extract table or text nodes
-blacklist_df <- page %>%
-  html_nodes("table") %>%   # adjust selector if necessary
-  html_table() %>%
-  .[[1]] %>%
-  rename(domain = 1)        # assume first column has domains
-
-## mutliple lists
-# assuming multiple lists in different data frames: bl1, bl2, bl3
-combined_blacklist <- bind_rows(bl1, bl2, bl3) %>%
-  distinct(domain, .keep_all = TRUE)
-
-# automation
-library(purrr)
-library(dplyr)
-library(readr)
-
-urls <- c(
-  "https://example.com/tracker_blacklist.txt",
-  "https://example.com/tracker_blacklist.csv"
-)
-
-# function to read text or csv automatically
-read_blacklist <- function(url) {
-  if (grepl("\\.csv$", url)) {
-    df <- read_csv(url)
-  } else {
-    txt <- read_lines(url)
-    df <- data.frame(domain = txt, stringsAsFactors = FALSE)
-  }
-  return(df)
-}
-
-combined_blacklist <- map_df(urls, read_blacklist) %>%
-  distinct(domain, .keep_all = TRUE)
-
-# EasyList EasyPrivacy ------------------------
+# Upload EasyList EasyPrivacy ------------------------
 
 library(httr)
 library(readr)
@@ -1191,8 +1055,8 @@ library(httr)
 library(readr)
 library(jsonlite)
 library(dplyr)
-library(stringr)
 library(purrr)
+library(stringr)
 
 # --- URLs of well-known tracker lists ---
 tracker_urls <- list(
@@ -1206,6 +1070,7 @@ tracker_urls <- list(
   notrack = "https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-blocklist.txt"
 )
 
+# Paths to local files (if any)
 tracker_paths <- list(
   disconnect_me = '/Users/nicolaswaser/New-project-GitHub-first/R/MSA II/Input Data/disconnect.txt'
 )
@@ -1214,21 +1079,22 @@ tracker_paths <- list(
 # --- Helper function: clean and normalize domains ---
 clean_domains <- function(domains) {
   domains %>%
-    str_remove_all("^\\|\\|") %>%  # remove leading ||
-    str_remove_all("^\\|") %>%     # remove leading |
-    str_remove_all("\\^$") %>%     # remove trailing ^
-    str_remove_all("/.*$") %>%     # remove anything after /
-    str_to_lower() %>%             # lowercase
-    str_remove("^www\\.") %>%     # remove leading www.
-    str_remove_all("^\\&") %>%     # remove &
-    str_remove_all("^\\.") %>%     # remove .
-    str_remove_all("^\\?") %>%     # remove ?
-    str_remove_all("^\\_")          # remove _
-    str_remove_all("\\?.*$") %>%      # remove query strings
-    str_remove_all("#+.*$") %>%       # remove selectors like ## or ###
-    str_remove_all(",domain.*$") %>%  # remove ,domain and anything after
-    str_remove_all("\\.$")            # remove trailing dot
+    stringr::str_remove_all("^\\|\\|") %>%  # remove leading ||
+    stringr::str_remove_all("^\\|") %>%     # remove leading |
+    stringr::str_remove_all("\\^$") %>%     # remove trailing ^
+    stringr::str_remove_all("/.*$") %>%     # remove anything after /
+    stringr::str_to_lower() %>%             # lowercase
+    stringr::str_remove("^www\\.") %>%      # remove leading www.
+    stringr::str_remove_all("^\\&") %>%     # remove &
+    stringr::str_remove_all("^\\.") %>%     # remove .
+    stringr::str_remove_all("^\\?") %>%     # remove ?
+    stringr::str_remove_all("^\\_") %>%     # remove _
+    stringr::str_remove_all("\\?.*$") %>%   # remove query strings
+    stringr::str_remove_all("#+.*$") %>%    # remove selectors like ## or ###
+    stringr::str_remove_all(",domain.*$") %>% # remove ,domain and anything after
+    stringr::str_remove_all("\\.$")         # remove trailing dot
 }
+
 
 # --- Parser for EasyPrivacy ---
 get_easyprivacy <- function(url) {
@@ -1252,7 +1118,7 @@ get_stevenblack <- function(url) {
     filter(str_detect(line, "^0\\.0\\.0\\.0\\s+")) %>% # lines with "0.0.0.0 domain"
     mutate(domain = str_remove(line, "^0\\.0\\.0\\.0\\s+")) %>%
     select(domain) %>%
-    mutate(domain = clean_domains(domain))
+    #mutate(domain = clean_domains(domain))
   return(df)
 }
 
@@ -1273,21 +1139,17 @@ get_plainlist <- function(url) {
   return(df)
 }
 
-# Parser for Disconnect.me JSON -------------------------------------------
-library(jsonlite)
 
-#disconnect_url <- "https://raw.githubusercontent.com/disconnectme/disconnect-tracking-protection/master/services.json"
-#disconnect_json <- fromJSON(disconnect_url)
+# Downloading and combing all lists ---------------------------------------
 
-# assuming JSON is a simple array of domains
-#disconnect_json <- data.frame(domain = unlist(disconnect_json), stringsAsFactors = FALSE)
-
-# keep only the domain column
-#disconnect_json <- disconnect_json %>%
-  #slice(-1:-1) %>% # remove first line (header info)
-  #select(domain) %>%
-  #mutate(domain = clean_domains(domain)) %>%
-  #filter(domain != "")
+library(dplyr)
+easyprivacy_df <- get_easyprivacy(tracker_urls$easyprivacy)
+stevenblack_df <- get_stevenblack(tracker_urls$stevenblack)
+masked_domain_df <- get_plainlist(tracker_urls$masked_domain)
+prigent_df <- get_plainlist(tracker_urls$prigent_ads)
+fademind_df <- get_plainlist(tracker_urls$fademind)
+frogeye_df <- get_plainlist(tracker_urls$frogeye)
+notrack_df <- get_plainlist(tracker_urls$notrack)
 
 
 # Disconnect.me from File ----------------------------------------------------
@@ -1336,17 +1198,6 @@ for (category_name in names(json_data$categories)) {
 
 # Viewing the first few rows to check the result
 head(disconnect_df)
-
-
-# Downloading and combing all lists ---------------------------------------
-
-easyprivacy_df <- get_easyprivacy(tracker_urls$easyprivacy)
-stevenblack_df <- get_stevenblack(tracker_urls$stevenblack)
-masked_domain_df <- get_plainlist(tracker_urls$masked_domain)
-prigent_df <- get_plainlist(tracker_urls$prigent_ads)
-fademind_df <- get_plainlist(tracker_urls$fademind)
-frogeye_df <- get_plainlist(tracker_urls$frogeye)
-notrack_df <- get_plainlist(tracker_urls$notrack)
 
 
 # Modifying these dfs -----------------------------------------------------
@@ -1411,6 +1262,7 @@ str(notrack_df)
 
 
 # Data Clean Disconnect.me df --------------------------------------------
+
 # convert disconnect tibble into df
 disconnect_df <- as.data.frame(disconnect_df)
 str(disconnect_df)
@@ -1423,9 +1275,30 @@ colnames(disconnect_df)[colnames(disconnect_df) == "category"] <- "CategoryDisco
 colnames(disconnect_df)[colnames(disconnect_df) == "organisation"] <- "OrganisationDisconnect"
 colnames(disconnect_df)[colnames(disconnect_df) == "url"] <- "URLDisconnect"
 
+# Show duplicate values in disconnect_df (domain column)
+disconnect_duplicates <- disconnect_df %>%
+  group_by(domain) %>%
+  filter(n() > 1)
+rm(disconnect_duplicates)
+
+# if there are duplicate domains, melt them into one row with all CategoryDisconnect values in the same cell
+collapsed_df <- disconnect_df %>%
+  group_by(domain) %>% 
+  summarise(
+    CategoryDisconnect = paste(unique(CategoryDisconnect), collapse = ", "),
+    OrganisationDisconnect = paste(unique(OrganisationDisconnect), collapse = ", "),
+    URLDisconnect = paste(unique(URLDisconnect), collapse = ", "),
+    .groups = "drop"
+  )
+
+disconnect_df_expanded <- disconnect_df
+disconnect_df <- collapsed_df
+rm(collapsed_df)
+
 
 # Combining all dfs into one master blacklist -----------------------------
 
+#rm(blacklist_df)
 blacklist_df <- bind_rows(
   easyprivacy_df,
   stevenblack_df,
@@ -1437,25 +1310,43 @@ blacklist_df <- bind_rows(
   notrack_df
 ) %>%
   distinct(domain, .keep_all = TRUE) %>%
-  filter(domain != "" & !is.na(domain))
+  filter(domain != "" & !is.na(domain)) 
 
+blacklist_df <- blacklist_df %>%
+  slice(-1:-1)  # remove first line (header info)
+
+# unique number of domains in blacklist_df
+length(unique(blacklist_df$domain)) # 324125
 
 # --- Preview results ---
 head(blacklist_df, 20)
 nrow(blacklist_df)
 
+## Adding tracker info to merged_data_all_more_info -----------------------
+# Disconnect ----------------------------------------------------
 
-# Cross-referencing with EasyList EasyPrivacy -----------------------------
+#merged_data_all_more_info <- merged_data_all
 
 library(dplyr)
-# find all network activity entries that match EasyList EasyPrivacy
-#matched_activity_easylist <- merged_data_all %>%
-# semi_join(easylist_easyprivacy_df_filtered, by = "domain")
-#rm(matched_activity)
+merged_data_all_more_info <- merged_data_all_more_info %>%
+  mutate(DisconnectTracker = domain %in% disconnect_df$domain)
 
-merged_data_all_more_info <- merged_data_all
+merged_data_all_more_info <- merged_data_all_more_info %>%
+  left_join(
+    disconnect_df %>% 
+      select(domain, OrganisationDisconnect, CategoryDisconnect), by = "domain") #%>%
+  #distinct()
 
-# add a tracker flag 
+#count number of TRUE in disconnect_tracker
+table(merged_data_all_more_info$DisconnectTracker)
+table(merged_data_all_more_info$domainType)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$DisconnectTracker)
+
+
+# EasyList EasyPrivacy -----------------------------
+
+library(dplyr)
+# find all network activity entries that match EasyList EasyPrivacy and add a tracker flag 
 merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(EasyListTracker = domain %in% easylist_easyprivacy_df_filtered$domain)
 
@@ -1477,7 +1368,7 @@ tracker_summary_easylist <- merged_data_all_more_info %>%
 print(tracker_summary, n = 50)
 
 
-# Cross-ref stevenblack ---------------------------------------------------
+# stevenblack ---------------------------------------------------
 
 merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(stevenblackTracker = domain %in% stevenblack_df$domain)
@@ -1490,36 +1381,14 @@ table(merged_data_all_more_info$domainType)
 table(merged_data_all_more_info$domainType, merged_data_all_more_info$stevenblackTracker)
 
 
-# Cross-ref disconnect ----------------------------------------------------
-
-library(dplyr)
-merged_data_all_more_info <- merged_data_all_more_info %>%
-  mutate(DisconnectTracker = domain %in% disconnect_df$domain)
-
-merged_data_all_more_info <- merged_data_all_more_info %>%
-  left_join(
-    disconnect_df %>% 
-      select(domain, OrganisationDisconnect, CategoryDisconnect),
-    by = "domain"
-  ) %>%
-  distinct()
-
-#count number of TRUE in disconnect_tracker
-table(merged_data_all_more_info$DisconnectTracker)
-table(merged_data_all_more_info$domainType)
-table(merged_data_all_more_info$domainType, merged_data_all_more_info$DisconnectTracker)
-
-
-# Cross-ref Masked Domain -------------------------------------------------
+# Masked Domain -------------------------------------------------
 
 merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(MaskedDomainTracker = domain %in% masked_domain_df$domain) %>%
   # add DomainOwnerMaskedD info column
   left_join(masked_domain_df %>% 
-              select(domain, DomainOwnerMaskedD),
-            by = "domain"
-            ) %>%
-              distinct()
+              select(domain, DomainOwnerMaskedD), by = "domain") #%>%
+              #distinct()
 
 #count number of TRUE in masked_domain_tracker
 table(merged_data_all_more_info$MaskedDomainTracker)
@@ -1527,7 +1396,7 @@ table(merged_data_all_more_info$domainType)
 table(merged_data_all_more_info$domainType, merged_data_all_more_info$MaskedDomainTracker)
 
 
-# Cross-ref NoTrack -------------------------------------------------------
+# NoTrack -------------------------------------------------------
 
 merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(NoTrackTracker = domain %in% notrack_df$domain)
@@ -1535,10 +1404,8 @@ merged_data_all_more_info <- merged_data_all_more_info %>%
 merged_data_all_more_info <- merged_data_all_more_info %>%
   left_join(
     notrack_df %>% 
-      select(domain, DomainOwnerNoTrack, CategoryNoTrack),
-    by = "domain"
-  ) %>%
-  distinct()
+      select(domain, DomainOwnerNoTrack, CategoryNoTrack), by = "domain") #%>%
+  #distinct()
 
 #count number of TRUE in notrack_tracker
 table(merged_data_all_more_info$NoTrackTracker)
@@ -1546,7 +1413,7 @@ table(merged_data_all_more_info$domainType)
 table(merged_data_all_more_info$domainType, merged_data_all_more_info$NoTrackTracker)
 
 
-# Cross-ref Prigent -------------------------------------------------------
+# Prigent -------------------------------------------------------
 
 merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(PrigentTracker = domain %in% prigent_df$domain)
@@ -1557,7 +1424,7 @@ table(merged_data_all_more_info$domainType)
 table(merged_data_all_more_info$domainType, merged_data_all_more_info$PrigentTracker)
 
 
-# Cross-ref Fademind -------------------------------------------------------
+# Fademind -------------------------------------------------------
 
 merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(FademindTracker = domain %in% fademind_df$domain)
@@ -1568,7 +1435,7 @@ table(merged_data_all_more_info$domainType)
 table(merged_data_all_more_info$domainType, merged_data_all_more_info$FademindTracker)
 
 
-# Cross-ref Frogeye -------------------------------------------------------
+# Frogeye -------------------------------------------------------
 
 merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(FrogeyeTracker = domain %in% frogeye_df$domain)
@@ -1592,7 +1459,7 @@ table(merged_data_all_more_info$domainType)
 table(merged_data_all_more_info$domainType, merged_data_all_more_info$TrackerBlackList)
 
 
-## Summary
+# Summary
 tracker_summary <- merged_data_all_more_info %>%
   filter(TrackerBlackList) %>%
   group_by(domain) %>%
@@ -1610,6 +1477,22 @@ merged_data_all_trackers <- merged_data_all_more_info %>%
         NoTrackTracker, FademindTracker, FrogeyeTracker, PrigentTracker,
         firstTimeStamp, timeStamp, hits, bundleID, initiatedType, domainClassification)
 
+# show dublicate rows
+merged_data_all_trackers_duplicates <- merged_data_all_trackers %>%
+  group_by(domain, AppName, timeStamp) %>%
+  filter(n() > 1)
+
+
+# Filtering and narrowing down --------------------------------------------
+
+merged_data_all_trackers_domainType1 <- merged_data_all_trackers %>%
+  filter(domainType == 1)
+
+merged_data_all_trackers_domainType2 <- merged_data_all_trackers %>%
+  filter(domainType == 2)
+
+merged_data_all_trackers_CategoryNoTrack_Tracker <- merged_data_all_trackers %>%
+  filter(CategoryNoTrack != "" & !is.na(CategoryNoTrack))
 
 
 # Same for CT OFF ---------------------------------------------------------
@@ -1622,5 +1505,157 @@ merged_data_ct_off <- merged_data_ct_off %>%
 # remove leading www. from domain in merged_data_ct_on
 merged_data_ct_on <- merged_data_ct_on %>%
   mutate(domain = str_remove(domain, "^www\\."))
+
+# Web-Parser for Disconnect.me JSON-file -------------------------------------------
+#library(jsonlite)
+
+#disconnect_url <- "https://raw.githubusercontent.com/disconnectme/disconnect-tracking-protection/master/services.json"
+#disconnect_json <- fromJSON(disconnect_url)
+
+# assuming JSON is a simple array of domains
+#disconnect_json <- data.frame(domain = unlist(disconnect_json), stringsAsFactors = FALSE)
+
+# keep only the domain column
+#disconnect_json <- disconnect_json %>%
+#slice(-1:-1) %>% # remove first line (header info)
+#select(domain) %>%
+#mutate(domain = clean_domains(domain)) %>%
+#filter(domain != "")
+
+
+
+# example code for reading in blacklists and url --------------------------
+
+## upload:
+# reading a plain text blacklist
+#blacklist <- readLines("tracker_blacklist.txt")
+
+# convert to a data frame
+#blacklist_df <- data.frame(domain = blacklist, stringsAsFactors = FALSE)
+
+#library(readr)
+
+# reading a csv file with a column 'domain'
+#blacklist_df <- read_csv("tracker_blacklist.csv")
+
+#library(jsonlite)
+
+# reading json file
+#blacklist_json <- fromJSON("tracker_blacklist.json")
+
+# assume JSON has a vector/list of domains
+#blacklist_df <- data.frame(domain = blacklist_json, stringsAsFactors = FALSE)
+
+#library(dplyr)
+#library(stringr)
+
+## Data Cleaning
+# lowercase all domains and remove leading "www."
+#blacklist_df <- blacklist_df %>%
+# mutate(domain = str_to_lower(domain),
+#       domain = str_remove(domain, "^www\\."))
+
+#networkActivity_df <- networkActivity_df %>%
+#  mutate(domain = str_to_lower(domain),
+#        domain = str_remove(domain, "^www\\."))
+
+## Cross-referencing
+# find all network activity entries that match blacklist
+#matched_activity <- networkActivity_df %>%
+# semi_join(blacklist_df, by = "domain")
+
+# check the results
+#print(matched_activity, n = 50)
+
+# Or: add a tracker flag to the network activity data
+#networkActivity_df <- networkActivity_df %>%
+# mutate(is_tracker = domain %in% blacklist_df$domain)
+
+## Summary
+#tracker_summary <- networkActivity_df %>%
+# filter(is_tracker) %>%
+#group_by(domain) %>%
+#summarise(total_hits = n(), .groups = "drop") %>%
+#arrange(desc(total_hits))
+
+#print(tracker_summary, n = 20)
+
+
+# Example Scrapping ---------------------------------------------------------------
+
+library(httr)
+library(readr)
+# txt
+# URL of the blacklist
+blacklist_url <- "https://example.com/tracker_blacklist.txt"
+
+# download the file as plain text
+blacklist_txt <- content(GET(blacklist_url), as = "text")
+
+# convert into vector of domains
+blacklist_domains <- read_lines(I(blacklist_txt))
+
+# make into a data frame
+blacklist_df <- data.frame(domain = blacklist_domains, stringsAsFactors = FALSE)
+
+## csv
+library(readr)
+
+blacklist_url <- "https://example.com/tracker_blacklist.csv"
+blacklist_df <- read_csv(blacklist_url)
+
+## json
+library(jsonlite)
+
+blacklist_url <- "https://example.com/tracker_blacklist.json"
+blacklist_json <- fromJSON(blacklist_url)
+
+# assuming JSON is a simple array of domains
+blacklist_df <- data.frame(domain = unlist(blacklist_json), stringsAsFactors = FALSE)
+
+## embedded in html
+library(rvest)
+library(dplyr)
+
+blacklist_url <- "https://example.com/blacklist-page"
+
+# read page
+page <- read_html(blacklist_url)
+
+# extract table or text nodes
+blacklist_df <- page %>%
+  html_nodes("table") %>%   # adjust selector if necessary
+  html_table() %>%
+  .[[1]] %>%
+  rename(domain = 1)        # assume first column has domains
+
+## mutliple lists
+# assuming multiple lists in different data frames: bl1, bl2, bl3
+combined_blacklist <- bind_rows(bl1, bl2, bl3) %>%
+  distinct(domain, .keep_all = TRUE)
+
+# automation
+library(purrr)
+library(dplyr)
+library(readr)
+
+urls <- c(
+  "https://example.com/tracker_blacklist.txt",
+  "https://example.com/tracker_blacklist.csv"
+)
+
+# function to read text or csv automatically
+read_blacklist <- function(url) {
+  if (grepl("\\.csv$", url)) {
+    df <- read_csv(url)
+  } else {
+    txt <- read_lines(url)
+    df <- data.frame(domain = txt, stringsAsFactors = FALSE)
+  }
+  return(df)
+}
+
+combined_blacklist <- map_df(urls, read_blacklist) %>%
+  distinct(domain, .keep_all = TRUE)
 
 ### Fin du Script ###
