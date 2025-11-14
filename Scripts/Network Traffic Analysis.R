@@ -1296,6 +1296,147 @@ disconnect_df <- collapsed_df
 rm(collapsed_df)
 
 
+# Lockdown Privacy JSON File Uploads --------------------------------------
+
+# Parsing the JSON data
+# Assuming the file is in your working directory
+library(jsonlite)
+library(dplyr)
+library(stringr)
+
+# load the JSON files
+privacy_list <- fromJSON("Input Data/Lockdown Privacy Blocklists/privacyBlockList.json")
+
+ad_list1 <- fromJSON("Input Data/Lockdown Privacy Blocklists/adBlockList.json")
+ad_list2 <- fromJSON("Input Data/Lockdown Privacy Blocklists/adBlockListTwo.json")
+ad_list3 <- fromJSON("Input Data/Lockdown Privacy Blocklists/adBlockListThree.json")
+
+social_list <- fromJSON("Input Data/Lockdown Privacy Blocklists/socialBlockList.json")
+
+# function to extract and clean domains from a single list
+extract_domains <- function(json_data) {
+  
+  # filter for rules where action type is "block" and load-type is "third-party"
+  filtered_rules <- json_data %>%
+    filter(action$type == "block") %>%
+    filter(sapply(trigger$`load-type`, function(x) "third-party" %in% x))
+  
+  # extract url-filter values
+  url_filters <- filtered_rules$trigger$`url-filter`
+  
+  # remove regex patterns to get clean domains
+  clean_domains <- url_filters %>%
+    # remove ^https?://
+    str_remove("^https?://") %>%
+    # remove ^https?:/+
+    str_remove("^https?:/+") %>%
+    # remove ^[^:]+:(//)?
+    str_remove("^[^:]+:(//)?") %>%
+    # remove ([^/]+\\.)?
+    str_remove("\\(\\[\\^/\\]\\+\\\\\\.\\)\\?") %>%
+    # remove ([^-_.%a-z0-9].*)?$
+    str_remove("\\(\\[\\^-_\\.%a-z0-9\\]\\.\\*\\)\\?\\$") %>%
+    # remove ^[^:]+:(//)?.*&
+    str_remove("^[^:]+:(//)?.*&") %>%
+    # remove [:\/]
+    str_remove("\\[:/\\\\]") %>%
+    # remove any remaining backslashes
+    str_remove_all("\\\\") %>%
+    # remove [^/]+\\.
+    str_remove_all("\\[\\^/\\]\\+\\.") %>%
+    
+    # remove *&np=
+    str_remove_all("\\*&np=") %>%
+    # remove *&hp=
+    str_remove_all("\\*&hp=") %>%
+    # remove *.se.*
+    str_remove_all("\\*\\.se\\.\\*") %>%
+    
+    # remove any remaining brackets and parentheses
+    str_remove_all("\\[|\\]|\\(|\\)") %>%
+    # remove ^ and $ anchors
+    str_remove_all("\\^|\\$") %>%
+    # remove +
+    str_remove_all("\\+") %>%
+    # remove ?
+    str_remove_all("\\?") %>%
+    # remove :
+    str_remove_all(":") %>%
+    # remove =
+    str_remove_all("=") %>%
+    
+    # remove //
+    str_remove_all("//") %>%
+    # remove /
+    str_remove_all("/") %>%
+    
+    # remove . at beginning
+    str_remove_all("^\\.") %>%
+    # remove *
+    str_remove_all("\\*") %>%
+    # remove &
+    str_remove_all("&") %>%
+    
+    # remove -_.%A-Za-z0-9.
+    #str_remove("-_\\.\\%A-Za-z0-9\\.") %>%
+    
+    # trim whitespace
+    str_trim()
+  
+  return(clean_domains)
+}
+
+
+# Extraction Lockdown Privacy ---------------------------------------------
+
+# extract domains from each list
+privacy_domains <- extract_domains(privacy_list)
+str(privacy_domains)
+privacy_domains <- data.frame(
+  domain = privacy_domains,
+  category = "privacy", # Analytics, Web Statistics Counters, User tracking pixels, third party monitoring
+  stringsAsFactors = FALSE)
+
+
+ad1_domains <- extract_domains(ad_list1)
+str(ad1_domains)
+ad1_domains <- data.frame(
+  domain = ad1_domains,
+  category = "advertising", # advertising networks, ad servers, and marketing platforms (automation)
+  stringsAsFactors = FALSE)
+
+ad2_domains <- extract_domains(ad_list2)
+str(ad2_domains)
+ad2_domains <- data.frame(
+  domain = ad2_domains,
+  category = "advertising", # advertising networks, ad servers, and marketing platforms (automation)
+  stringsAsFactors = FALSE)
+
+ad3_domains <- extract_domains(ad_list3)
+str(ad3_domains)
+ad3_domains <- data.frame(
+  domain = ad3_domains,
+  category = "advertising", # advertising networks, ad servers, and marketing platforms (automation)
+  stringsAsFactors = FALSE)
+
+
+social_domains <- extract_domains(social_list)
+str(social_domains)
+social_domains <- data.frame(
+  domain = social_domains,
+  category = "social", # Blocks social media widgets embedded on third-party websites (Like and sharing buttons, comments, etc.)
+  stringsAsFactors = FALSE)
+
+
+# combine all domains into one df
+lockdown_privacy_df <- bind_rows(
+  privacy_domains, ad1_domains, ad2_domains, ad3_domains, social_domains) %>%
+  distinct(domain, .keep_all = TRUE) %>%
+  filter(domain != "" & !is.na(domain)) %>%
+  # rename category column to CategoryLockdown
+  rename(CategoryLockdown = category)
+
+
 # Combining all dfs into one master blacklist -----------------------------
 
 #rm(blacklist_df)
@@ -1307,7 +1448,8 @@ blacklist_df <- bind_rows(
   prigent_df,
   fademind_df,
   frogeye_df,
-  notrack_df
+  notrack_df,
+  lockdown_privacy_df
 ) %>%
   distinct(domain, .keep_all = TRUE) %>%
   filter(domain != "" & !is.na(domain)) 
