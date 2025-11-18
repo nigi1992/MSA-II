@@ -1,6 +1,7 @@
 ### Network Traffic Analysis Script ###
+# Network Analysis --------------------------------------------------------
 
-# Another Overview --------------------------------------------------------
+## Another Overview --------------------------------------------------------
 
 # domain accessed during network activity
 merged_data_all %>%
@@ -60,11 +61,13 @@ merged_data_ct_on %>%
   print(n=20)
 
 
+# 1. Adding columns with simpler names ---------------------------------------
 
-# Adding columns with simpler names ---------------------------------------
+# 1.1 bundleID - App Name -----------------------------------------------------
 
 # Start with bundleID
-# Complete Data frame -----------------------------------------------------
+
+## Complete Df -----------------------------------------------------
 
 # Renaming bundleID for easier readability
 merged_data_all %>%
@@ -278,7 +281,7 @@ merged_data_all <- merged_data_all %>% # moving AppName column next to bundleID 
   select(firstTimeStamp, timeStamp, hits, bundleID, AppName, domain, domainOwner, everything())    
   
 
-# Same for CT off ------------------------------------------------
+## Same for CT off ------------------------------------------------
 
 merged_data_ct_off <- merged_data_ct_off %>%
   mutate(AppName = case_when(
@@ -482,7 +485,7 @@ merged_data_ct_off <- merged_data_ct_off %>%
 merged_data_ct_off <- merged_data_ct_off %>%
   select(firstTimeStamp, timeStamp, hits, bundleID, AppName, domain, domainOwner, everything())    
   
-# Same for CT on ------------------------------------------------
+## Same for CT on ------------------------------------------------
 
 merged_data_ct_on <- merged_data_ct_on %>%
   mutate(AppName = case_when(
@@ -687,9 +690,7 @@ merged_data_ct_on <- merged_data_ct_on %>%
   select(firstTimeStamp, timeStamp, hits, bundleID, AppName, domain, domainOwner, everything())
 
 
-
-# Continue with DomainOwner
-# Complete Df -------------------------------------------------------------
+# 1.2 DomainOwner -------------------------------------------------------------
 
 # domain owner
 merged_data_all %>%
@@ -705,7 +706,7 @@ length(unique(merged_data_all$domainOwner))
 library(tidyverse) # For data manipulation
 
 
-# Creating new column DomainOwnerName ---------------------------------------------------------
+## Creating new column DomainOwnerName ---------------------------------------------------------
 merged_data_all <- merged_data_all %>%
   mutate(DomainOwnerName = case_when(
     str_detect(domainOwner, "Microsoft Corporation") ~ "Microsoft",
@@ -873,7 +874,7 @@ merged_data_all <- merged_data_all %>%
 # Save df as CSV
 write.csv(merged_data_all, "Output/Tables/merged_data_all_df.csv", row.names = TRUE)
 
-# Printing DomainOwnerName summaries ------------------------------------------------------
+## Printing DomainOwnerName summaries ------------------------------------------------------
 library(dplyr)
 merged_data_all %>%
   group_by(DomainOwnerName) %>%
@@ -893,7 +894,7 @@ merged_data_all %>%
   arrange(desc(total_accesses)) %>%
   print(n=150) 
 
-# Filtered Df domain > 10 -------------------------------------------------------------
+## Filtered Df domain > 10 -------------------------------------------------------------
 
 # New df with domains that have more than 10 accesses
 merged_data_all_domain_10plus <- merged_data_all %>%
@@ -925,7 +926,7 @@ merged_data_all_domain_10plus_full <- merged_data_all %>%
 write.csv(merged_data_all_domain_10plus_full, "Output/Tables/most_accessed_domains_10plus_full.csv", row.names = TRUE)
 
 
-# new df's with domain Owners ---------------------------------------
+## New df's with domain Owners ---------------------------------------
 
 # New df for domain Owner Names with domains that have more than 10 accesses
 merged_data_all_domain_10plus_domainOwners <- merged_data_all_domain_10plus %>%
@@ -957,8 +958,9 @@ length(unique(merged_data_all$domain[merged_data_all$domainType == 2])) # 4218
 length(unique(merged_data_all$bundleID)) # 184
 
 
-# Prep for Cross-Referencing DFs with black and white lists ------------------------
+# 2. Cross-Referencing with BlackLists ------------------------
 
+# Prep for Cross-Referencing DFs with black and white lists
 library(dplyr)
 # remove leading www. from domain in merged_data_all
 merged_data_all <- merged_data_all %>%
@@ -966,7 +968,7 @@ merged_data_all <- merged_data_all %>%
 
 merged_data_all_more_info <- merged_data_all
 
-# Upload EasyList EasyPrivacy ------------------------
+## Upload EasyList EasyPrivacy ------------------------
 
 library(httr)
 library(readr)
@@ -984,7 +986,7 @@ easylist_easyprivacy_domains <- read_lines(I(easylist_easyprivacy_txt))
 easylist_easyprivacy_df <- data.frame(domain = easylist_easyprivacy_domains, stringsAsFactors = FALSE)
 
 
-# Data Cleaning EasyList-----------------------------------------------------------
+## Data Cleaning EasyList-----------------------------------------------------------
 library(dplyr)
 # Clean the domains (remove comments, wildcards, etc.)
 easylist_easyprivacy_df_filtered <- easylist_easyprivacy_df %>%
@@ -1048,7 +1050,7 @@ easylist_easyprivacy_df_filtered <- easylist_easyprivacy_df_filtered %>%
   distinct(domain, .keep_all = TRUE)
 
 
-# Ready to run script -----------------------------------------------------
+# 2.1 Web list parsing -----------------------------------------------------
 
 # --- Load required packages ---
 library(httr)
@@ -1057,6 +1059,11 @@ library(jsonlite)
 library(dplyr)
 library(purrr)
 library(stringr)
+
+# Paths to local files (if any)
+tracker_paths <- list(
+  disconnect_me = '/Users/nicolaswaser/New-project-GitHub-first/R/MSA II/Input Data/disconnect.txt'
+)
 
 # --- URLs of well-known tracker lists ---
 tracker_urls <- list(
@@ -1067,13 +1074,61 @@ tracker_urls <- list(
   prigent_ads = "https://v.firebog.net/hosts/Prigent-Ads.txt",
   fademind = "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.2o7Net/hosts",
   frogeye = "https://hostfiles.frogeye.fr/firstparty-trackers-hosts.txt",
-  notrack = "https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-blocklist.txt"
+  notrack = "https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-blocklist.txt", # flagged as having to many false positives
+  
+  # newly added lists with ads:
+  yoyo = "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&mimetype=plaintext&useip=0.0.0.0", # domain start with 0.0.0.0
+  dan_pollock = "https://someonewhocares.org/hosts/zero/hosts",
+  anudeepND = "https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt",
+  easylist = "https://easylist.to/easylist/easylist.txt",
+  
+  # soon discontinued / outdated lists:
+  developerdan = "https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt", # 429286 domains
+  frogeye_multiparty = "https://hostfiles.frogeye.fr/multiparty-trackers-hosts.txt", # 44956 domains
+  w3c = "https://raw.githubusercontent.com/Kees1958/W3C_annual_most_used_survey_blocklist/6b8c2411f22dda68b0b41757aeda10e50717a802/TOP_EU_US_Ads_Trackers_HOST"
 )
 
-# Paths to local files (if any)
-tracker_paths <- list(
-  disconnect_me = '/Users/nicolaswaser/New-project-GitHub-first/R/MSA II/Input Data/disconnect.txt'
-)
+
+## Additional URLs ---------------------------------------------------------
+
+# from uBlock Origin:
+# Ad_guard tracking protection?
+# first party tracking on non advertising sites https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/SpywareFilter/sections/tracking_servers_firstparty.txt
+# third party tracking https://github.com/AdguardTeam/AdguardFilters/blob/master/SpywareFilter/sections/tracking_servers.txt
+# mobile analytics spyware https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/SpywareFilter/sections/mobile.txt
+# track param ($removeparam used for tracking what to do?) https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/TrackParamFilter/sections/general_url.txt
+
+# From Firebog.net:
+# soon discontinued / outdated lists:
+# https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt 429286 domains
+# https://hostfiles.frogeye.fr/multiparty-trackers-hosts.txt 44956 domains
+# https://raw.githubusercontent.com/Kees1958/W3C_annual_most_used_survey_blocklist/6b8c2411f22dda68b0b41757aeda10e50717a802/TOP_EU_US_Ads_Trackers_HOST
+
+# sus
+#https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt
+#https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Spam/hosts
+#https://v.firebog.net/hosts/static/w3kbl.txt
+
+# ads
+#https://adaway.org/hosts.txt
+#https://v.firebog.net/hosts/AdguardDNS.txt
+#https://v.firebog.net/hosts/Admiral.txt
+#https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt
+#https://v.firebog.net/hosts/Easylist.txt
+#https://raw.githubusercontent.com/FadeMind/hosts.extras/master/UncheckyAds/hosts
+#https://raw.githubusercontent.com/bigdargon/hostsVN/master/hosts
+
+# malware
+#https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt
+#https://v.firebog.net/hosts/Prigent-Crypto.txt
+#https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Risk/hosts
+#https://phishing.army/download/phishing_army_blocklist_extended.txt
+#https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-malware.txt
+#https://v.firebog.net/hosts/RPiList-Malware.txt
+#https://raw.githubusercontent.com/Spam404/lists/master/main-blacklist.txt
+#https://raw.githubusercontent.com/AssoEchap/stalkerware-indicators/master/generated/hosts
+#https://urlhaus.abuse.ch/downloads/hostfile/
+#https://lists.cyberhost.uk/malware.txt
 
 
 # --- Helper function: clean and normalize domains ---
@@ -1104,6 +1159,7 @@ get_easyprivacy <- function(url) {
     filter(!str_starts(domain, "!")) %>%  # remove comments
     filter(!str_detect(domain, "\\*\\*\\*")) %>%  # remove comments
     filter(!str_starts(domain, "\\@\\@\\|\\|")) %>%  # remove exceptions
+    mutate(domain = str_remove_all(domain, "\\^\\$third-party")) %>%    # remove trailing ^$ third-party
     mutate(domain = clean_domains(domain)) %>%
     filter(domain != "")
   return(df)
@@ -1140,7 +1196,7 @@ get_plainlist <- function(url) {
 }
 
 
-# Downloading and combing all lists ---------------------------------------
+# 2.2 Upload Lists as df's ---------------------------------------
 
 library(dplyr)
 easyprivacy_df <- get_easyprivacy(tracker_urls$easyprivacy)
@@ -1150,9 +1206,18 @@ prigent_df <- get_plainlist(tracker_urls$prigent_ads)
 fademind_df <- get_plainlist(tracker_urls$fademind)
 frogeye_df <- get_plainlist(tracker_urls$frogeye)
 notrack_df <- get_plainlist(tracker_urls$notrack)
+yoyo_df <- get_plainlist(tracker_urls$yoyo)
+dan_pollock_df <- get_plainlist(tracker_urls$dan_pollock)
+anudeepND_df <- get_plainlist(tracker_urls$anudeepND) 
+easylist_df <- get_easyprivacy(tracker_urls$easylist)
+
+# soon discontinued / outdated lists:
+developerdan_df <- get_plainlist(tracker_urls$developerdan)
+frogeye_multi_df <- get_plainlist(tracker_urls$frogeye_multiparty)
+w3c_df <- get_plainlist(tracker_urls$w3c)
 
 
-# Disconnect.me from File ----------------------------------------------------
+## Disconnect.me from File ----------------------------------------------------
 
 # Loading necessary libraries
 library(jsonlite)
@@ -1200,7 +1265,7 @@ for (category_name in names(json_data$categories)) {
 head(disconnect_df)
 
 
-# Modifying these dfs -----------------------------------------------------
+# 2.3 Modifying the dfs -----------------------------------------------------
 
 # NoTrack
 notrack_df <- notrack_df %>%
@@ -1259,9 +1324,17 @@ str(prigent_df)
 str(fademind_df)
 str(frogeye_df)
 str(notrack_df)
+str(yoyo_df)
+str(dan_pollock_df)
+str(anudeepND_df)
+str(easylist_df)
+
+str(developerdan_df)
+str(frogeye_multi_df)
+str(w3c_df)
 
 
-# Data Clean Disconnect.me df --------------------------------------------
+## Data Clean Disconnect.me df --------------------------------------------
 
 # convert disconnect tibble into df
 disconnect_df <- as.data.frame(disconnect_df)
@@ -1296,7 +1369,7 @@ disconnect_df <- collapsed_df
 rm(collapsed_df)
 
 
-# Lockdown Privacy JSON File Uploads --------------------------------------
+## Lockdown Privacy JSON File Uploads --------------------------------------
 
 # Parsing the JSON data
 # Assuming the file is in your working directory
@@ -1387,7 +1460,7 @@ extract_domains <- function(json_data) {
 }
 
 
-# Extraction Lockdown Privacy ---------------------------------------------
+## Extraction Lockdown Privacy ---------------------------------------------
 
 # extract domains from each list
 privacy_domains <- extract_domains(privacy_list)
@@ -1437,9 +1510,9 @@ lockdown_privacy_df <- bind_rows(
   rename(CategoryLockdown = category)
 
 
-# Combining all dfs into one master blacklist -----------------------------
+# 2.4 Combining all dfs into one master blacklist -----------------------------
 
-#rm(blacklist_df)
+rm(blacklist_df)
 blacklist_df <- bind_rows(
   easyprivacy_df,
   stevenblack_df,
@@ -1449,7 +1522,11 @@ blacklist_df <- bind_rows(
   fademind_df,
   frogeye_df,
   notrack_df,
-  lockdown_privacy_df
+  lockdown_privacy_df,
+  yoyo_df,
+  dan_pollock_df,
+  anudeepND_df,
+  easylist_df
 ) %>%
   distinct(domain, .keep_all = TRUE) %>%
   filter(domain != "" & !is.na(domain)) 
@@ -1458,14 +1535,35 @@ blacklist_df <- blacklist_df %>%
   slice(-1:-1)  # remove first line (header info)
 
 # unique number of domains in blacklist_df
-length(unique(blacklist_df$domain)) # 324125
+length(unique(blacklist_df$domain)) # 298'552
 
 # --- Preview results ---
 head(blacklist_df, 20)
 nrow(blacklist_df)
 
-## Adding tracker info to merged_data_all_more_info -----------------------
-# Disconnect ----------------------------------------------------
+
+## Adding extended Master Blacklist ----------------------------------------
+rm(blacklist_XL_df)
+blacklist_XL_df <- bind_rows(
+  blacklist_df,
+  developerdan_df,
+  frogeye_multi_df,
+  w3c_df
+) %>%
+  distinct(domain, .keep_all = TRUE) %>%
+  filter(domain != "" & !is.na(domain))
+
+# unique number of domains in blacklist_XL_df
+length(unique(blacklist_XL_df$domain)) #
+
+# --- Preview results ---
+head(blacklist_XL_df, 20)
+nrow(blacklist_XL_df)
+
+
+# 2.5 Adding tracker info to merged_data_all_more_info -----------------------
+
+## Disconnect ----------------------------------------------------
 
 #merged_data_all_more_info <- merged_data_all
 
@@ -1485,7 +1583,7 @@ table(merged_data_all_more_info$domainType)
 table(merged_data_all_more_info$domainType, merged_data_all_more_info$DisconnectTracker)
 
 
-# EasyList EasyPrivacy -----------------------------
+## EasyList EasyPrivacy -----------------------------
 
 library(dplyr)
 # find all network activity entries that match EasyList EasyPrivacy and add a tracker flag 
@@ -1510,7 +1608,7 @@ tracker_summary_easylist <- merged_data_all_more_info %>%
 print(tracker_summary, n = 50)
 
 
-# stevenblack ---------------------------------------------------
+## stevenblack ---------------------------------------------------
 
 merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(stevenblackTracker = domain %in% stevenblack_df$domain)
@@ -1523,7 +1621,7 @@ table(merged_data_all_more_info$domainType)
 table(merged_data_all_more_info$domainType, merged_data_all_more_info$stevenblackTracker)
 
 
-# Masked Domain -------------------------------------------------
+## Masked Domain -------------------------------------------------
 
 merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(MaskedDomainTracker = domain %in% masked_domain_df$domain) %>%
@@ -1538,7 +1636,7 @@ table(merged_data_all_more_info$domainType)
 table(merged_data_all_more_info$domainType, merged_data_all_more_info$MaskedDomainTracker)
 
 
-# NoTrack -------------------------------------------------------
+## NoTrack -------------------------------------------------------
 
 merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(NoTrackTracker = domain %in% notrack_df$domain)
@@ -1555,7 +1653,7 @@ table(merged_data_all_more_info$domainType)
 table(merged_data_all_more_info$domainType, merged_data_all_more_info$NoTrackTracker)
 
 
-# Prigent -------------------------------------------------------
+## Prigent -------------------------------------------------------
 
 merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(PrigentTracker = domain %in% prigent_df$domain)
@@ -1566,7 +1664,7 @@ table(merged_data_all_more_info$domainType)
 table(merged_data_all_more_info$domainType, merged_data_all_more_info$PrigentTracker)
 
 
-# Fademind -------------------------------------------------------
+## Fademind -------------------------------------------------------
 
 merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(FademindTracker = domain %in% fademind_df$domain)
@@ -1577,7 +1675,7 @@ table(merged_data_all_more_info$domainType)
 table(merged_data_all_more_info$domainType, merged_data_all_more_info$FademindTracker)
 
 
-# Frogeye -------------------------------------------------------
+## Frogeye -------------------------------------------------------
 
 merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(FrogeyeTracker = domain %in% frogeye_df$domain)
@@ -1588,7 +1686,7 @@ table(merged_data_all_more_info$domainType)
 table(merged_data_all_more_info$domainType, merged_data_all_more_info$FrogeyeTracker)
 
 
-# Cross-reference all with network activity data --------------------------
+# 3. Cross-reference all with network activity data --------------------------
 
 merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(TrackerBlackList = domain %in% blacklist_df$domain)
@@ -1625,7 +1723,7 @@ merged_data_all_trackers_duplicates <- merged_data_all_trackers %>%
   filter(n() > 1)
 
 
-# Filtering and narrowing down --------------------------------------------
+## 3.1 Filtering and narrowing down --------------------------------------------
 
 merged_data_all_trackers_domainType1 <- merged_data_all_trackers %>%
   filter(domainType == 1)
@@ -1637,18 +1735,28 @@ merged_data_all_trackers_CategoryNoTrack_Tracker <- merged_data_all_trackers %>%
   filter(CategoryNoTrack != "" & !is.na(CategoryNoTrack))
 
 
-# Same for CT OFF ---------------------------------------------------------
+# 4. Same for CT OFF - New Columns for domainOwner and Cross-Ref ---------------------------------------------------------
 
 # remove leading www. from domain in merged_data_ct_off
 merged_data_ct_off <- merged_data_ct_off %>%
   mutate(domain = str_remove(domain, "^www\\."))
-# Same for CT ON ----------------------------------------------------------
+
+
+# 5. Same for CT ON - New Columns for domainOwner and Cross-Ref ----------------------------------------------------------
 
 # remove leading www. from domain in merged_data_ct_on
 merged_data_ct_on <- merged_data_ct_on %>%
   mutate(domain = str_remove(domain, "^www\\."))
 
-# Web-Parser for Disconnect.me JSON-file -------------------------------------------
+
+# 6. Comparison CT ON & OFF --------------------------------------------------
+
+
+
+
+# 7. Code Leftovers -------------------------------------------------------
+
+## Web-Parser for Disconnect.me JSON-file -------------------------------------------
 #library(jsonlite)
 
 #disconnect_url <- "https://raw.githubusercontent.com/disconnectme/disconnect-tracking-protection/master/services.json"
@@ -1666,7 +1774,7 @@ merged_data_ct_on <- merged_data_ct_on %>%
 
 
 
-# example code for reading in blacklists and url --------------------------
+## example code for reading in blacklists and url --------------------------
 
 ## upload:
 # reading a plain text blacklist
@@ -1723,7 +1831,7 @@ merged_data_ct_on <- merged_data_ct_on %>%
 #print(tracker_summary, n = 20)
 
 
-# Example Scrapping ---------------------------------------------------------------
+## Example Scrapping ---------------------------------------------------------------
 
 library(httr)
 library(readr)
@@ -1801,3 +1909,6 @@ combined_blacklist <- map_df(urls, read_blacklist) %>%
   distinct(domain, .keep_all = TRUE)
 
 ### Fin du Script ###
+
+# ### Fin du script ### ---------------------------------------------------
+### Fin du script ###

@@ -1,6 +1,6 @@
 ### Data Preparation Script for Analysis ###
 
-# Loading the libraries ----------------------------------------------------------
+# 1. Loading the libraries ----------------------------------------------------------
 
 # installing packages
 install.packages("ndjson")
@@ -13,7 +13,7 @@ library(ggplot2)
 library(tidyverse) # For data manipulation
 
 
-# Reading the data -----------------------------------------------------------
+# 2. Reading the data -----------------------------------------------------------
 
 # Defining File Paths
 file_path <- '/Users/nicolaswaser/New-project-GitHub-first/R/MSA II/Input Data'
@@ -66,7 +66,7 @@ colnames(df10_ct_unknown) # 2 Missing columns: "broadcaster.identifier", "broadc
 colnames(df11_ct_unknown) # 3 Missing columns: "outOfProcess", "broadcaster.identifier", "broadcaster.identifierType"
 
 
-# Tibble data -------------------------------------------------------------
+# 3. Tibble data -------------------------------------------------------------
 
 # Turning data frames into tibbles for better readability 
 library(tibble)
@@ -111,7 +111,7 @@ head(df3_ct_off_tibble)
 head(df11_ct_unknown_tibble)
 
 
-# Unnest Data -------------------------------------------------------------
+# 4. Unnest Data -------------------------------------------------------------
 
 # Unnest data
 #install.packages("tidyr")
@@ -205,7 +205,7 @@ df11_ct_unknown_unnested <- unnest(df11_ct_unknown_tibble, cols = c("accessCount
 
 
 
-# Selecting only rows and columns relevant to "networkActivity" ----------------------------------------
+# 5. Selecting only rows and columns relevant to "networkActivity" ----------------------------------------
 
 library(dplyr)
 # Selecting only the relevant columns for analysis that concern "networkActivity"
@@ -276,7 +276,7 @@ df11_ct_unknown_relevant <- df11_ct_unknown_unnested %>%
          initiatedType)
 
 
-# Getting an overview by showing some rankings ----------------------------
+# 6. Getting an overview by showing some rankings ----------------------------
 
 # specified domain accessed during network activity
 # CT OFF
@@ -415,7 +415,7 @@ df7_ct_on_relevant %>%
   print(n=20)
 
 
-# Merging data frames -----------------------------------------------------
+# 7. Merging data frames -----------------------------------------------------
 
 # Merging all relevant data frames into one
 merged_data_all <- bind_rows(
@@ -432,7 +432,7 @@ merged_data_all <- bind_rows(
   df11_ct_unknown_relevant
 )
 
-# 2 df with distinction between Cross-Tracking ON and OFF
+# 2 separate dfs with distinction between Cross-Tracking ON and OFF
 
 1646 + 1879 + 2057
 
@@ -459,4 +459,5 @@ merged_data_ct_on <- bind_rows(
 #)
 
 
+# ### Fin du script ### ---------------------------------------------------
 ### Fin du script ###
