@@ -962,6 +962,7 @@ length(unique(merged_data_all$bundleID)) # 184
 
 # Prep for Cross-Referencing DFs with black and white lists
 library(dplyr)
+
 # remove leading www. from domain in merged_data_all
 merged_data_all <- merged_data_all %>%
   mutate(domain = str_remove(domain, "^www\\."))
@@ -1050,6 +1051,8 @@ easylist_easyprivacy_df_filtered <- easylist_easyprivacy_df_filtered %>%
   distinct(domain, .keep_all = TRUE)
 
 
+rm(easylist_easyprivacy__domains, easylist_easyprivacy_txt, easylist_easyprivacy_url)
+
 # 2.1 Web list parsing -----------------------------------------------------
 
 # --- Load required packages ---
@@ -1085,20 +1088,21 @@ tracker_urls <- list(
   # soon discontinued / outdated lists:
   developerdan = "https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt", # 429286 domains
   frogeye_multiparty = "https://hostfiles.frogeye.fr/multiparty-trackers-hosts.txt", # 44956 domains
-  w3c = "https://raw.githubusercontent.com/Kees1958/W3C_annual_most_used_survey_blocklist/6b8c2411f22dda68b0b41757aeda10e50717a802/TOP_EU_US_Ads_Trackers_HOST"
+  w3c = "https://raw.githubusercontent.com/Kees1958/W3C_annual_most_used_survey_blocklist/6b8c2411f22dda68b0b41757aeda10e50717a802/TOP_EU_US_Ads_Trackers_HOST",
+  stevenblack_df_XL = "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts"
 )
 
 
 ## Additional URLs ---------------------------------------------------------
 
-# from uBlock Origin:
+## from uBlock Origin:
 # Ad_guard tracking protection?
 # first party tracking on non advertising sites https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/SpywareFilter/sections/tracking_servers_firstparty.txt
 # third party tracking https://github.com/AdguardTeam/AdguardFilters/blob/master/SpywareFilter/sections/tracking_servers.txt
 # mobile analytics spyware https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/SpywareFilter/sections/mobile.txt
 # track param ($removeparam used for tracking what to do?) https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/refs/heads/master/TrackParamFilter/sections/general_url.txt
 
-# From Firebog.net:
+## From Firebog.net:
 # soon discontinued / outdated lists:
 # https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt 429286 domains
 # https://hostfiles.frogeye.fr/multiparty-trackers-hosts.txt 44956 domains
@@ -1130,6 +1134,8 @@ tracker_urls <- list(
 #https://urlhaus.abuse.ch/downloads/hostfile/
 #https://lists.cyberhost.uk/malware.txt
 
+
+## Syntax Cleaning Functions -----------------------------------------------
 
 # --- Helper function: clean and normalize domains ---
 clean_domains <- function(domains) {
@@ -1206,6 +1212,7 @@ prigent_df <- get_plainlist(tracker_urls$prigent_ads)
 fademind_df <- get_plainlist(tracker_urls$fademind)
 frogeye_df <- get_plainlist(tracker_urls$frogeye)
 notrack_df <- get_plainlist(tracker_urls$notrack)
+
 yoyo_df <- get_plainlist(tracker_urls$yoyo)
 dan_pollock_df <- get_plainlist(tracker_urls$dan_pollock)
 anudeepND_df <- get_plainlist(tracker_urls$anudeepND) 
@@ -1215,6 +1222,7 @@ easylist_df <- get_easyprivacy(tracker_urls$easylist)
 developerdan_df <- get_plainlist(tracker_urls$developerdan)
 frogeye_multi_df <- get_plainlist(tracker_urls$frogeye_multiparty)
 w3c_df <- get_plainlist(tracker_urls$w3c)
+stevenblack_df_XL <- get_stevenblack(tracker_urls$stevenblack_df_XL)
 
 
 ## Disconnect.me from File ----------------------------------------------------
@@ -1261,6 +1269,7 @@ for (category_name in names(json_data$categories)) {
   }
 }
 
+rm(disconnect_temp_df, category_array, category_name, json_data, org_name, org_obj, url, url_obj, disconnect_domains)
 # Viewing the first few rows to check the result
 head(disconnect_df)
 
@@ -1513,7 +1522,7 @@ lockdown_privacy_df <- bind_rows(
 # 2.4 Combining all dfs into one master blacklist -----------------------------
 
 rm(blacklist_df)
-blacklist_df <- bind_rows(
+blacklist_df <- bind_rows( # 298'556
   easyprivacy_df,
   stevenblack_df,
   disconnect_df,
@@ -1522,6 +1531,7 @@ blacklist_df <- bind_rows(
   fademind_df,
   frogeye_df,
   notrack_df,
+  # newly added lists:
   lockdown_privacy_df,
   yoyo_df,
   dan_pollock_df,
@@ -1563,11 +1573,13 @@ nrow(blacklist_XL_df)
 
 # 2.5 Adding tracker info to merged_data_all_more_info -----------------------
 
+library(dplyr)
+merged_data_all_more_info <- merged_data_all
+#rm(merged_data_all_more_info)
+
+
 ## Disconnect ----------------------------------------------------
 
-#merged_data_all_more_info <- merged_data_all
-
-library(dplyr)
 merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(DisconnectTracker = domain %in% disconnect_df$domain)
 
@@ -1588,24 +1600,24 @@ table(merged_data_all_more_info$domainType, merged_data_all_more_info$Disconnect
 library(dplyr)
 # find all network activity entries that match EasyList EasyPrivacy and add a tracker flag 
 merged_data_all_more_info <- merged_data_all_more_info %>%
-  mutate(EasyListTracker = domain %in% easylist_easyprivacy_df_filtered$domain)
+  mutate(EasyPrivacyTracker = domain %in% easyprivacy_df$domain)
 
 #count number of TRUE in easylist_tracker
-table(merged_data_all_more_info$EasyListTracker)
+table(merged_data_all_more_info$EasyPrivacyTracker)
 
 table(merged_data_all_more_info$domainType)
 
-table(merged_data_all_more_info$domainType, merged_data_all_more_info$EasyListTracker)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$EasyPrivacyTracker)
 
 
 ## Summary
 tracker_summary_easylist <- merged_data_all_more_info %>%
-  filter(EasyListTracker) %>%
+  filter(EasyPrivacyTracker) %>%
   group_by(domain) %>%
   summarise(total_hits = n(), .groups = "drop") %>%
   arrange(desc(total_hits))
 
-print(tracker_summary, n = 50)
+print(tracker_summary_easylist, n = 50)
 
 
 ## stevenblack ---------------------------------------------------
@@ -1772,7 +1784,8 @@ merged_data_ct_on <- merged_data_ct_on %>%
 #mutate(domain = clean_domains(domain)) %>%
 #filter(domain != "")
 
-
+rm(disconnect_json)
+rm(disconnect_url)
 
 ## example code for reading in blacklists and url --------------------------
 
