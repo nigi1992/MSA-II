@@ -1802,6 +1802,8 @@ table(merged_data_all_more_info$domainType, merged_data_all_more_info$Stevenblac
 
 # 3. Cross-reference all with network activity data --------------------------
 
+## Blacklist df ------------------------------------------------------------
+
 ## merge with blacklist df
 merged_data_all_more_info <- merged_data_all_more_info %>%
   mutate(TrackerBlackList = domain %in% blacklist_df$domain)
@@ -1820,6 +1822,35 @@ tracker_summary <- merged_data_all_more_info %>%
 
 print(tracker_summary, n = 50)
 
+
+## Create new df with only tracker entries
+#rm(merged_data_all_trackers)
+merged_data_all_trackers <- merged_data_all_more_info %>% # (also for True Positives and False Negatives)
+  filter(TrackerBlackList == TRUE) %>%
+  select(domainOwner, DomainOwnerName, DomainOwnerNoTrack, DomainOwnerMaskedD, 
+         AppName, domain, domainType, TrackerBlackList, #TrackerBlackListXL, 
+         CategoryNoTrack, CategoryDisconnect, OrganisationDisconnect, 
+         EasyPrivacyTracker, stevenblackTracker, DisconnectTracker, MaskedDomainTracker, 
+         FademindTracker, FrogeyeTracker, PrigentTracker, 
+         LockdownPrivacyTracker, DanPollockTracker, AnudeepNDTracker,  EasyListTracker, YoyoTracker, 
+         #DeveloperdanTracker, NoTrackTracker, W3CTracker, FrogeyeMultiTracker, StevenblackXLTracker,
+         firstTimeStamp, timeStamp, hits, bundleID, initiatedType, domainClassification)
+
+# Show duplicate trackers (over multiple apps)
+#rm(merged_data_all_trackers_duplicates)
+merged_data_all_trackers_duplicates <- merged_data_all_trackers %>%
+  group_by(domain, AppName) %>%
+  #, timeStamp, firstTimeStamp) %>%
+  filter(n() > 1) %>%
+  distinct(domain, AppName, .keep_all = TRUE)
+
+# Show unique trackers
+#rm(merged_data_all_trackers_unique)
+merged_data_all_trackers_unique <- merged_data_all_trackers %>%
+  distinct(domain, .keep_all = TRUE)
+
+
+## Blacklist XL df ---------------------------------------------------------
 
 ## merge with blacklist df XL
 merged_data_all_more_info <- merged_data_all_more_info %>%
@@ -1840,37 +1871,7 @@ tracker_summary_XL <- merged_data_all_more_info %>%
 print(tracker_summary_XL, n = 50)
 
 
-#rm(merged_data_all_trackers)
-# Create new df with only tracker entries
-merged_data_all_trackers <- merged_data_all_more_info %>% # (also for True Positives and False Negatives)
-  filter(TrackerBlackList == TRUE) %>%
-  select(domainOwner, DomainOwnerName, DomainOwnerNoTrack, DomainOwnerMaskedD, 
-        AppName, domain, domainType, TrackerBlackList, #TrackerBlackListXL, 
-        CategoryNoTrack, CategoryDisconnect, OrganisationDisconnect, 
-        EasyPrivacyTracker, stevenblackTracker, DisconnectTracker, MaskedDomainTracker, 
-        FademindTracker, FrogeyeTracker, PrigentTracker, 
-        LockdownPrivacyTracker, DanPollockTracker, AnudeepNDTracker,  EasyListTracker, YoyoTracker, 
-        #DeveloperdanTracker, NoTrackTracker, W3CTracker, FrogeyeMultiTracker, StevenblackXLTracker,
-        firstTimeStamp, timeStamp, hits, bundleID, initiatedType, domainClassification)
-
-#rm(merged_data_all_trackers_duplicates)
-
-# Show duplicate trackers (over multiple apps)
-merged_data_all_trackers_duplicates <- merged_data_all_trackers %>%
-  group_by(domain, AppName) %>%
-  #, timeStamp, firstTimeStamp) %>%
-  filter(n() > 1) %>%
-  distinct(domain, AppName, .keep_all = TRUE)
-
-#rm(merged_data_all_trackers_unique)
-
-# Show unique trackers
-merged_data_all_trackers_unique <- merged_data_all_trackers %>%
-  distinct(domain, .keep_all = TRUE)
-
-
-## blacklist XL lists
-# Create new df with only tracker entries
+## Create new df with only tracker entries
 merged_data_all_trackers_XL <- merged_data_all_more_info %>% # (also for True Positives and False Negatives)
   filter(TrackerBlackListXL == TRUE) %>%
   select(domainOwner, DomainOwnerName, DomainOwnerNoTrack, DomainOwnerMaskedD, 
@@ -1897,6 +1898,8 @@ merged_data_all_trackers_XL_unique <- merged_data_all_trackers_XL %>%
 
 ## 3.1 Filtering and narrowing down --------------------------------------------
 
+## Blacklist ---------------------------------------------------------------
+
 rm(merged_data_all_trackers_domainType1)
 rm(merged_data_all_trackers_domainType2)
 
@@ -1916,22 +1919,45 @@ merged_data_all_blacklist_false_domainType1 <- merged_data_all_more_info %>%
          firstTimeStamp, timeStamp, hits, initiatedType, domainClassification) %>%
   filter(TrackerBlackList == FALSE & domainType == 1) # for False Positives
 
+#rm(merged_data_all_trackers_CategoryNoTrack_Tracker)
+#merged_data_all_trackers_CategoryNoTrack_Tracker <- merged_data_all_trackers %>%
+#  filter(CategoryNoTrack != "" & !is.na(CategoryNoTrack))
 
+## Blacklist XL ------------------------------------------------------------
+
+rm(merged_data_all_trackers_domainType1)
+rm(merged_data_all_trackers_domainType2)
+
+merged_data_all_trackers_XL_domainType1 <- merged_data_all_trackers_XL %>%
+  filter(domainType == 1) # for True Positives
+
+merged_data_all_trackers_XL_domainType2 <- merged_data_all_trackers_XL %>%
+  filter(domainType == 2) # for False Negatives
+
+merged_data_all_blacklist_XL_false_domainType2 <- merged_data_all_more_info %>%
+  select(DomainOwnerName, AppName, domain, domainType, TrackerBlackList, TrackerBlackListXL, 
+         firstTimeStamp, timeStamp, hits, initiatedType, domainClassification) %>%
+  filter(TrackerBlackListXL == FALSE & domainType == 2) # for True Negatives
+
+merged_data_all_blacklist_XL_false_domainType1 <- merged_data_all_more_info %>%
+  select(DomainOwnerName, AppName, domain, domainType, TrackerBlackList, TrackerBlackListXL, 
+         firstTimeStamp, timeStamp, hits, initiatedType, domainClassification) %>%
+  filter(TrackerBlackListXL == FALSE & domainType == 1) # for False Positives
+
+
+## Opposite Df's -----------------------------------------------------------
+
+# Opposite df's
+#rm(merged_data_all_domainType1, merged_data_all_domainType2)
 merged_data_all_domainType1 <- merged_data_all_more_info %>%
-  select(DomainOwnerName, AppName, domain, domainType, TrackerBlackList, #TrackerBlackListXL, 
+  select(DomainOwnerName, AppName, domain, domainType, TrackerBlackList, TrackerBlackListXL, 
          firstTimeStamp, timeStamp, hits, initiatedType, domainClassification) %>%
   filter(domainType == 1) # for True and False Positives
 
 merged_data_all_domainType2 <- merged_data_all_more_info %>%
-  select(DomainOwnerName, AppName, domain, domainType, TrackerBlackList, #TrackerBlackListXL, 
+  select(DomainOwnerName, AppName, domain, domainType, TrackerBlackList, TrackerBlackListXL, 
          firstTimeStamp, timeStamp, hits, initiatedType, domainClassification) %>%
   filter(domainType == 2) # for True and False Negatives
-
-
-
-#rm(merged_data_all_trackers_CategoryNoTrack_Tracker)
-merged_data_all_trackers_CategoryNoTrack_Tracker <- merged_data_all_trackers %>%
-  filter(CategoryNoTrack != "" & !is.na(CategoryNoTrack))
 
 
 # 4. Same for CT OFF - New Columns for domainOwner and Cross-Ref ---------------------------------------------------------
