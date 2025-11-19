@@ -1225,7 +1225,7 @@ w3c_df <- get_plainlist(tracker_urls$w3c)
 stevenblack_df_XL <- get_stevenblack(tracker_urls$stevenblack_df_XL)
 
 
-## Disconnect.me from File ----------------------------------------------------
+## Disconnect from File ----------------------------------------------------
 
 # Loading necessary libraries
 library(jsonlite)
@@ -1269,116 +1269,14 @@ for (category_name in names(json_data$categories)) {
   }
 }
 
-rm(disconnect_temp_df, category_array, category_name, json_data, org_name, org_obj, url, url_obj, disconnect_domains)
+rm(disconnect_temp_df, category_array, category_name, org_name, org_obj, url, 
+   url_obj, disconnect_domains)
+
 # Viewing the first few rows to check the result
 head(disconnect_df)
 
 
-# 2.3 Modifying the dfs -----------------------------------------------------
-
-# NoTrack
-notrack_df <- notrack_df %>%
-  mutate(domain = str_squish(domain)) %>%                       # trim stray spaces
-  separate(
-    domain,
-    into = c("domain", "DomainOwnerNoTrack"),
-    sep = "\\s*#\\s*",                                          # split on '#' with optional spaces
-    fill = "right",
-    extra = "merge"                                             # keep everything after '#' together
-  ) %>%
-  mutate(DomainOwnerNoTrack = str_squish(DomainOwnerNoTrack))
-
-notrack_df <- notrack_df %>%
-  mutate(DomainOwnerNoTrack = str_squish(DomainOwnerNoTrack)) %>%                       
-  separate(
-    DomainOwnerNoTrack,
-    into = c("DomainOwnerNoTrack", "CategoryNoTrack"),
-    sep = "\\s*-\\s*",                                          
-    fill = "right",
-    extra = "merge"                                             
-  ) %>%
-  mutate(CategoryNoTrack = str_squish(CategoryNoTrack))
-
-
-## Masked_domain 
-masked_domain_df <- masked_domain_df %>%
-  slice(-1:-31) %>% # remove first line (header info)
-  mutate(domain = str_squish(domain)) %>%                       # trim stray spaces
-  separate(
-    domain,
-    into = c("domain", "DomainOwnerMaskedD"),
-    sep = "\\s*\\|\\s*",                                        # split on '|' with optional spaces
-    fill = "right",
-    extra = "merge"                                             # keep everything after '|' together
-  ) %>%
-  mutate(DomainOwnerMaskedD = str_squish(DomainOwnerMaskedD))
-
-masked_domain_df <- masked_domain_df %>%
-  mutate(DomainOwnerMaskedD = str_squish(DomainOwnerMaskedD)) %>%                       
-  separate(
-    DomainOwnerMaskedD,
-    into = c("DomainOwnerMaskedD", "NotesMaskedD"),
-    sep = "\\s*\\|\\s*",                                          
-    fill = "right",
-    extra = "merge"                                             
-  ) %>%
-  mutate(NotesMaskedD = str_squish(NotesMaskedD))
-
-# Structures of the DFs
-str(easyprivacy_df)
-str(stevenblack_df)
-str(disconnect_df)
-str(masked_domain_df)
-str(prigent_df)
-str(fademind_df)
-str(frogeye_df)
-str(notrack_df)
-str(yoyo_df)
-str(dan_pollock_df)
-str(anudeepND_df)
-str(easylist_df)
-
-str(developerdan_df)
-str(frogeye_multi_df)
-str(w3c_df)
-
-
-## Data Clean Disconnect.me df --------------------------------------------
-
-# convert disconnect tibble into df
-disconnect_df <- as.data.frame(disconnect_df)
-str(disconnect_df)
-
-# convert domain values to character
-disconnect_df$domain <- as.character(disconnect_df$domain)
-str(disconnect_df)
-# rename Category column to CategoryDisconnect
-colnames(disconnect_df)[colnames(disconnect_df) == "category"] <- "CategoryDisconnect"
-colnames(disconnect_df)[colnames(disconnect_df) == "organisation"] <- "OrganisationDisconnect"
-colnames(disconnect_df)[colnames(disconnect_df) == "url"] <- "URLDisconnect"
-
-# Show duplicate values in disconnect_df (domain column)
-disconnect_duplicates <- disconnect_df %>%
-  group_by(domain) %>%
-  filter(n() > 1)
-rm(disconnect_duplicates)
-
-# if there are duplicate domains, melt them into one row with all CategoryDisconnect values in the same cell
-collapsed_df <- disconnect_df %>%
-  group_by(domain) %>% 
-  summarise(
-    CategoryDisconnect = paste(unique(CategoryDisconnect), collapse = ", "),
-    OrganisationDisconnect = paste(unique(OrganisationDisconnect), collapse = ", "),
-    URLDisconnect = paste(unique(URLDisconnect), collapse = ", "),
-    .groups = "drop"
-  )
-
-disconnect_df_expanded <- disconnect_df
-disconnect_df <- collapsed_df
-rm(collapsed_df)
-
-
-## Lockdown Privacy JSON File Uploads --------------------------------------
+## LockdownPrivacy JSON File Uploads --------------------------------------
 
 # Parsing the JSON data
 # Assuming the file is in your working directory
@@ -1396,10 +1294,10 @@ ad_list3 <- fromJSON("Input Data/Lockdown Privacy Blocklists/adBlockListThree.js
 social_list <- fromJSON("Input Data/Lockdown Privacy Blocklists/socialBlockList.json")
 
 # function to extract and clean domains from a single list
-extract_domains <- function(json_data) {
+extract_domains <- function(JSONdata) {
   
   # filter for rules where action type is "block" and load-type is "third-party"
-  filtered_rules <- json_data %>%
+  filtered_rules <- JSONdata %>%
     filter(action$type == "block") %>%
     filter(sapply(trigger$`load-type`, function(x) "third-party" %in% x))
   
@@ -1469,7 +1367,113 @@ extract_domains <- function(json_data) {
 }
 
 
-## Extraction Lockdown Privacy ---------------------------------------------
+# 2.3 Modifying the dfs -----------------------------------------------------
+
+## NoTrack
+notrack_df <- notrack_df %>%
+  mutate(domain = str_squish(domain)) %>%                       # trim stray spaces
+  separate(
+    domain,
+    into = c("domain", "DomainOwnerNoTrack"),
+    sep = "\\s*#\\s*",                                          # split on '#' with optional spaces
+    fill = "right",
+    extra = "merge"                                             # keep everything after '#' together
+  ) %>%
+  mutate(DomainOwnerNoTrack = str_squish(DomainOwnerNoTrack))
+
+notrack_df <- notrack_df %>%
+  mutate(DomainOwnerNoTrack = str_squish(DomainOwnerNoTrack)) %>%                       
+  separate(
+    DomainOwnerNoTrack,
+    into = c("DomainOwnerNoTrack", "CategoryNoTrack"),
+    sep = "\\s*-\\s*",                                          
+    fill = "right",
+    extra = "merge"                                             
+  ) %>%
+  mutate(CategoryNoTrack = str_squish(CategoryNoTrack))
+
+
+## Masked_domain 
+masked_domain_df <- masked_domain_df %>%
+  slice(-1:-36) # remove first text lines (header info)
+
+masked_domain_df <- masked_domain_df %>%
+  mutate(domain = str_squish(domain)) %>%                       # trim stray spaces
+  separate(
+    domain,
+    into = c("domain", "DomainOwnerMaskedD"),
+    sep = "\\s*\\|\\s*",                                        # split on '|' with optional spaces
+    fill = "right",
+    extra = "merge"                                             # keep everything after '|' together
+  ) %>%
+  mutate(DomainOwnerMaskedD = str_squish(DomainOwnerMaskedD))
+
+masked_domain_df <- masked_domain_df %>%
+  mutate(DomainOwnerMaskedD = str_squish(DomainOwnerMaskedD)) %>%                       
+  separate(
+    DomainOwnerMaskedD,
+    into = c("DomainOwnerMaskedD", "NotesMaskedD"),
+    sep = "\\s*\\|\\s*",                                          
+    fill = "right",
+    extra = "merge"                                             
+  ) %>%
+  mutate(NotesMaskedD = str_squish(NotesMaskedD))
+
+# Structures of the DFs
+str(easyprivacy_df)
+str(stevenblack_df)
+str(disconnect_df)
+str(masked_domain_df)
+str(prigent_df)
+str(fademind_df)
+str(frogeye_df)
+str(notrack_df)
+str(yoyo_df)
+str(dan_pollock_df)
+str(anudeepND_df)
+str(easylist_df)
+
+str(developerdan_df)
+str(frogeye_multi_df)
+str(w3c_df)
+
+
+## Disconnect Data Clean --------------------------------------------
+
+# convert disconnect tibble into df
+disconnect_df <- as.data.frame(disconnect_df)
+str(disconnect_df)
+
+# convert domain values to character
+disconnect_df$domain <- as.character(disconnect_df$domain)
+str(disconnect_df)
+# rename Category column to CategoryDisconnect
+colnames(disconnect_df)[colnames(disconnect_df) == "category"] <- "CategoryDisconnect"
+colnames(disconnect_df)[colnames(disconnect_df) == "organisation"] <- "OrganisationDisconnect"
+colnames(disconnect_df)[colnames(disconnect_df) == "url"] <- "URLDisconnect"
+
+# Show duplicate values in disconnect_df (domain column)
+disconnect_duplicates <- disconnect_df %>%
+  group_by(domain) %>%
+  filter(n() > 1)
+rm(disconnect_duplicates)
+
+# if there are duplicate domains, melt them into one row with all CategoryDisconnect values in the same cell
+collapsed_df <- disconnect_df %>%
+  group_by(domain) %>% 
+  summarise(
+    CategoryDisconnect = paste(unique(CategoryDisconnect), collapse = ", "),
+    OrganisationDisconnect = paste(unique(OrganisationDisconnect), collapse = ", "),
+    URLDisconnect = paste(unique(URLDisconnect), collapse = ", "),
+    .groups = "drop"
+  )
+
+disconnect_df_expanded <- disconnect_df
+disconnect_df <- collapsed_df
+rm(collapsed_df)
+
+
+## LockdownPrivacy Extraction ---------------------------------------------
 
 # extract domains from each list
 privacy_domains <- extract_domains(privacy_list)
@@ -1509,6 +1513,7 @@ social_domains <- data.frame(
   category = "social", # Blocks social media widgets embedded on third-party websites (Like and sharing buttons, comments, etc.)
   stringsAsFactors = FALSE)
 
+rm(privacy_list, ad_list1, ad_list2, ad_list3, social_list)
 
 # combine all domains into one df
 lockdown_privacy_df <- bind_rows(
@@ -1522,21 +1527,20 @@ lockdown_privacy_df <- bind_rows(
 # 2.4 Combining all dfs into one master blacklist -----------------------------
 
 rm(blacklist_df)
-blacklist_df <- bind_rows( # 298'556
-  easyprivacy_df,
-  stevenblack_df,
-  disconnect_df,
-  masked_domain_df,
-  prigent_df,
-  fademind_df,
-  frogeye_df,
-  notrack_df,
+blacklist_df <- bind_rows( 
+  easyprivacy_df, # trackers
+  stevenblack_df, # adware, malware
+  disconnect_df, # ads, trackers
+  masked_domain_df, # trackers
+  prigent_df, # ads, trackers
+  fademind_df, # ads, trackers
+  frogeye_df, # first party trackers
+  
   # newly added lists:
-  lockdown_privacy_df,
-  yoyo_df,
-  dan_pollock_df,
-  anudeepND_df,
-  easylist_df
+  lockdown_privacy_df, # trackers, ads, and badware
+  yoyo_df, # ads, trackers, badware
+  dan_pollock_df, # ads, trackers, badware
+  anudeepND_df, # ads, trackers, badware
 ) %>%
   distinct(domain, .keep_all = TRUE) %>%
   filter(domain != "" & !is.na(domain)) 
@@ -1545,30 +1549,29 @@ blacklist_df <- blacklist_df %>%
   slice(-1:-1)  # remove first line (header info)
 
 # unique number of domains in blacklist_df
-length(unique(blacklist_df$domain)) # 298'552
+length(unique(blacklist_df$domain)) # 299'6278
 
 # --- Preview results ---
 head(blacklist_df, 20)
-nrow(blacklist_df)
 
 
 ## Adding extended Master Blacklist ----------------------------------------
 rm(blacklist_XL_df)
 blacklist_XL_df <- bind_rows(
   blacklist_df,
-  developerdan_df,
-  frogeye_multi_df,
-  w3c_df
+  developerdan_df, # outdated ads, trackers
+  frogeye_multi_df, # outdated tracker
+  w3c_df, # outdated ads, trackers
+  stevenblack_df_XL, # adware, malware, fakenews, gambling
+  easylist_df, # ads
+  notrack_df, # ads, trackers - disencouraged due to too many false positives
+  
 ) %>%
   distinct(domain, .keep_all = TRUE) %>%
   filter(domain != "" & !is.na(domain))
 
 # unique number of domains in blacklist_XL_df
 length(unique(blacklist_XL_df$domain)) #
-
-# --- Preview results ---
-head(blacklist_XL_df, 20)
-nrow(blacklist_XL_df)
 
 
 # 2.5 Adding tracker info to merged_data_all_more_info -----------------------
@@ -1627,9 +1630,7 @@ merged_data_all_more_info <- merged_data_all_more_info %>%
 
 #count number of TRUE in easylist_tracker
 table(merged_data_all_more_info$stevenblackTracker)
-
 table(merged_data_all_more_info$domainType)
-
 table(merged_data_all_more_info$domainType, merged_data_all_more_info$stevenblackTracker)
 
 
@@ -1696,6 +1697,107 @@ merged_data_all_more_info <- merged_data_all_more_info %>%
 table(merged_data_all_more_info$FrogeyeTracker)
 table(merged_data_all_more_info$domainType)
 table(merged_data_all_more_info$domainType, merged_data_all_more_info$FrogeyeTracker)
+
+
+## lockdown privacy --------------------------------------------------------
+
+merged_data_all_more_info <- merged_data_all_more_info %>%
+  mutate(LockdownPrivacyTracker = domain %in% lockdown_privacy_df$domain) %>%
+  left_join(
+    lockdown_privacy_df %>% 
+      select(domain, CategoryLockdown), by = "domain") #%>%
+  #distinct()
+
+#count number of TRUE in lockdownprivacy_tracker
+table(merged_data_all_more_info$LockdownPrivacyTracker)
+table(merged_data_all_more_info$domainType)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$LockdownPrivacyTracker)      
+
+
+## Dan Pollock -------------------------------------------------------
+
+merged_data_all_more_info <- merged_data_all_more_info %>%
+  mutate(DanPollockTracker = domain %in% dan_pollock_df$domain)
+
+#count number of TRUE in danpollock_tracker
+table(merged_data_all_more_info$DanPollockTracker)
+table(merged_data_all_more_info$domainType)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$DanPollockTracker)
+
+
+## AnudeepND -------------------------------------------------------
+
+merged_data_all_more_info <- merged_data_all_more_info %>%
+  mutate(AnudeepNDTracker = domain %in% anudeepND_df$domain)
+
+#count number of TRUE in anudeepND_tracker
+table(merged_data_all_more_info$AnudeepNDTracker)
+table(merged_data_all_more_info$domainType)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$AnudeepNDTracker)
+
+## EasyList -------------------------------------------------------
+
+merged_data_all_more_info <- merged_data_all_more_info %>%
+  mutate(EasyListTracker = domain %in% easylist_df$domain)
+
+#count number of TRUE in easylist_tracker
+table(merged_data_all_more_info$EasyListTracker)
+table(merged_data_all_more_info$domainType)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$EasyListTracker)
+
+## Developerdan -------------------------------------------------------
+
+merged_data_all_more_info <- merged_data_all_more_info %>%
+  mutate(DeveloperdanTracker = domain %in% developerdan_df$domain)
+
+#count number of TRUE in developerdan_tracker
+table(merged_data_all_more_info$DeveloperdanTracker)
+table(merged_data_all_more_info$domainType)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$DeveloperdanTracker)
+
+
+## Yoyo -------------------------------------------------------
+
+merged_data_all_more_info <- merged_data_all_more_info %>%
+  mutate(YoyoTracker = domain %in% yoyo_df$domain)
+
+#count number of TRUE in yoyo_tracker
+table(merged_data_all_more_info$YoyoTracker)
+table(merged_data_all_more_info$domainType)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$YoyoTracker)
+
+
+## W3C -------------------------------------------------------
+
+merged_data_all_more_info <- merged_data_all_more_info %>%
+  mutate(W3CTracker = domain %in% w3c_df$domain)
+
+#count number of TRUE in w3c_tracker
+table(merged_data_all_more_info$W3CTracker)
+table(merged_data_all_more_info$domainType)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$W3CTracker)
+
+
+## Frogeye Multi -------------------------------------------------------
+
+merged_data_all_more_info <- merged_data_all_more_info %>%
+  mutate(FrogeyeMultiTracker = domain %in% frogeye_multi_df$domain)
+
+#count number of TRUE in frogeye_multi_tracker
+table(merged_data_all_more_info$FrogeyeMultiTracker)
+table(merged_data_all_more_info$domainType)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$FrogeyeMultiTracker)
+
+
+## stevenblack XL -------------------------------------------------------
+
+merged_data_all_more_info <- merged_data_all_more_info %>%
+  mutate(StevenblackXLTracker = domain %in% stevenblack_df_XL$domain)
+
+#count number of TRUE in stevenblack_XL_tracker
+table(merged_data_all_more_info$StevenblackXLTracker)
+table(merged_data_all_more_info$domainType)
+table(merged_data_all_more_info$domainType, merged_data_all_more_info$StevenblackXLTracker)
 
 
 # 3. Cross-reference all with network activity data --------------------------

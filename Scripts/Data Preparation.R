@@ -459,5 +459,12 @@ merged_data_ct_on <- bind_rows(
 #)
 
 
+# rm df to free up memory
+rm(df1_ct_off, df2_ct_off, df3_ct_off, df4_ct_on, df5_ct_on, df6_ct_on, df7_ct_on,
+   df8_ct_off, df9_ct_off, df10_ct_unknown, df11_ct_unknown,
+   df1_ct_off_tibble, df2_ct_off_tibble, df3_ct_off_tibble, df4_ct_on_tibble, df5_ct_on_tibble,
+   df6_ct_on_tibble, df7_ct_on_tibble, df8_ct_off_tibble, df9_ct_off_tibble,
+   df10_ct_unknown_tibble, df11_ct_unknown_tibble)
+
 # ### Fin du script ### ---------------------------------------------------
 ### Fin du script ###
