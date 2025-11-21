@@ -2187,13 +2187,13 @@ merged_data_ct_off %>%
   arrange(desc(total_accesses)) %>%
   print(n=150) 
 
-## Filtered Df domain > 10 -------------------------------------------------------------
+## Filtered Df domain > 5 -------------------------------------------------------------
 
-# New df with domains that have more than 10 accesses
+# New df with domains that have more than 5 accesses
 merged_data_ct_off_domain_10plus <- merged_data_ct_off %>%
   group_by(domain) %>%
   summarise(total_accesses = n()) %>%
-  filter(total_accesses > 10) %>%
+  filter(total_accesses >= 5) %>%
   arrange(desc(total_accesses)) %>%
   # add DomainOwnerName and domainType columns
   left_join(merged_data_ct_off %>% 
@@ -2239,16 +2239,16 @@ write.csv(merged_data_ct_off_domain_10plus_domainOwners, "Output/Tables/DomainOw
 table(merged_data_ct_off$domainType)
 table(merged_data_ct_off_domain_10plus$domainType)
 
-13375/100
-1718/133.75
+5582/100
+682/55.82
 
 # unique number of domains where domainType = 1
-length(unique(merged_data_ct_off$domain[merged_data_ct_off$domainType == 1])) # 246
+length(unique(merged_data_ct_off$domain[merged_data_ct_off$domainType == 1])) # 136
 
-length(unique(merged_data_ct_off$domain[merged_data_ct_off$domainType == 2])) # 4218
+length(unique(merged_data_ct_off$domain[merged_data_ct_off$domainType == 2])) # 2168
 
 # unique number of bundleIDs
-length(unique(merged_data_ct_off$bundleID)) # 184
+length(unique(merged_data_ct_off$bundleID)) # 122
 
 
 # 4.2 Adding tracker info to merged_data_ct_off_more_info -----------------------
@@ -2289,9 +2289,7 @@ merged_data_ct_off_more_info <- merged_data_ct_off_more_info %>%
 
 #count number of TRUE in easylist_tracker
 table(merged_data_ct_off_more_info$EasyPrivacyTracker)
-
 table(merged_data_ct_off_more_info$domainType)
-
 table(merged_data_ct_off_more_info$domainType, merged_data_ct_off_more_info$EasyPrivacyTracker)
 
 
@@ -2495,15 +2493,6 @@ table(merged_data_ct_off_more_info$TrackerBlackList)
 table(merged_data_ct_off_more_info$domainType)
 table(merged_data_ct_off_more_info$domainType, merged_data_ct_off_more_info$TrackerBlackList)
 
-# Summary
-tracker_summary_ct_off <- merged_data_ct_off_more_info %>%
-  filter(TrackerBlackList) %>%
-  group_by(domain) %>%
-  summarise(total_hits = n(), .groups = "drop") %>%
-  arrange(desc(total_hits))
-
-print(tracker_summary_ct_off, n = 50)
-
 
 ## Summary - with True and False Positives and False Negatives
 tracker_summary_ct_off <- merged_data_ct_off_more_info %>%
@@ -2516,7 +2505,7 @@ tracker_summary_ct_off <- merged_data_ct_off_more_info %>%
 print(tracker_summary_ct_off, n = 50)
 
 # save as CSV
-#write.csv(tracker_summary_ct_off, "Output/Tables/most_hit_blacklist_trackers_ct_off.csv", row.names = TRUE)
+write.csv(tracker_summary_ct_off, "Output/Tables/most_hit_blacklist_trackers_ct_off.csv", row.names = TRUE)
 
 
 ## Summary with more info
@@ -2601,7 +2590,7 @@ table(merged_data_ct_off_more_info$domainType, merged_data_ct_off_more_info$Trac
 
 ## Summary XL - with True and False Positives and False Negatives
 tracker_summary_XL_ct_off <- merged_data_ct_off_more_info %>%
-  filter(TrackerBlackList == TRUE | domainType == 1) %>% # == TRUE or domainType == 1
+  filter(TrackerBlackListXL == TRUE | domainType == 1) %>% # == TRUE or domainType == 1
   #filter(TrackerBlackList) %>%
   group_by(domain) %>%
   summarise(total_hits = n(), .groups = "drop") %>%
@@ -2610,13 +2599,13 @@ tracker_summary_XL_ct_off <- merged_data_ct_off_more_info %>%
 print(tracker_summary_XL_ct_off, n = 50)
 
 # save as CSV
-#write.csv(tracker_summary_XL_ct_off, "Output/Tables/most_hit_blacklist_trackers_XL_ct_off.csv", row.names = TRUE)
+write.csv(tracker_summary_XL_ct_off, "Output/Tables/most_hit_blacklist_trackers_XL_ct_off.csv", row.names = TRUE)
 
 
-## Summary with more info
-#rm(tracker_summary)
+## Summary XL - with more info
+#rm(tracker_summary_XL_extended_ct_off)
 tracker_summary_XL_extended_ct_off <- merged_data_ct_off_more_info %>%
-  filter(TrackerBlackList == TRUE | domainType == 1) %>% # == TRUE or domainType == 1
+  filter(TrackerBlackListXL == TRUE | domainType == 1) %>% # == TRUE or domainType == 1
   group_by(domain) %>%
   summarise(total_hits = n(), .groups = "drop") %>%
   arrange(desc(total_hits)) %>%
@@ -2642,10 +2631,10 @@ tracker_summary_XL_extended_ct_off <- merged_data_ct_off_more_info %>%
   ) %>%
   ungroup()
 
-print(tracker_summary_XL_extended_ct_on, n = 50)
+print(tracker_summary_XL_extended_ct_off, n = 50)
 
 # save as CSV
-#write.csv(tracker_summary_XL_extended_ct_on, "Output/Tables/most_hit_blacklist_trackers_XL_extended_ct_on.csv", row.names = TRUE)
+write.csv(tracker_summary_XL_extended_ct_off, "Output/Tables/most_hit_blacklist_trackers_XL_extended_ct_off.csv", row.names = TRUE)
 
 
 ## Create new df with only tracker entries
@@ -2683,6 +2672,8 @@ write.csv(merged_data_ct_off_more_info, "Output/Tables/merged_data_ct_off_more_i
 
 #rm(merged_data_ct_off_trackers_domainType1)
 #rm(merged_data_ct_off_trackers_domainType2)
+#rm(merged_data_ct_off_blacklist_false_domainType2)
+#rm(merged_data_ct_off_blacklist_false_domainType1)
 
 merged_data_ct_off_trackers_domainType1 <- merged_data_ct_off_trackers %>%
   filter(domainType == 1) # for True Positives
@@ -2700,17 +2691,22 @@ merged_data_ct_off_blacklist_false_domainType1 <- merged_data_ct_off_more_info %
          firstTimeStamp, timeStamp, hits, initiatedType, domainClassification) %>%
   filter(TrackerBlackList == FALSE & domainType == 1) # for False Positives
 
-
+#rm(confusion_matrix_ct_off)
 ## print table with number of True and False Positives and Negatives
 confusion_matrix_ct_off <- table(merged_data_ct_off_more_info$domainType, merged_data_ct_off_more_info$TrackerBlackList)
 confusion_matrix_ct_off <- addmargins(confusion_matrix_ct_off, FUN = list(Total = sum))
 print(confusion_matrix_ct_off)
 
 # write confusion matrix to CSV
-#write.csv(as.data.frame(confusion_matrix_ct_off), "Output/Tables/blacklist_domainType1_confusion_matrix_ct_off.csv", row.names = TRUE)
+write.csv(as.data.frame(confusion_matrix_ct_off), "Output/Tables/blacklist_domainType1_confusion_matrix_ct_off.csv", row.names = TRUE)
 
 
 ## Blacklist XL ------------------------------------------------------------
+
+#rm(merged_data_ct_off_trackers_XL_domainType1)
+#rm(merged_data_ct_off_trackers_XL_domainType2)
+#rm(merged_data_ct_off_blacklist_XL_false_domainType2)
+#rm(merged_data_ct_off_blacklist_XL_false_domainType1)
 
 merged_data_ct_off_trackers_XL_domainType1 <- merged_data_ct_off_trackers_XL %>%
   filter(domainType == 1) # for True Positives
@@ -2729,19 +2725,20 @@ merged_data_ct_off_blacklist_XL_false_domainType1 <- merged_data_ct_off_more_inf
   filter(TrackerBlackListXL == FALSE & domainType == 1) # for False Positives
 
 
+rm(confusion_matrix_XL_ct_off)
 ## print table with number of True and False Positives and Negatives
-confusion_matrix_XL_ct_off <- table(merged_data_ct_off_more_info$domainType, merged_data_ct_off_more_info$TrackerBlackList)
+confusion_matrix_XL_ct_off <- table(merged_data_ct_off_more_info$domainType, merged_data_ct_off_more_info$TrackerBlackListXL)
 confusion_matrix_XL_ct_off <- addmargins(confusion_matrix_XL_ct_off, FUN = list(Total = sum))
 print(confusion_matrix_XL_ct_off)
 
 # write confusion matrix to CSV
-#write.csv(as.data.frame(confusion_matrix_XL_ct_off), "Output/Tables/blacklist_domainType1_confusion_matrix_XL_ct_off.csv", row.names = TRUE)
+write.csv(as.data.frame(confusion_matrix_XL_ct_off), "Output/Tables/blacklist_domainType1_confusion_matrix_XL_ct_off.csv", row.names = TRUE)
 
 
 ## Opposite Df's -----------------------------------------------------------
 
-# Opposite df's
 #rm(merged_data_all_domainType1, merged_data_all_domainType2)
+
 merged_data_ct_off_domainType1 <- merged_data_ct_off_more_info %>%
   select(DomainOwnerName, AppName, domain, domainType, TrackerBlackList, TrackerBlackListXL, 
          firstTimeStamp, timeStamp, hits, initiatedType, domainClassification) %>%
@@ -2962,13 +2959,13 @@ merged_data_ct_on %>%
   print(n=150) 
 
 
-## Filtered Df domain > 10 -----------------------------------------------------
+## Filtered Df domain >= 5 -----------------------------------------------------
 
-# New df with domains that have more than 10 accesses
+# New df with domains that have more than 5 accesses
 merged_data_ct_on_domain_10plus <- merged_data_ct_on %>%
   group_by(domain) %>%
   summarise(total_accesses = n()) %>%
-  filter(total_accesses > 10) %>%
+  filter(total_accesses >= 5) %>%
   arrange(desc(total_accesses)) %>%
   # add DomainOwnerName and domainType columns
   left_join(merged_data_ct_on %>% 
@@ -3014,30 +3011,28 @@ write.csv(merged_data_ct_on_domain_10plus_domainOwners, "Output/Tables/DomainOwn
 table(merged_data_ct_on$domainType)
 table(merged_data_ct_on_domain_10plus$domainType)
 
-13375/100
-1718/133.75
+5940/100
+629/59.4
 
 # unique number of domains where domainType = 1
-length(unique(merged_data_ct_on$domain[merged_data_ct_on$domainType == 1])) # 246
+length(unique(merged_data_ct_on$domain[merged_data_ct_on$domainType == 1])) # 177
 
-length(unique(merged_data_ct_on$domain[merged_data_ct_on$domainType == 2])) # 4218
+length(unique(merged_data_ct_on$domain[merged_data_ct_on$domainType == 2])) # 2807
 
 # unique number of bundleIDs
-length(unique(merged_data_ct_on$bundleID)) # 184
+length(unique(merged_data_ct_on$bundleID)) # 138
 
 
 # 5.2 Adding tracker info to merged_data_ct_on_more_info -----------------------
 
 library(dplyr)
-#rm(merged_data_ct_on_more_info)
-merged_data_ct_on_more_info <- merged_data_ct_on
 
 # remove leading www. from domain in merged_data_ct_on
 merged_data_ct_on <- merged_data_ct_on %>%
   mutate(domain = str_remove(domain, "^www\\."))
 
-#merged_data_ct_on_more_info <- merged_data_ct_on
-
+#rm(merged_data_ct_on_more_info)
+merged_data_ct_on_more_info <- merged_data_ct_on
 
 ## Disconnect ----------------------------------------------------
 
@@ -3065,9 +3060,7 @@ merged_data_ct_on_more_info <- merged_data_ct_on_more_info %>%
 
 #count number of TRUE in easylist_tracker
 table(merged_data_ct_on_more_info$EasyPrivacyTracker)
-
 table(merged_data_ct_on_more_info$domainType)
-
 table(merged_data_ct_on_more_info$domainType, merged_data_ct_on_more_info$EasyPrivacyTracker)
 
 
@@ -3285,7 +3278,7 @@ tracker_summary_ct_on <- merged_data_ct_on_more_info %>%
 print(tracker_summary_ct_on, n = 50)
 
 # save as CSV
-#write.csv(tracker_summary, "Output/Tables/most_hit_blacklist_trackers_ct_on.csv", row.names = TRUE)
+write.csv(tracker_summary_ct_on, "Output/Tables/most_hit_blacklist_trackers_ct_on.csv", row.names = TRUE)
 
 
 ## Summary with more info
@@ -3374,12 +3367,12 @@ tracker_summary_XL_ct_on <- merged_data_ct_on_more_info %>%
 print(tracker_summary_XL_ct_on, n = 50)
 
 # save as CSV
-#write.csv(tracker_summary_XL, "Output/Tables/most_hit_blacklist_XL_trackers_ct_on.csv", row.names = TRUE)
+write.csv(tracker_summary_XL_ct_on, "Output/Tables/most_hit_blacklist_XL_trackers_ct_on.csv", row.names = TRUE)
 
 
 ## Summary with more info
-#rm(tracker_summary)
-tracker_summary_extended_XL_ct_on <- merged_data_ct_on_more_info %>%
+#rm(tracker_summary_extended_XL_ct_on)
+tracker_summary_XL_extended_ct_on <- merged_data_ct_on_more_info %>%
   filter(TrackerBlackListXL == TRUE | domainType == 1) %>% # == TRUE or domainType == 1
   group_by(domain) %>%
   summarise(total_hits = n(), .groups = "drop") %>%
@@ -3406,10 +3399,10 @@ tracker_summary_extended_XL_ct_on <- merged_data_ct_on_more_info %>%
   ) %>%
   ungroup()
 
-print(tracker_summary_extended_XL_ct_on, n = 50)
+print(tracker_summary_XL_extended_ct_on, n = 50)
 
 # save as CSV
-#write.csv(tracker_summary_extended_XL_ct_on, "Output/Tables/most_hit_blacklist_XL_trackers_extended.csv", row.names = TRUE)
+write.csv(tracker_summary_XL_extended_ct_on, "Output/Tables/most_hit_blacklist_XL_trackers_extended_ct_on.csv", row.names = TRUE)
 
 
 ## Create new df with only tracker entries
@@ -3437,9 +3430,8 @@ merged_data_ct_on_trackers_XL_unique <- merged_data_ct_on_trackers_XL %>%
   distinct(domain, .keep_all = TRUE)
 
 
-
 ### Save df with more Info as CSV ###
-write.csv(merged_data_all, "Output/Tables/merged_data_ct_on_more_info_df.csv", row.names = TRUE)
+write.csv(merged_data_ct_on_more_info, "Output/Tables/merged_data_ct_on_more_info_df.csv", row.names = TRUE)
 
 
 # 5.4 Filtering and narrowing down ---------------------------------------------
@@ -3472,10 +3464,15 @@ confusion_matrix_ct_on <- addmargins(confusion_matrix_ct_on, FUN = list(Total = 
 print(confusion_matrix_ct_on)
 
 # write confusion matrix to CSV
-#write.csv(as.data.frame(confusion_matrix_ct_on), "Output/Tables/blacklist_domainType1_confusion_matrix_ct_on.csv", row.names = TRUE)
+write.csv(as.data.frame(confusion_matrix_ct_on), "Output/Tables/blacklist_domainType1_confusion_matrix_ct_on.csv", row.names = TRUE)
 
 
 ## Blacklist XL ----------------------------------------------------------------
+
+#rm(merged_data_ct_on_trackers_XL_domainType1)
+#rm(merged_data_ct_on_trackers_XL_domainType2)
+#rm(merged_data_ct_on_blacklist_XL_false_domainType2)
+#rm(merged_data_ct_on_blacklist_XL_false_domainType1)
 
 merged_data_ct_on_trackers_XL_domainType1 <- merged_data_ct_on_trackers_XL %>%
   filter(domainType == 1) # for True Positives
@@ -3500,13 +3497,13 @@ confusion_matrix_XL_ct_on <- addmargins(confusion_matrix_XL_ct_on, FUN = list(To
 print(confusion_matrix_XL_ct_on)
 
 # write confusion matrix to CSV
-#write.csv(as.data.frame(confusion_matrix_XL_ct_on), "Output/Tables/blacklist_XL_domainType1_confusion_matrix_ct_on.csv", row.names = TRUE)
+write.csv(as.data.frame(confusion_matrix_XL_ct_on), "Output/Tables/blacklist_XL_domainType1_confusion_matrix_ct_on.csv", row.names = TRUE)
 
 
 ## Opposite Df's ---------------------------------------------------------------
 
-# Opposite df's
 #rm(merged_data_all_domainType1, merged_data_all_domainType2)
+
 merged_data_ct_on_domainType1 <- merged_data_ct_on_more_info %>%
   select(DomainOwnerName, AppName, domain, domainType, TrackerBlackList, TrackerBlackListXL, 
          firstTimeStamp, timeStamp, hits, initiatedType, domainClassification) %>%
@@ -3520,6 +3517,136 @@ merged_data_ct_on_domainType2 <- merged_data_ct_on_more_info %>%
 
 # 6. Comparison CT ON & OFF --------------------------------------------------
 
+# compare number of suspected trackers (True & False Positives + False Negatives) in CT ON vs CT OFF
+nrow(tracker_summary_ct_off)
+nrow(tracker_summary_ct_on)
+
+nrow(tracker_summary_XL_ct_off)
+nrow(tracker_summary_XL_ct_on)
+
+# print confusion matrices
+print(confusion_matrix)
+print(confusion_matrix_XL)
+
+print(confusion_matrix_ct_off)
+print(confusion_matrix_ct_on)
+
+print(confusion_matrix_XL_ct_off)
+print(confusion_matrix_XL_ct_on)
+
+# calculate ratios TRUE + FALSE POSITIVES / TOTAL ENTRIES
+confusion_matrix_ct_off[1,3] / confusion_matrix_ct_off[3,3]
+confusion_matrix_ct_on[1,3] / confusion_matrix_ct_on[3,3]
+
+
+## Confusion Matrix Ratios -------------------------------------------------
+
+confusion_matrix_ratio <- confusion_matrix
+confusion_matrix_ratio[1,1] <- confusion_matrix[1,1] / confusion_matrix[3,3] * 100
+confusion_matrix_ratio[1,2] <- confusion_matrix[1,2] / confusion_matrix[3,3] * 100
+confusion_matrix_ratio[2,1] <- confusion_matrix[2,1] / confusion_matrix[3,3] * 100
+confusion_matrix_ratio[2,2] <- confusion_matrix[2,2] / confusion_matrix[3,3] * 100
+confusion_matrix_ratio[1,3] <- confusion_matrix[1,3] / confusion_matrix[3,3] * 100 
+confusion_matrix_ratio[2,3] <- confusion_matrix[2,3] / confusion_matrix[3,3] * 100
+confusion_matrix_ratio[3,1] <- confusion_matrix[3,1] / confusion_matrix[3,3] * 100
+confusion_matrix_ratio[3,2] <- confusion_matrix[3,2] / confusion_matrix[3,3] * 100
+confusion_matrix_ratio[3,3] <- confusion_matrix[3,3] / confusion_matrix[3,3] * 100
+print(confusion_matrix_ratio)
+
+confusion_matrix_XL_ratio <- confusion_matrix_XL
+confusion_matrix_XL_ratio[1,1] <- confusion_matrix_XL[1,1] / confusion_matrix_XL[3,3] * 100
+confusion_matrix_XL_ratio[1,2] <- confusion_matrix_XL[1,2] / confusion_matrix_XL[3,3] * 100
+confusion_matrix_XL_ratio[2,1] <- confusion_matrix_XL[2,1] / confusion_matrix_XL[3,3] * 100
+confusion_matrix_XL_ratio[2,2] <- confusion_matrix_XL[2,2] / confusion_matrix_XL[3,3] * 100
+confusion_matrix_XL_ratio[1,3] <- confusion_matrix_XL[1,3] / confusion_matrix_XL[3,3] * 100 
+confusion_matrix_XL_ratio[2,3] <- confusion_matrix_XL[2,3] / confusion_matrix_XL[3,3] * 100
+confusion_matrix_XL_ratio[3,1] <- confusion_matrix_XL[3,1] / confusion_matrix_XL[3,3] * 100
+confusion_matrix_XL_ratio[3,2] <- confusion_matrix_XL[3,2] / confusion_matrix_XL[3,3] * 100
+confusion_matrix_XL_ratio[3,3] <- confusion_matrix_XL[3,3] / confusion_matrix_XL[3,3] * 100
+print(confusion_matrix_XL_ratio)
+
+# calculate ratios of all entries in confusion matrix in new confusion matrix
+confusion_matrix_ct_off_ratio <- confusion_matrix_ct_off
+confusion_matrix_ct_off_ratio[1,1] <- confusion_matrix_ct_off[1,1] / confusion_matrix_ct_off[3,3] * 100
+confusion_matrix_ct_off_ratio[1,2] <- confusion_matrix_ct_off[1,2] / confusion_matrix_ct_off[3,3] * 100
+confusion_matrix_ct_off_ratio[2,1] <- confusion_matrix_ct_off[2,1] / confusion_matrix_ct_off[3,3] * 100
+confusion_matrix_ct_off_ratio[2,2] <- confusion_matrix_ct_off[2,2] / confusion_matrix_ct_off[3,3] * 100
+confusion_matrix_ct_off_ratio[1,3] <- confusion_matrix_ct_off[1,3] / confusion_matrix_ct_off[3,3] * 100 
+confusion_matrix_ct_off_ratio[2,3] <- confusion_matrix_ct_off[2,3] / confusion_matrix_ct_off[3,3] * 100
+confusion_matrix_ct_off_ratio[3,1] <- confusion_matrix_ct_off[3,1] / confusion_matrix_ct_off[3,3] * 100
+confusion_matrix_ct_off_ratio[3,2] <- confusion_matrix_ct_off[3,2] / confusion_matrix_ct_off[3,3] * 100
+confusion_matrix_ct_off_ratio[3,3] <- confusion_matrix_ct_off[3,3] / confusion_matrix_ct_off[3,3] * 100
+print(confusion_matrix_ct_off_ratio)
+
+confusion_matrix_ct_on_ratio <- confusion_matrix_ct_on
+confusion_matrix_ct_on_ratio[1,1] <- confusion_matrix_ct_on[1,1] / confusion_matrix_ct_on[3,3] * 100
+confusion_matrix_ct_on_ratio[1,2] <- confusion_matrix_ct_on[1,2] / confusion_matrix_ct_on[3,3] * 100
+confusion_matrix_ct_on_ratio[2,1] <- confusion_matrix_ct_on[2,1] / confusion_matrix_ct_on[3,3] * 100
+confusion_matrix_ct_on_ratio[2,2] <- confusion_matrix_ct_on[2,2] / confusion_matrix_ct_on[3,3] * 100
+confusion_matrix_ct_on_ratio[1,3] <- confusion_matrix_ct_on[1,3] / confusion_matrix_ct_on[3,3] * 100 
+confusion_matrix_ct_on_ratio[2,3] <- confusion_matrix_ct_on[2,3] / confusion_matrix_ct_on[3,3] * 100
+confusion_matrix_ct_on_ratio[3,1] <- confusion_matrix_ct_on[3,1] / confusion_matrix_ct_on[3,3] * 100
+confusion_matrix_ct_on_ratio[3,2] <- confusion_matrix_ct_on[3,2] / confusion_matrix_ct_on[3,3] * 100
+confusion_matrix_ct_on_ratio[3,3] <- confusion_matrix_ct_on[3,3] / confusion_matrix_ct_on[3,3] * 100
+print(confusion_matrix_ct_on_ratio)
+
+confusion_matrix_XL_ct_off_ratio <- confusion_matrix_XL_ct_off
+confusion_matrix_XL_ct_off_ratio[1,1] <- confusion_matrix_XL_ct_off[1,1] / confusion_matrix_XL_ct_off[3,3] * 100
+confusion_matrix_XL_ct_off_ratio[1,2] <- confusion_matrix_XL_ct_off[1,2] / confusion_matrix_XL_ct_off[3,3] * 100
+confusion_matrix_XL_ct_off_ratio[2,1] <- confusion_matrix_XL_ct_off[2,1] / confusion_matrix_XL_ct_off[3,3] * 100
+confusion_matrix_XL_ct_off_ratio[2,2] <- confusion_matrix_XL_ct_off[2,2] / confusion_matrix_XL_ct_off[3,3] * 100
+confusion_matrix_XL_ct_off_ratio[1,3] <- confusion_matrix_XL_ct_off[1,3] / confusion_matrix_XL_ct_off[3,3] * 100 
+confusion_matrix_XL_ct_off_ratio[2,3] <- confusion_matrix_XL_ct_off[2,3] / confusion_matrix_XL_ct_off[3,3] * 100
+confusion_matrix_XL_ct_off_ratio[3,1] <- confusion_matrix_XL_ct_off[3,1] / confusion_matrix_XL_ct_off[3,3] * 100
+confusion_matrix_XL_ct_off_ratio[3,2] <- confusion_matrix_XL_ct_off[3,2] / confusion_matrix_XL_ct_off[3,3] * 100
+confusion_matrix_XL_ct_off_ratio[3,3] <- confusion_matrix_XL_ct_off[3,3] / confusion_matrix_XL_ct_off[3,3] * 100
+print(confusion_matrix_XL_ct_off_ratio)
+
+confusion_matrix_XL_ct_on_ratio <- confusion_matrix_XL_ct_on
+confusion_matrix_XL_ct_on_ratio[1,1] <- confusion_matrix_XL_ct_on[1,1] / confusion_matrix_XL_ct_on[3,3] * 100
+confusion_matrix_XL_ct_on_ratio[1,2] <- confusion_matrix_XL_ct_on[1,2] / confusion_matrix_XL_ct_on[3,3] * 100
+confusion_matrix_XL_ct_on_ratio[2,1] <- confusion_matrix_XL_ct_on[2,1] / confusion_matrix_XL_ct_on[3,3] * 100
+confusion_matrix_XL_ct_on_ratio[2,2] <- confusion_matrix_XL_ct_on[2,2] / confusion_matrix_XL_ct_on[3,3] * 100
+confusion_matrix_XL_ct_on_ratio[1,3] <- confusion_matrix_XL_ct_on[1,3] / confusion_matrix_XL_ct_on[3,3] * 100 
+confusion_matrix_XL_ct_on_ratio[2,3] <- confusion_matrix_XL_ct_on[2,3] / confusion_matrix_XL_ct_on[3,3] * 100
+confusion_matrix_XL_ct_on_ratio[3,1] <- confusion_matrix_XL_ct_on[3,1] / confusion_matrix_XL_ct_on[3,3] * 100
+confusion_matrix_XL_ct_on_ratio[3,2] <- confusion_matrix_XL_ct_on[3,2] / confusion_matrix_XL_ct_on[3,3] * 100
+confusion_matrix_XL_ct_on_ratio[3,3] <- confusion_matrix_XL_ct_on[3,3] / confusion_matrix_XL_ct_on[3,3] * 100
+print(confusion_matrix_XL_ct_on_ratio)
+
+
+## Confusion Matrix Ratio Results ------------------------------------------
+
+print(confusion_matrix_ratio)
+print(confusion_matrix_XL_ratio)
+
+print(confusion_matrix_ct_off_ratio)
+print(confusion_matrix_ct_on_ratio)
+
+print(confusion_matrix_XL_ct_off_ratio)
+print(confusion_matrix_XL_ct_on_ratio)
+
+# tables
+# count number of TRUE in TrackerBlackList
+table(merged_data_ct_off_more_info$TrackerBlackList)
+table(merged_data_ct_off_more_info$domainType)
+table(merged_data_ct_off_more_info$domainType, merged_data_ct_off_more_info$TrackerBlackList)
+
+#count number of TRUE in TrackerBlackList
+table(merged_data_ct_on_more_info$TrackerBlackList)
+table(merged_data_ct_on_more_info$domainType)
+table(merged_data_ct_on_more_info$domainType, merged_data_ct_on_more_info$TrackerBlackList)
+
+
+#count number of TRUE in TrackerBlackListXL
+table(merged_data_ct_off_more_info$TrackerBlackListXL)
+table(merged_data_ct_off_more_info$domainType)
+table(merged_data_ct_off_more_info$domainType, merged_data_ct_off_more_info$TrackerBlackListXL)
+
+#count number of TRUE in TrackerBlackListXL
+table(merged_data_ct_on_more_info$TrackerBlackListXL)
+table(merged_data_ct_on_more_info$domainType)
+table(merged_data_ct_on_more_info$domainType, merged_data_ct_on_more_info$TrackerBlackListXL)
 
 # 7. Code Leftovers -------------------------------------------------------
 
