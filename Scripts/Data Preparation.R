@@ -466,5 +466,7 @@ rm(df1_ct_off, df2_ct_off, df3_ct_off, df4_ct_on, df5_ct_on, df6_ct_on, df7_ct_o
    df6_ct_on_tibble, df7_ct_on_tibble, df8_ct_off_tibble, df9_ct_off_tibble,
    df10_ct_unknown_tibble, df11_ct_unknown_tibble)
 
+rm(category_data)
+
 # ### Fin du script ### ---------------------------------------------------
 ### Fin du script ###
