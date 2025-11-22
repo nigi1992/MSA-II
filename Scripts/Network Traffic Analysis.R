@@ -2603,7 +2603,6 @@ write.csv(tracker_summary_XL_ct_off, "Output/Tables/most_hit_blacklist_trackers_
 
 
 ## Summary XL - with more info
-#rm(tracker_summary_XL_extended_ct_off)
 tracker_summary_XL_extended_ct_off <- merged_data_ct_off_more_info %>%
   filter(TrackerBlackListXL == TRUE | domainType == 1) %>% # == TRUE or domainType == 1
   group_by(domain) %>%
@@ -2634,7 +2633,7 @@ tracker_summary_XL_extended_ct_off <- merged_data_ct_off_more_info %>%
 print(tracker_summary_XL_extended_ct_off, n = 50)
 
 # save as CSV
-write.csv(tracker_summary_XL_extended_ct_off, "Output/Tables/most_hit_blacklist_trackers_XL_extended_ct_off.csv", row.names = TRUE)
+write.csv(tracker_summary_XL_extended_ct_off, "Output/Tables/most_hit_blacklist_XL_trackers_extended_ct_off.csv", row.names = TRUE)
 
 
 ## Create new df with only tracker entries
