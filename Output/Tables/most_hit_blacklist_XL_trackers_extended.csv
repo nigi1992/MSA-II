@@ -1,656 +1,902 @@
-"","domain","total_hits"
-"1","firebase-settings.crashlytics.com",179
-"2","firebaselogging-pa.googleapis.com",160
-"3","firebaseremoteconfig.googleapis.com",103
-"4","g.doubleclick.net",91
-"5","metrics.icloud.com",80
-"6","google.com",70
-"7","ca.iadsdk.apple.com",55
-"8","pagead2.googlesyndication.com",51
-"9","googleapis.com",49
-"10","graph.facebook.com",48
-"11","gstatic.com",48
-"12","app-measurement.com",45
-"13","googletagmanager.com",45
-"14","ingest.sentry.io",45
-"15","cdn.cookielaw.org",42
-"16","googleads.g.doubleclick.net",42
-"17","in.appcenter.ms",41
-"18","crashlyticsreports-pa.googleapis.com",39
-"19","cdn.branch.io",36
-"20","region1.app-measurement.com",32
-"21","youtube.com",31
-"22","facebook.com",24
-"23","tpc.googlesyndication.com",24
-"24","googletagservices.com",21
-"25","googleadservices.com",19
-"26","xp.apple.com",19
-"27","events.mapbox.com",18
-"28","accounts.google.com",17
-"29","acdn.adnxs.com",17
-"30","ad.doubleclick.net",17
-"31","ads.vungle.com",17
-"32","api.revenuecat.com",17
-"33","ade.googlesyndication.com",16
-"34","cloud.unity3d.com",15
-"35","pubads.g.doubleclick.net",15
-"36","amazon.de",14
-"37","api2.amplitude.com",14
-"38","fra-01.braze.eu",14
-"39","google.ch",14
-"40","google-analytics.com",13
-"41","ib.adnxs.com",13
-"42","unityads.unity3d.com",13
-"43","ae.iads.unity3d.com",12
-"44","cdn.iads.unity3d.com",12
-"45","cdn2.inner-active.mobi",12
-"46","d.applovin.com",12
-"47","i-sdk.mediation.unity3d.com",12
-"48","instagram.com",12
-"49","m.media-amazon.com",12
-"50","ms.applovin.com",12
-"51","o-sdk.mediation.unity3d.com",12
-"52","rt.applovin.com",12
-"53","rules.aatkit.com",12
-"54","rules2.aatkit.com",12
-"55","rules3.aatkit.com",12
-"56","sdk-events.inner-active.mobi",12
-"57","tracking.aatkit.com",12
-"58","api.kochava.com",11
-"59","csi.gstatic.com",11
-"60","gnar.grammarly.com",11
-"61","iad-03.braze.com",11
-"62","ib.adnxs-simple.com",11
-"63","imasdk.googleapis.com",11
-"64","ms4.applovin.com",11
-"65","pdst.fm",11
-"66","sdk.out.usbla.net",11
-"67","w.usabilla.com",11
-"68","assets.adobedtm.com",10
-"69","combine.urbanairship.com",10
-"70","d3nn82uaxijpm6.cloudfront.net",10
-"71","device-api.urbanairship.com",10
-"72","fundingchoicesmessages.google.com",10
-"73","o352714.ingest.sentry.io",10
-"74","region1.google-analytics.com",10
-"75","remote-data.urbanairship.com",10
-"76","reporting.aatkit.com",10
-"77","sts.applovin.com",10
-"78","web.facebook.com",10
-"79","api.leanplum.com",9
-"80","cdn-f.adsmoloco.com",9
-"81","dpm.demdex.net",9
-"82","engine.adzerk.net",9
-"83","incoming.telemetry.mozilla.org",9
-"84","pixel.adsafeprotected.com",9
-"85","res1.applovin.com",9
-"86","sc.omtrdc.net",9
-"87","storage.googleapis.com",9
-"88","t.teads.tv",9
-"89","tr.iadsdk.apple.com",9
-"90","a.teads.tv",8
-"91","amplify.outbrain.com",8
-"92","api-sdk.datadome.co",8
-"93","bat.bing.com",8
-"94","browser-intake-datadoghq.eu",8
-"95","control.kochava.com",8
-"96","geolocation.onetrust.com",8
-"97","linkedin.com",8
-"98","sc-static.net",8
-"99","srf.ch",8
-"100","static.cloudflareinsights.com",8
-"101","adservice.google.com",7
-"102","api.onesignal.com",7
-"103","cdn.jsdelivr.net",7
-"104","connect.facebook.net",7
-"105","ct.pinterest.com",7
-"106","dt.adsafeprotected.com",7
-"107","fls-na.amazon.com",7
-"108","img.applovin.com",7
-"109","mz.unity3d.com",7
-"110","s0.2mdn.net",7
-"111","static.adsafeprotected.com",7
-"112","tr.snapchat.com",7
-"113","tr6.snapchat.com",7
-"114","ads.stickyadstv.com",6
-"115","amazon.com",6
-"116","api16-access-sg.pangle.io",6
-"117","browser-intake-datadoghq.com",6
-"118","c.amazon-adsystem.com",6
-"119","cdn-settings.appsflyersdk.com",6
-"120","cdn.confiant-integrations.net",6
-"121","cdn.scarabresearch.com",6
-"122","cdnjs.cloudflare.com",6
-"123","cmp.lemonde.fr",6
-"124","config.inmobi.com",6
-"125","data.adobedc.net",6
-"126","eservice.emarsys.net",6
-"127","gum.criteo.com",6
-"128","id5-sync.com",6
-"129","ih.adscale.de",6
-"130","images-na.ssl-images-amazon.com",6
-"131","inbox.google.com",6
-"132","m.stripe.com",6
-"133","p.teads.tv",6
-"134","pangolin16.isnssdk.com",6
-"135","ping.chartbeat.net",6
-"136","platform.twitter.com",6
-"137","recaptcha.net",6
-"138","recommender.scarabresearch.com",6
-"139","ricardo.ch",6
-"140","s.pinimg.com",6
-"141","search.ch",6
-"142","sessions.bugsnag.com",6
-"143","ssdk-sg.pangle.io",6
-"144","ssl.google-analytics.com",6
-"145","t.co",6
-"146","ws.batch.com",6
-"147","ad.yieldlab.net",5
-"148","adx.adform.net",5
-"149","analytics.tiktok.com",5
-"150","api.adnz.co",5
-"151","cdn-lb.vungle.com",5
-"152","crashlogs.whatsapp.net",5
-"153","customerhub.vermoegenszentrum.ch",5
-"154","grid-bidder.criteo.com",5
-"155","launches.appsflyer.com",5
-"156","lb.eu-1-id5-sync.com",5
-"157","links.reply.ricardo.ch",5
-"158","m.facebook.com",5
-"159","me-client.eservice.emarsys.net",5
-"160","mobile-events.eservice.emarsys.net",5
-"161","mobile.adsafeprotected.com",5
-"162","perplexity.ai",5
-"163","reddit.com",5
-"164","sentry.io",5
-"165","statsigapi.net",5
-"166","telemetry.sdk.inmobi.com",5
-"167","uct.service.usercentrics.eu",5
-"168","wikihow.com",5
-"169","20min.ch",4
-"170","aax-eu.amazon-adsystem.com",4
-"171","aax.amazon-adsystem.com",4
-"172","acs.m.taobao.com",4
-"173","ads.yieldmo.com",4
-"174","adsensecustomsearchads.com",4
-"175","alb.reddit.com",4
-"176","analytics.twitter.com",4
-"177","api.mixpanel.com",4
-"178","app-analytics-v2.snapchat.com",4
-"179","app.adjust.com",4
-"180","cdn.doubleverify.com",4
-"181","cm.everesttech.net",4
-"182","dsum-sec.casalemedia.com",4
-"183","eu-mobile.events.data.microsoft.com",4
-"184","events.bsky.app",4
-"185","events.ocdn.eu",4
-"186","excess.duolingo.com",4
-"187","f-log-mobile-ios.grammarly.io",4
-"188","fonts.googleapis.com",4
-"189","fra1-ib.adnxs-simple.com",4
-"190","gcdn.2mdn.net",4
-"191","img.ricardostatic.ch",4
-"192","mail.google.com",4
-"193","mcdp-chidc2.outbrain.com",4
-"194","mv.outbrain.com",4
-"195","order.info.sbb.ch",4
-"196","pixel.rubiconproject.com",4
-"197","redditstatic.com",4
-"198","secure.adnxs.com",4
-"199","securepubads.g.doubleclick.net",4
-"200","stocks-analytics-events.apple.com",4
-"201","tps.doubleverify.com",4
-"202","track.adform.net",4
-"203","us-u.openx.net",4
-"204","w3-reporting.reddit.com",4
-"205","webchannel-content.eservice.emarsys.net",4
-"206","widgets.outbrain.com",4
-"207","a1.api.bbc.co.uk",3
-"208","adashx4ae.ut.taobao.com",3
-"209","ads.linkedin.com",3
-"210","ads.mozilla.org",3
-"211","aeis.alicdn.com",3
-"212","aliexpress.com",3
-"213","ap.lijit.com",3
-"214","api-m.paypal.com",3
-"215","api.segment.io",3
-"216","assets.alicdn.com",3
-"217","beacon.shazam.com",3
-"218","beacons.ai",3
-"219","cdn-a.yieldlove.com",3
-"220","cdn.braze.eu",3
-"221","cdn.forter.com",3
-"222","cdn.mcauto-images-production.sendgrid.net",3
-"223","cdn.teads.tv",3
-"224","cdn4.forter.com",3
-"225","cdp.cloud.unity3d.com",3
-"226","clarity.ms",3
-"227","config.claspws.tv",3
-"228","config.uca.cloud.unity3d.com",3
-"229","creativecdn.com",3
-"230","csr.onet.pl",3
-"231","doubleclick.net",3
-"232","eb2.3lift.com",3
-"233","facebook.net",3
-"234","fourier.taobao.com",3
-"235","g.alicdn.com",3
-"236","h-adashx4ae.ut.taobao.com",3
-"237","hb.adscale.de",3
-"238","hcaptcha.com",3
-"239","htlb.casalemedia.com",3
-"240","iad-06.braze.com",3
-"241","images.outbrainimg.com",3
-"242","impression.appsflyer.com",3
-"243","js.adscale.de",3
-"244","jsdelivr.net",3
-"245","match.adsrvr.org",3
-"246","o170101.ingest.sentry.io",3
-"247","o2129.ingest.sentry.io",3
-"248","o228883.ingest.sentry.io",3
-"249","pagead2.googleadservices.com",3
-"250","prod-ingestion.tracking.v2.yieldlove-ad-serving.net",3
-"251","r.teads.tv",3
-"252","radar.cedexis.com",3
-"253","rt.udmserve.net",3
-"254","rtb-csync.smartadserver.com",3
-"255","s2.adform.net",3
-"256","s2s.singular.net",3
-"257","s8t.teads.tv",3
-"258","sb.scorecardresearch.com",3
-"259","ssp-csync.smartadserver.com",3
-"260","static.ads-twitter.com",3
-"261","stats.paypal.com",3
-"262","sync.teads.tv",3
-"263","token.rubiconproject.com",3
-"264","tt.omtrdc.net",3
-"265","tutti.ch",3
-"266","twitter.com",3
-"267","u31231550.ct.sendgrid.net",3
-"268","userimg-assets.customeriomail.com",3
-"269","weather-analytics-events.apple.com",3
-"270","wv.inner-active.mobi",3
-"271","x.bidswitch.net",3
-"272","x.com",3
-"273","acdn.adnxs-simple.com",2
-"274","adnz.co",2
-"275","ads.creative-serving.com",2
-"276","ads.pubmatic.com",2
-"277","api.iterable.com",2
-"278","api.permutive.com",2
-"279","api3.siftscience.com",2
-"280","apple.com",2
-"281","audid-api.taobao.com",2
-"282","b1sync.zemanta.com",2
-"283","bh.contextweb.com",2
-"284","bimi.entrust.net",2
-"285","c2.piano.io",2
-"286","cdn-settings.segment.com",2
-"287","cdn.adnxs.com",2
-"288","cdn.adsafeprotected.com",2
-"289","cdn.id5-sync.com",2
-"290","cdn.onesignal.com",2
-"291","cdn.shopify.com",2
-"292","client.protechts.net",2
-"293","cloudflareinsights.com",2
-"294","cm.adform.net",2
-"295","collector.lunalabs.io",2
-"296","configv2.unityads.unity3d.com",2
-"297","downloads.intercomcdn.com",2
-"298","ds-aksb-a.akamaihd.net",2
-"299","dyn.emetriq.de",2
-"300","ebayadservices.com",2
-"301","email.repebble.com",2
-"302","eus.rubiconproject.com",2
-"303","events.claspws.tv",2
-"304","fastlane.rubiconproject.com",2
-"305","files.ricardostatic.ch",2
-"306","fonts.gstatic.com",2
-"307","g2.gumgum.com",2
-"308","gj.mmstat.com",2
-"309","gm.mmstat.com",2
-"310","googlesyndication.com",2
-"311","h-sdk.online-metrix.net",2
-"312","hbopenbid.pubmatic.com",2
-"313","homegate.ch",2
-"314","i.connectad.io",2
-"315","iad-01.braze.com",2
-"316","ice.360yield.com",2
-"317","imagesrv.adition.com",2
-"318","ingress.linktr.ee",2
-"319","iqdigital.demdex.net",2
-"320","linktr.ee",2
-"321","log.outbrainimg.com",2
-"322","log.pinterest.com",2
-"323","macro.adnami.io",2
-"324","mads.amazon-adsystem.com",2
-"325","match.justpremium.com",2
-"326","mc.sendgrid.com",2
-"327","mcusercontent.com",2
-"328","mediation.adnxs.com",2
-"329","mybbc-analytics.files.bbci.co.uk",2
-"330","nfl.demdex.net",2
-"331","notion.so",2
-"332","o1069899.ingest.sentry.io",2
-"333","ogads-pa.googleapis.com",2
-"334","orbidder.otto.de",2
-"335","p.nfltags.com",2
-"336","partner.googleadservices.com",2
-"337","paypal.com",2
-"338","pixel.everesttech.net",2
-"339","pub.doubleverify.com",2
-"340","roam-research-6a2c436dc9f6.intercom-mail.com",2
-"341","rumcdn.geoedge.be",2
-"342","secureir.ebaystatic.com",2
-"343","sharethis.com",2
-"344","simage2.pubmatic.com",2
-"345","static.criteo.net",2
-"346","static.hotjar.com",2
-"347","stripe-images.s3.amazonaws.com",2
-"348","studio-t.teads.tv",2
-"349","sync.1rx.io",2
-"350","sync.connectad.io",2
-"351","sync.mathtag.com",2
-"352","sync.outbrain.com",2
-"353","sync.taboola.com",2
-"354","t.adcell.com",2
-"355","thind.unityads.unity3d.com",2
-"356","tlx.3lift.com",2
-"357","tr.outbrain.com",2
-"358","u.openx.net",2
-"359","u41709400.ct.sendgrid.net",2
-"360","udm.scorecardresearch.com",2
-"361","ups.xplosion.de",2
-"362","view.adjust.com",2
-"363","vmc.digicert.com",2
-"364","widget-pixels.outbrain.com",2
-"365","zc.adswizz.com",2
-"366","0.0.0.1",1
-"367","1.1.1.1",1
-"368","3lift.com",1
-"369","9gag.com",1
-"370","a.klaviyo.com",1
-"371","a.pub.network",1
-"372","a.twiago.com",1
-"373","a4.applovin.com",1
-"374","aax-eu.amazon.de",1
-"375","ad-delivery.net",1
-"376","ad.360yield.com",1
-"377","ad.ad-srv.net",1
-"378","ad.sxp.smartclip.net",1
-"379","ad11.adfarm1.adition.com",1
-"380","ad4m.at",1
-"381","adclick.g.doubleclick.net",1
-"382","adf0901f1861.cdn4.forter.com",1
-"383","adnxs.com",1
-"384","adobedtm.com",1
-"385","adrta.com",1
-"386","ads.betweendigital.com",1
-"387","ads.smartstream.tv",1
-"388","adsrvr.org",1
-"389","ae01.alicdn.com",1
-"390","ajax.cloudflare.com",1
-"391","alibaba.com",1
-"392","alicdn.com",1
-"393","amazon-adsystem.com",1
-"394","amplitude.com",1
-"395","analytics.google.com",1
-"396","analytics.localytics.com",1
-"397","analytics.yahoo.com",1
-"398","api-iam.intercom.io",1
-"399","api.brandsforstudents.ch",1
-"400","api.gameanalytics.com",1
-"401","api.helpshift.com",1
-"402","api.pubnative.net",1
-"403","api.sprig.com",1
-"404","api.transferwise.com",1
-"405","applets.ebxcdn.com",1
-"406","appslix.g2afse.com",1
-"407","arg.atomex.net",1
-"408","arttrk.com",1
-"409","assets-jpcust.jwpsrv.com",1
-"410","assets.applovin.com",1
-"411","assets.prod.leanplum.com",1
-"412","assets.revolut.com",1
-"413","ats.otto.de",1
-"414","attr.appsflyer.com",1
-"415","baechli-bergsport.zendesk.com",1
-"416","bcp.crwdcntrl.net",1
-"417","bidswitch.net",1
-"418","bing.com",1
-"419","brwsrfrm.com",1
-"420","btloader.com",1
-"421","businessclick.ch",1
-"422","buy.tinypass.com",1
-"423","c.go-mpulse.net",1
-"424","c.pub.network",1
-"425","c1.adform.net",1
-"426","cadmus.script.ac",1
-"427","casalemedia.com",1
-"428","cdn.amplitude.com",1
-"429","cdn.atomex.net",1
-"430","cdn.connectad.io",1
-"431","cdn.hadronid.net",1
-"432","cdn.liftoff-creatives.io",1
-"433","cdn.optimizely.com",1
-"434","cdn.piano.io",1
-"435","cdn.pubnative.net",1
-"436","cdn.quantummetric.com",1
-"437","cdn.revolut.com",1
-"438","cdn.siftscience.com",1
-"439","cdn.taboola.com",1
-"440","ce.lijit.com",1
-"441","ced-ns.sascdn.com",1
-"442","choices.trustarc.com",1
-"443","claude.ai",1
-"444","click.oneplus.ch",1
-"445","click.revolut.com",1
-"446","clicks.eventbrite.com",1
-"447","cloudflare.com",1
-"448","cm.adsafety.net",1
-"449","collect.igodigital.com",1
-"450","combine.asnapieu.com",1
-"451","comcluster.cxense.com",1
-"452","confiant-integrations.global.ssl.fastly.net",1
-"453","configure.rayjump.com",1
-"454","consent.api.osano.com",1
-"455","consent.trustarc.com",1
-"456","conversions.appsflyer.com",1
-"457","criteo.com",1
-"458","crwdcntrl.net",1
-"459","csync.loopme.me",1
-"460","d.adroll.com",1
-"461","d.pub.network",1
-"462","d15k2d11r6t6rl.cloudfront.net",1
-"463","data.dianomi.com",1
-"464","device-api.asnapieu.com",1
-"465","device.marketingcloudapis.com",1
-"466","dianomi.com",1
-"467","dk9ps7goqoeef.cloudfront.net",1
-"468","dmp.theadex.com",1
-"469","dropbox.com",1
-"470","dspcluster.adfarm1.adition.com",1
-"471","dynamic.criteo.com",1
-"472","edge.eu1.fullstory.com",1
-"473","edge.fullstory.com",1
-"474","edge.safedk.com",1
-"475","embed.filekitcdn.com",1
-"476","embed.reddit.com",1
-"477","entitlements.jwplayer.com",1
-"478","eventgw.twilio.com",1
-"479","events.browsiprod.com",1
-"480","events.mz.unity3d.com",1
-"481","exp.notion.so",1
-"482","facebookmail.com",1
-"483","fast.a.klaviyo.com",1
-"484","firebaselogging.googleapis.com",1
-"485","fra1-ib.adnxs.com",1
-"486","freestar-io.videoplayerhub.com",1
-"487","fw.adsafeprotected.com",1
-"488","g.ign.com",1
-"489","gateway.unityads.unity3d.com",1
-"490","github.com",1
-"491","google.de",1
-"492","gumgum.com",1
-"493","gw.geoedge.be",1
-"494","gw.mediation.unity3d.com",1
-"495","hb.yellowblue.io",1
-"496","hbx.media.net",1
-"497","hcmanager.swifteq.com",1
-"498","hexagon-analytics.com",1
-"499","hp.com",1
-"500","i.clean.gg",1
-"501","i.ipromote.com",1
-"502","idsync.rlcdn.com",1
-"503","image2.pubmatic.com",1
-"504","image6.pubmatic.com",1
-"505","images.mediago.io",1
-"506","imdb.com",1
-"507","in.treasuredata.com",1
-"508","indexww.com",1
-"509","intake-analytics.wikimedia.org",1
-"510","inv-nets.admixer.net",1
-"511","ipds.adrta.com",1
-"512","ir.ebaystatic.com",1
-"513","isx.unity3d.com",1
-"514","js-sec.indexww.com",1
-"515","lemonde.fr",1
-"516","liadm.com",1
-"517","lijit.com",1
-"518","links.iterable.com",1
-"519","links.notifications.galaxus.ch",1
-"520","loadm.exelator.com",1
-"521","mab.chartbeat.com",1
-"522","mabping.chartbeat.net",1
-"523","mailing.rad-marathon.ch",1
-"524","mailing.sbb.ch",1
-"525","mandrillapp.com",1
-"526","manifest.localytics.com",1
-"527","marketingplatform.google.com",1
-"528","match.360yield.com",1
-"529","match.sharethrough.com",1
-"530","media.admob.com",1
-"531","media.ticketmaster.eu",1
-"532","mediamarkt.de",1
-"533","merchant-center-analytics.goog",1
-"534","metricreceiver.cellrebel.com",1
-"535","microsoft.com",1
-"536","mollusk.apis.ign.com",1
-"537","mozilla.org",1
-"538","my.rtmark.net",1
-"539","n.sni.global.fastly.net",1
-"540","npttech.com",1
-"541","o-iab-notifications.mediation.unity3d.com",1
-"542","o.alicdn.com",1
-"543","o.iads.unity3d.com",1
-"544","o4505071687041024.ingest.sentry.io",1
-"545","o488710.ingest.sentry.io",1
-"546","odr.mookie1.com",1
-"547","offer.alibaba.com",1
-"548","omtrdc.net",1
-"549","onetag-sys.com",1
-"550","open.convertkit-mail2.com",1
-"551","openx.net",1
-"552","p.typekit.net",1
-"553","pictures.cumulus.migros.ch",1
-"554","pippio.com",1
-"555","pix.hyj.mobi",1
-"556","pixel.mathtag.com",1
-"557","pixel.spotify.com",1
-"558","pixel.tapad.com",1
-"559","platform-static.tutti.ch",1
-"560","pm.w55c.net",1
-"561","pool.admedo.com",1
-"562","post.ch",1
-"563","prd.jwpltx.com",1
-"564","prebid.cootlogix.com",1
-"565","prism.app-us1.com",1
-"566","privacy-policy.truste.com",1
-"567","pubmatic.com",1
-"568","px-intl.ucweb.com",1
-"569","quantserve.com",1
-"570","r.bbci.co.uk",1
-"571","r.linksprf.com",1
-"572","register.appsflyer.com",1
-"573","remote-data.asnapieu.com",1
-"574","rezync.com",1
-"575","rfihub.com",1
-"576","rlcdn.com",1
-"577","rtb0.doubleverify.com",1
-"578","rubiconproject.com",1
-"579","rules.quantcount.com",1
-"580","rum.hlx.page",1
-"581","s.ad.smaato.net",1
-"582","s.adroll.com",1
-"583","s.amazon-adsystem.com",1
-"584","s.click.aliexpress.com",1
-"585","s.go-mpulse.net",1
-"586","s.seedtag.com",1
-"587","s1.adform.net",1
-"588","s2s.t13.io",1
-"589","s3-eu-west-1.amazonaws.com",1
-"590","samsung.com",1
-"591","scar.unityads.unity3d.com",1
-"592","scribd.com",1
-"593","script.hotjar.com",1
-"594","scripts.swifteq.com",1
-"595","sdk-api-v1.singular.net",1
-"596","sdk.iad-01.braze.com",1
-"597","sdk.streamrail.com",1
-"598","sf16-website-login.neutral.ttwstatic.com",1
-"599","sharethrough.com",1
-"600","srgssr01.wt-eu02.net",1
-"601","ssbsync.smartadserver.com",1
-"602","ssc-cms.33across.com",1
-"603","sslwidget.criteo.com",1
-"604","ssum-sec.casalemedia.com",1
-"605","static-tracking.klaviyo.com",1
-"606","static.chartbeat.com",1
-"607","static.klaviyo.com",1
-"608","static.woopra.com",1
-"609","static.xx.fbcdn.net",1
-"610","style-6a38.kxcdn.com",1
-"611","survey.survicate.com",1
-"612","swiss.us20.list-manage.com",1
-"613","sync-eu.connectad.io",1
-"614","sync.go.sonobi.com",1
-"615","t.adx.opera.com",1
-"616","t2.chartboost.com",1
-"617","tags.tiqcdn.com",1
-"618","teads.tv",1
-"619","temu.com",1
-"620","thesun.co.uk",1
-"621","thingortwo.g2afse.com",1
-"622","thrtle.com",1
-"623","ticketcorner.ch",1
-"624","tiktok.com",1
-"625","tms.post.ch",1
-"626","tmxx-static.s3.amazonaws.com",1
-"627","tr-eu.adsmoloco.com",1
-"628","trackcmp.net",1
-"629","trackmaxx.ch",1
-"630","trafiko-prod-public.s3.eu-west-3.amazonaws.com",1
-"631","transa.my.salesforce.com",1
-"632","trk.atomex.net",1
-"633","trk.brands4students.ch",1
-"634","trustpilot.com",1
-"635","undertone.com",1
-"636","unified.adsafeprotected.com",1
-"637","unilu.ch",1
-"638","usermatch.targeting.unrulymedia.com",1
-"639","va.tawk.to",1
-"640","vast.doubleverify.com",1
-"641","vc.hotjar.io",1
-"642","verify.ridedott.com",1
-"643","vg-aws-cdn-us-east-1a-hb-bid-feedback.mtgglobals.com",1
-"644","visualwebsiteoptimizer.com",1
-"645","vpaid.doubleverify.com",1
-"646","web.inxmail-commerce.com",1
-"647","webrental.s3.eu-west-3.amazonaws.com",1
-"648","webview.unityads.unity3d.com",1
-"649","woopra.com",1
-"650","www3.doubleclick.net",1
-"651","yahoo.com",1
-"652","yield-manager.browsiprod.com",1
-"653","yieldlove.com",1
-"654","yieldmo.com",1
-"655","youtube-nocookie.com",1
+"","domain","total_hits","TrackerBlackListXL","TrackerBlackList","domainType","domainClassification","hits_sum","initiatedType","DomainOwnerName","apps","apps_count","CategoryNoTrack","CategoryDisconnect","CategoryLockdown"
+"1","firebase-settings.crashlytics.com",179,TRUE,TRUE,"1","1",417,"AppInitiated","Google","Ricardo, Voi, Bitwarden, Trainline, Twitter, Yuh, Uber Eats, Tacx Training, Le Monde, Reddit, SBB, Tutti, GoMore, AppBox Pro, Komoot, Jodel, Spotify, Just Eat, DER SPIEGEL, RoamResearch, Salt, BBC, WhiteRisk, BBCWorldService, Revolut, bergfex, Bird, Dott, Postcard Creator, Post, Lime, Zwift, Hinge, eBay, Hitman, FAZ, Solitaire, Traffic Escape, Blick, Play SRF, Uber, Migros, RTS, Perplexity, Slopes, Freedom, Avira PWM, Flatfox, Notion, Wise, Sonect, Nextbike, Speedtest",53,"NA","NA","NA"
+"2","firebaselogging-pa.googleapis.com",160,TRUE,TRUE,"1","1",1367,"AppInitiated","Google","Ricardo, Trainline, Neon, Twitter, Yuh, Tacx Training, Steam, Le Monde, Reddit, SBB, Tutti, AppBox Pro, Jodel, Spotify, Salt, BBC, Uber Eats, WhiteRisk, BBCWorldService, Revolut, Bird, Bitwarden, Dott, Postcard Creator, Post, Zwift, Komoot, eBay, Hitman, Solitaire, DER SPIEGEL, Traffic Escape, Blick, Play SRF, Migros, RTS, Perplexity, Slopes, bergfex, Freedom, Just Eat, Flatfox, Lime, Voi, Notion, Zak, Wise, Sonect, Speedtest",49,"Tracker","NA","NA"
+"3","firebaseremoteconfig.googleapis.com",103,FALSE,FALSE,"1, 2","1",300,"AppInitiated","Google","Ricardo, Voi, Galaxus, Digitec, Post, Tacx Training, Le Monde, Coffee Golf, Tutti, Just Eat, Jodel, DER SPIEGEL, Uber Eats, Revolut, bergfex, Dott, 20 Minuten, Zwift, eBay, SRF Player, Hitman, FAZ, Solitaire, Brave, Traffic Escape, Blick, Play SRF, Uber, Migros, Perplexity, Sony Headphones, Slopes, Freedom, RTS, Lime, Wise",36,"NA","NA","NA"
+"4","g.doubleclick.net",91,TRUE,TRUE,"1","1",865,"AppInitiated","Google","Youtube, Snapchat, Ricardo, Search.ch, Twitter, Post, Coffee Golf, Tutti, AppBox Pro, NFL, Jodel, DER SPIEGEL, Salt, BBC, BBCWorldService, Tinder, 20 Minuten, Trainline, Le Monde, Bumble, Hitman, FAZ, Solitaire, Traffic Escape, Instagram, Blick, Uber, Spotify, Speedtest, LEO",30,"NA","NA","NA"
+"5","metrics.icloud.com",80,TRUE,TRUE,"2","1",174,"AppInitiated","Apple","Apple Wallet, Phone App, Apple Reminders, AppBox Pro, Apple Mail, Apple Photos, Apple Fitness, Microsoft Authenticator, Apple Shortcuts, Apple Books, Apple Maps, Stanley Parable, WhatsApp, Apple Notes, Windy, Signal, Apple Weather",17,"Tracker","NA","NA"
+"6","google.com",70,TRUE,TRUE,"2, 1","1",386,"AppInitiated, NonAppInitiated","Google","Youtube, Snapchat, Google App, Google Maps, Ricardo, Search.ch, Tutti, DER SPIEGEL, RoamResearch, Salt, Coop Supercard, Firefox Klar, Firefox, Dott, Brave, Digitec, Instagram, Perplexity, Trafikpoint, ChatGPT, Uber, WhatsApp",22,"NA","Content","NA"
+"7","ca.iadsdk.apple.com",55,TRUE,TRUE,"2","1",112,"AppInitiated","Apple","Amazon, Twitter, Flo, Amazon Kindle, Uber Eats, Spotify, Just Eat, DER SPIEGEL, Threads, BBCWorldService, Revolut, AoE Mobile, Tinder, TikTok, AliExpress, Bumble, eBay, Discord, FAZ, Uber, Alibaba, Slopes, Ricardo, Wise, Jodel",25,"NA","NA","NA"
+"8","pagead2.googlesyndication.com",51,TRUE,TRUE,"1","1",270,"AppInitiated","Google","Youtube, Ricardo, Twitter, Post, NFL, DER SPIEGEL, BBC, BBCWorldService, 20 Minuten, Tutti, Hitman, FAZ, Solitaire, Traffic Escape, Coffee Golf, Blick, AliExpress, Search.ch, Uber, Speedtest, Jodel, LEO",22,"NA","NA","NA"
+"9","googleapis.com",49,TRUE,TRUE,"2","1",411,"AppInitiated","Google","Youtube, Google App, Google Maps, Gmail, Tacx Training, RoamResearch, Dott, Lime, Hitman, Brave, Uber, Google Drive, Google Authenticator, Trafikpoint, Exodus, Google Docs, Gemini",17,"NA","Content","NA"
+"10","graph.facebook.com",48,TRUE,FALSE,"1","1",1090,"AppInitiated","Meta","Messenger, Strava, Instagram, Threads, Coffee Golf, Facebook, BBCWorldService, Bird, Watson, Lime, Brainwave, Bumble, Plague.Inc, Smood",14,"NA","NA","NA"
+"11","gstatic.com",48,TRUE,TRUE,"2","1",287,"AppInitiated","Google","Youtube, Snapchat, Google App, Google Maps, Reddit, NFL, Dott, Brave, Tutti, Firefox, FAZ, Solitaire, 20 Minuten, Twitter, Blick, Uber, Alibaba, Search.ch, Trafikpoint, PayPal, Speedtest, LEO",22,"NA","Content","NA"
+"12","app-measurement.com",45,TRUE,TRUE,"1","1",777,"AppInitiated","Google","Neon, Twitter, Uber Eats, AppBox Pro, Spotify, WhiteRisk, BBCWorldService, AoE Mobile, Watson, Lime, Uber, Alibaba, Smood, Zak",14,"Tracker","NA","NA"
+"13","googletagmanager.com",45,TRUE,TRUE,"1","1",150,"AppInitiated","Google","Snapchat, Ricardo, Galaxus, Search.ch, Digitec, Tutti, Just Eat, DER SPIEGEL, Salt, Coop Supercard, 20 Minuten, Firefox, Brave, Instagram, Blick, Local.ch, Relai, Komoot, Flatfox, Speedtest",20,"Tracker","NA","NA"
+"14","ingest.sentry.io",45,TRUE,FALSE,"1","1",627,"AppInitiated","Functional Software","Strava, Bluesky, TrainerDay, Jodel, Coop Supercard, Firefox, Ricardo, Zwift, Brainwave, Discord, DeepSeek, Working Bicycle, Firefox Klar, Relai, Notion, Coffee Golf",16,"Tracker","NA","NA"
+"15","cdn.cookielaw.org",42,TRUE,TRUE,"2","1",228,"AppInitiated","OneTrust","Ricardo, Search.ch, Trainline, Tutti, Jodel, NFL, Watson, 20 Minuten, Brave, Blick, Local.ch, Flatfox, Speedtest, Spotify",14,"NA","NA","NA"
+"16","googleads.g.doubleclick.net",42,TRUE,TRUE,"1","1",121,"AppInitiated","Google","Youtube, Ricardo, Post, Tutti, NFL, Jodel, BBC, Twitter, BBCWorldService, Postcard Creator, Trainline, AppBox Pro, Le Monde, Coffee Golf, Uber, Search.ch",16,"NA","NA","advertising"
+"17","in.appcenter.ms",41,FALSE,FALSE,"1","1",142,"AppInitiated","Microsoft","OneDrive, Microsoft Authenticator, Post, NFL, Watson, Postcard Creator, 20 Minuten, SRF Player, FAZ, Outlook, Tutti",11,"NA","NA","NA"
+"18","crashlyticsreports-pa.googleapis.com",39,TRUE,TRUE,"1","1",63,"AppInitiated","Google","Ricardo, Bitwarden, Twitter, Komoot, Yuh, Salt, Spotify, WhiteRisk, Revolut, Lime, Reddit, Tutti, Post, Perplexity, Freedom, Migros, Sonect",17,"Tracker","NA","NA"
+"19","cdn.branch.io",36,TRUE,TRUE,"2","1",1586,"AppInitiated","Branch","Strava, Reddit, Spotify, Just Eat, Jodel, Tinder, Lime, Brainwave",8,"NA","NA","NA"
+"20","region1.app-measurement.com",32,TRUE,FALSE,"1","1",1173,"AppInitiated","Google","Twitter, Uber Eats, AppBox Pro, Spotify, WhiteRisk, Lime, AoE Mobile, Uber, Alibaba",9,"NA","NA","NA"
+"21","youtube.com",31,TRUE,TRUE,"2, 1","1",527,"AppInitiated, NonAppInitiated","Google","Youtube, Telegraph, Messages App, Signal, WhatsApp, Reddit, Brave, Digitec, 20 Minuten, Perplexity",10,"NA","Content","NA"
+"22","facebook.com",24,TRUE,TRUE,"1","1",263,"AppInitiated","Meta","Messenger, Instagram, Threads, Facebook, Salt, Brave, Firefox, DER SPIEGEL, 20 Minuten, Speedtest",10,"NA","FingerprintingGeneral, Social","social"
+"23","tpc.googlesyndication.com",24,TRUE,TRUE,"2","1",54,"AppInitiated","Google","Youtube, Post, NFL, BBCWorldService, Google Maps, 20 Minuten, FAZ, Solitaire, DER SPIEGEL, Twitter, Blick, Search.ch, Tutti, Speedtest, Jodel, LEO",16,"NA","NA","NA"
+"24","googletagservices.com",21,TRUE,TRUE,"2","1",44,"AppInitiated","Google","Post, NFL, BBCWorldService, 20 Minuten, FAZ, Solitaire, Blick, Search.ch, Tutti, Speedtest, Jodel, LEO",12,"Tracker","Advertising, FingerprintingGeneral","advertising"
+"25","api-adservices.apple.com",20,TRUE,FALSE,"2","1",36,"AppInitiated","Apple","Twitter, Spotify, DER SPIEGEL, AoE Mobile, AliExpress, Bumble, eBay, Alibaba, Slopes, Ricardo, Wise, Jodel",12,"NA","NA","NA"
+"26","googleadservices.com",19,TRUE,TRUE,"1","1",50,"AppInitiated","Google","Youtube, Ricardo, Instagram, DER SPIEGEL, Uber Eats, Google App, Google Maps, Firefox, Alibaba",9,"Advertising","Advertising, FingerprintingGeneral","advertising"
+"27","growth-pa.googleapis.com",19,TRUE,FALSE,"2","1",83,"AppInitiated","Google","Google App, Google Maps, Gmail, Youtube, Google Drive, Google Docs",6,"Advertising","NA","NA"
+"28","xp.apple.com",19,TRUE,TRUE,"2","1",187,"AppInitiated","Apple","App Store, Apple Fitness, Apple Podcasts, Apple Books, Apple Music",5,"NA","NA","NA"
+"29","events.mapbox.com",18,TRUE,TRUE,"2","1",668,"AppInitiated","Other","Strava, Voi, Lime, Slopes, Flatfox, Nextbike",6,"Tracker","NA","NA"
+"30","accounts.google.com",17,TRUE,TRUE,"2","1",217,"AppInitiated","Google","Snapchat, Google App, Google Maps, 20 Minuten, Gmail, Notion",6,"NA","NA","NA"
+"31","acdn.adnxs.com",17,TRUE,TRUE,"2","1",129,"AppInitiated","Microsoft","Ricardo, Tutti, DER SPIEGEL, Blick, Search.ch",5,"NA","NA","NA"
+"32","ad.doubleclick.net",17,TRUE,TRUE,"2","1",165,"AppInitiated","Google","Youtube, Jodel, 20 Minuten, DER SPIEGEL, Instagram, Blick, Search.ch",7,"NA","NA","advertising"
+"33","ads.vungle.com",17,TRUE,FALSE,"1","1",73,"AppInitiated","Vungle Inc.","Coffee Golf, Jodel, Hitman, Solitaire, Traffic Escape",5,"NA","NA","NA"
+"34","api.revenuecat.com",17,FALSE,FALSE,"1","1",104,"AppInitiated","RevenueCat","ChatGPT, Jodel, Brainwave, Delta Emulator, Perplexity",5,"NA","NA","NA"
+"35","ade.googlesyndication.com",16,TRUE,TRUE,"2","1",164,"AppInitiated","Google","Youtube, Ricardo, 20 Minuten, DER SPIEGEL, Blick, Search.ch",6,"NA","NA","NA"
+"36","cloud.unity3d.com",15,FALSE,FALSE,"1","1",92,"AppInitiated","Unity Inc.","Coffee Golf, Hitman, Traffic Escape, Getting Over It",4,"NA","NA","NA"
+"37","pubads.g.doubleclick.net",15,TRUE,TRUE,"1","1",31,"AppInitiated","Google","Ricardo, Post, Tutti, Jodel, BBC, Postcard Creator",6,"NA","NA","advertising"
+"38","amazon.de",14,TRUE,TRUE,"2, 1","1",26,"AppInitiated, NonAppInitiated","Amazon","Amazon, Amazon Kindle, Apple Mail, Amazon Echo",4,"NA","Advertising","advertising"
+"39","api2.amplitude.com",14,TRUE,TRUE,"1","1",47,"AppInitiated","Amplitude","YNAB, RoamResearch, bergfex, Lime, Brainwave, Sonect",6,"NA","NA","NA"
+"40","fra-01.braze.eu",14,TRUE,TRUE,"1","1",33,"AppInitiated","Braze Inc.","Voi, Trainline, Dott, Smood, Wise",5,"NA","NA","NA"
+"41","google.ch",14,TRUE,TRUE,"2","1",29,"AppInitiated","Google","Ricardo, Search.ch, DER SPIEGEL, Salt, Firefox, Instagram",6,"NA","Content","NA"
+"42","self.events.data.microsoft.com",14,TRUE,FALSE,"2","1",47,"AppInitiated","Microsoft","Microsoft Authenticator, AoE Mobile, Outlook",3,"NA","NA","NA"
+"43","google-analytics.com",13,TRUE,TRUE,"1","1",51,"AppInitiated","Google","Snapchat, Ricardo, Firefox, Brave, Traffic Escape, Instagram, Komoot",7,"Tracker","Email, Analytics, FingerprintingGeneral","privacy"
+"44","ib.adnxs.com",13,TRUE,TRUE,"1","1",71,"AppInitiated","Microsoft","Ricardo, DER SPIEGEL, FAZ, Blick, Search.ch",5,"NA","NA","NA"
+"45","unityads.unity3d.com",13,TRUE,TRUE,"1","1",42,"AppInitiated","Unity Inc.","Coffee Golf, Tinder, Hitman, Solitaire, Traffic Escape",5,"Advertising","NA","NA"
+"46","ae.iads.unity3d.com",12,TRUE,TRUE,"2","1",42,"AppInitiated","Unity Software","Coffee Golf, Hitman, Solitaire, Traffic Escape",4,"NA","NA","NA"
+"47","cdn.iads.unity3d.com",12,TRUE,TRUE,"2","1",40,"AppInitiated","Unity Software","Coffee Golf, Hitman, Solitaire, Traffic Escape",4,"NA","NA","NA"
+"48","cdn2.inner-active.mobi",12,TRUE,TRUE,"2","1",42,"AppInitiated","Other","Coffee Golf, Hitman, Solitaire, Traffic Escape",4,"NA","NA","NA"
+"49","d.applovin.com",12,TRUE,TRUE,"2","1",38,"AppInitiated","Other","Coffee Golf, Hitman, Solitaire, Traffic Escape",4,"NA","NA","NA"
+"50","i-sdk.mediation.unity3d.com",12,TRUE,TRUE,"2","1",39,"AppInitiated","Unity Software","Coffee Golf, Hitman, Solitaire, Traffic Escape",4,"NA","NA","NA"
+"51","instagram.com",12,TRUE,TRUE,"2","1",22,"AppInitiated, NonAppInitiated","Meta","Instagram, Signal, Threads, WhatsApp, 20 Minuten",5,"NA","Content","NA"
+"52","m.media-amazon.com",12,TRUE,TRUE,"2","1",26,"AppInitiated","Amazon","Amazon, Amazon Kindle, Amazon Echo, Audible, Search.ch",5,"NA","NA","NA"
+"53","ms.applovin.com",12,TRUE,TRUE,"2","1",41,"AppInitiated","Other","Coffee Golf, Hitman, Solitaire, Traffic Escape",4,"NA","NA","NA"
+"54","o-sdk.mediation.unity3d.com",12,TRUE,TRUE,"2","1",59,"AppInitiated","Unity Software","Coffee Golf, Hitman, Solitaire, Traffic Escape",4,"NA","NA","NA"
+"55","rt.applovin.com",12,TRUE,TRUE,"2","1",48,"AppInitiated","Other","Coffee Golf, Hitman, Solitaire, Traffic Escape",4,"NA","NA","NA"
+"56","rules.aatkit.com",12,TRUE,TRUE,"1","1",130,"AppInitiated","AddApptr","Ricardo, Tutti",2,"NA","NA","NA"
+"57","rules2.aatkit.com",12,TRUE,TRUE,"2","1",129,"AppInitiated","Other","Ricardo, Tutti",2,"NA","NA","NA"
+"58","rules3.aatkit.com",12,TRUE,TRUE,"1","1",125,"AppInitiated","AddApptr","Ricardo, Tutti",2,"NA","NA","NA"
+"59","sdk-events.inner-active.mobi",12,TRUE,TRUE,"1","1",23,"AppInitiated","Digital Turbine","Coffee Golf, Hitman, Solitaire, Traffic Escape",4,"NA","NA","NA"
+"60","stats.gc.apple.com",12,TRUE,FALSE,"2","1",89,"AppInitiated","Apple","App Store, Hitman, Plague.Inc, Stanley Parable, Super Mario Run, The Impossible Game, Getting Over It",7,"Tracker","NA","NA"
+"61","tracking.aatkit.com",12,TRUE,TRUE,"1","1",255,"AppInitiated","AddApptr","Ricardo, Tutti",2,"NA","NA","NA"
+"62","api.kochava.com",11,TRUE,TRUE,"1","1",17,"AppInitiated","Kochava","Amazon Kindle, NFL, Audible",3,"NA","NA","NA"
+"63","csi.gstatic.com",11,TRUE,TRUE,"2","1",25,"AppInitiated","Google","Ricardo, Twitter, BBC, 20 Minuten, Blick, Search.ch",6,"NA","NA","NA"
+"64","data.eu.pendo.io",11,TRUE,FALSE,"2","1",67,"AppInitiated","Other","Yuh",1,"NA","NA","NA"
+"65","dit.whatsapp.net",11,TRUE,FALSE,"2","1",165,"AppInitiated","Meta","WhatsApp",1,"NA","NA","NA"
+"66","g.whatsapp.net",11,TRUE,FALSE,"2","1",4702,"AppInitiated","Meta","WhatsApp",1,"NA","NA","NA"
+"67","gnar.grammarly.com",11,TRUE,TRUE,"2","1",93,"AppInitiated","Other","Grammarly",1,"NA","NA","NA"
+"68","iad-03.braze.com",11,TRUE,TRUE,"1","1",41,"AppInitiated","Braze Inc.","YNAB, Bird, Lime, Brainwave, Hinge",5,"NA","NA","NA"
+"69","ib.adnxs-simple.com",11,TRUE,TRUE,"2","1",162,"AppInitiated","Microsoft","Ricardo, Tutti, 20 Minuten",3,"NA","NA","NA"
+"70","imasdk.googleapis.com",11,TRUE,TRUE,"2","1",28,"AppInitiated","Google","Twitter, NFL, BBC, 20 Minuten, Search.ch",5,"NA","NA","advertising"
+"71","mobile.events.data.microsoft.com",11,TRUE,FALSE,"2","1",107,"AppInitiated","Microsoft","Microsoft Authenticator",1,"NA","NA","NA"
+"72","ms4.applovin.com",11,TRUE,TRUE,"1","1",37,"AppInitiated","AppLovin Corp.","Coffee Golf, Solitaire, Traffic Escape",3,"NA","NA","NA"
+"73","pdst.fm",11,TRUE,TRUE,"2","1",147,"AppInitiated","Other","Spotify",1,"NA","Analytics","NA"
+"74","prod-mediate-events.applovin.com",11,TRUE,FALSE,"2","1",37,"AppInitiated","AppLovin Corp.","Coffee Golf, Solitaire, Traffic Escape",3,"NA","NA","NA"
+"75","scontent-zrh1-1.cdninstagram.com",11,TRUE,FALSE,"2","1",40,"AppInitiated, NonAppInitiated","Meta","Signal, Threads, WhatsApp, Instagram, 20 Minuten",5,"NA","NA","NA"
+"76","sdk.out.usbla.net",11,TRUE,TRUE,"2","1",19,"AppInitiated","Other","Trainline, Just Eat",2,"NA","NA","NA"
+"77","static.whatsapp.net",11,TRUE,FALSE,"2","1",86,"AppInitiated","Meta","WhatsApp",1,"NA","NA","NA"
+"78","w.usabilla.com",11,TRUE,TRUE,"2","1",19,"AppInitiated","Other","Trainline, Just Eat",2,"NA","NA","NA"
+"79","assets.adobedtm.com",10,TRUE,TRUE,"2","1",20,"AppInitiated","Adobe","Snapchat, NFL, DER SPIEGEL, FAZ, Audible",5,"NA","NA","NA"
+"80","combine.urbanairship.com",10,TRUE,TRUE,"1","1",82,"AppInitiated","United Airship Inc.","BBC, SRF Player, RTS, Sonect",4,"NA","NA","NA"
+"81","d3nn82uaxijpm6.cloudfront.net",10,TRUE,TRUE,"2","1",30,"AppInitiated","Other","Strava",1,"NA","NA","NA"
+"82","device-api.urbanairship.com",10,TRUE,TRUE,"1","1",29,"AppInitiated","United Airship Inc.","BBC, SRF Player, RTS, Sonect",4,"NA","NA","NA"
+"83","fundingchoicesmessages.google.com",10,TRUE,TRUE,"2","1",35,"AppInitiated","Google","Coffee Golf, Traffic Escape",2,"NA","NA","NA"
+"84","o352714.ingest.sentry.io",10,FALSE,FALSE,"1","1",114,"AppInitiated","Functional Software","Strava",1,"NA","NA","NA"
+"85","region1.google-analytics.com",10,TRUE,TRUE,"1","1",46,"AppInitiated","Google","Ricardo, Instagram, Local.ch, Komoot, Search.ch",5,"NA","NA","NA"
+"86","remote-data.urbanairship.com",10,TRUE,TRUE,"2","1",62,"AppInitiated","Other","BBC, SRF Player, RTS, Sonect",4,"NA","NA","NA"
+"87","reporting.aatkit.com",10,TRUE,TRUE,"2","1",72,"AppInitiated","Other","Ricardo, Tutti",2,"NA","NA","NA"
+"88","scontent.xx.fbcdn.net",10,TRUE,FALSE,"2","1",67,"AppInitiated","Meta","Messenger, Facebook, Instagram, 20 Minuten",4,"NA","NA","NA"
+"89","sts.applovin.com",10,TRUE,TRUE,"2","1",22,"AppInitiated","Other","Coffee Golf, Traffic Escape",2,"NA","NA","NA"
+"90","web.facebook.com",10,TRUE,FALSE,"1","1",237,"AppInitiated","Meta","Messenger, Instagram, Facebook",3,"NA","NA","NA"
+"91","api.leanplum.com",9,TRUE,TRUE,"1","1",30,"AppInitiated","CleverTap","Trainline, Dott",2,"NA","NA","NA"
+"92","api.snapkit.com",9,TRUE,FALSE,"2","1",54,"AppInitiated","Other","Jodel, eBay, TikTok",3,"NA","NA","NA"
+"93","cdn-f.adsmoloco.com",9,TRUE,TRUE,"1","1",14,"AppInitiated","Moloco Inc.","Twitter, Hitman, Traffic Escape, Coffee Golf",4,"NA","NA","NA"
+"94","dpm.demdex.net",9,TRUE,TRUE,"1","1",13,"AppInitiated","Adobe","NFL, DER SPIEGEL, FAZ, Audible",4,"NA","NA","NA"
+"95","engine.adzerk.net",9,TRUE,TRUE,"2","1",17,"AppInitiated","Other","Strava",1,"NA","NA","NA"
+"96","incoming.telemetry.mozilla.org",9,TRUE,TRUE,"2","1",37,"AppInitiated","Mozilla Firefox","Firefox, Firefox Klar",2,"Tracker","NA","NA"
+"97","pbs.twimg.com",9,TRUE,FALSE,"2","1",69,"AppInitiated","Other","Signal, Twitter, 20 Minuten, DER SPIEGEL, Brave",5,"NA","NA","NA"
+"98","pixel.adsafeprotected.com",9,TRUE,TRUE,"2","1",18,"AppInitiated","Other","NFL, DER SPIEGEL, Tutti, Search.ch",4,"NA","NA","advertising"
+"99","pps.whatsapp.net",9,TRUE,FALSE,"2","1",31,"AppInitiated","Meta","WhatsApp",1,"NA","NA","NA"
+"100","res1.applovin.com",9,TRUE,TRUE,"2","1",12,"AppInitiated","Other","Coffee Golf, Solitaire, Traffic Escape",3,"NA","NA","NA"
+"101","sc.omtrdc.net",9,TRUE,TRUE,"1","1",19,"AppInitiated","Adobe","NFL, DER SPIEGEL, FAZ, Audible",4,"NA","NA","NA"
+"102","static.xx.fbcdn.net",9,TRUE,FALSE,"2, 1","1",9,"AppInitiated, NonAppInitiated","Meta","Messenger, Strava, Instagram, 20 Minuten, Apple Mail",5,"NA","NA","NA"
+"103","storage.googleapis.com",9,TRUE,TRUE,"2","1",12,"AppInitiated","Google","Uber Eats, Revolut, Dott, Spotify",4,"NA","NA","NA"
+"104","t.teads.tv",9,TRUE,TRUE,"2","1",77,"AppInitiated","Other","Ricardo, 20 Minuten, Blick",3,"NA","NA","NA"
+"105","tr.iadsdk.apple.com",9,TRUE,TRUE,"2","1",68,"AppInitiated","Apple","App Store",1,"NA","NA","NA"
+"106","a.teads.tv",8,TRUE,TRUE,"2","1",28,"AppInitiated","Other","DER SPIEGEL, 20 Minuten, Blick, Search.ch",4,"NA","NA","NA"
+"107","amplify.outbrain.com",8,TRUE,TRUE,"2","1",41,"AppInitiated","Other","Ricardo, DER SPIEGEL",2,"NA","NA","NA"
+"108","api-sdk.datadome.co",8,TRUE,TRUE,"1","1",17,"AppInitiated","DataDome","Trainline",1,"NA","NA","NA"
+"109","bat.bing.com",8,TRUE,TRUE,"1","1",49,"AppInitiated","Microsoft","Ricardo, DER SPIEGEL",2,"Tracker","Advertising","NA"
+"110","browser-intake-datadoghq.eu",8,TRUE,TRUE,"2","1",17,"AppInitiated","Other","Galaxus, Digitec",2,"Tracker","NA","NA"
+"111","control.kochava.com",8,TRUE,TRUE,"1","1",22,"AppInitiated","Kochava","Amazon Kindle, NFL",2,"NA","NA","NA"
+"112","edge-mqtt.facebook.com",8,TRUE,FALSE,"2","1",91,"AppInitiated","Meta","Messenger, Instagram, Facebook",3,"NA","NA","NA"
+"113","geolocation.onetrust.com",8,TRUE,TRUE,"2","1",9,"AppInitiated","Other","Instagram, NFL, Ricardo, Brave, Local.ch, Spotify",6,"NA","NA","NA"
+"114","i.instagram.com",8,TRUE,FALSE,"2","1",64,"AppInitiated","Meta","Instagram, Threads",2,"NA","NA","NA"
+"115","linkedin.com",8,TRUE,TRUE,"2, 1","1",46,"AppInitiated, NonAppInitiated","Microsoft","LinkedIn, Apple Mail",2,"NA","Social","social"
+"116","lookaside.facebook.com",8,TRUE,FALSE,"2","1",31,"AppInitiated","Meta","Messenger, Facebook",2,"NA","NA","NA"
+"117","sc-static.net",8,TRUE,TRUE,"2","1",38,"AppInitiated","Other","Snapchat, Ricardo, Uber",3,"Advertising","Advertising","NA"
+"118","srf.ch",8,TRUE,TRUE,"2","1",16,"AppInitiated","Other","Firefox Klar, Firefox, SRF Player, Play SRF",4,"NA","NA","NA"
+"119","static.cloudflareinsights.com",8,TRUE,TRUE,"2","1",18,"AppInitiated","Other","Ricardo, Instagram",2,"Tracker","NA","NA"
+"120","adservice.google.com",7,TRUE,TRUE,"2","1",28,"AppInitiated","Google","Ricardo, Jodel, Instagram",3,"Advertising","Advertising, FingerprintingGeneral","NA"
+"121","api.onesignal.com",7,TRUE,FALSE,"1","1",114,"AppInitiated","OneSignal","NFL, Watson, Blick",3,"NA","NA","NA"
+"122","cdn.jsdelivr.net",7,TRUE,TRUE,"2","1",9,"AppInitiated","Other","BBC, 20 Minuten, DER SPIEGEL, Search.ch",4,"NA","Content","NA"
+"123","collect.commander1.com",7,TRUE,FALSE,"2","1",121,"AppInitiated","Other","SRF Player, RTS",2,"NA","NA","NA"
+"124","connect.facebook.net",7,TRUE,TRUE,"2, 1","1",18,"AppInitiated","Meta","Instagram, Salt, Brave, Firefox, Search.ch",5,"NA","NA","NA"
+"125","ct.pinterest.com",7,TRUE,TRUE,"2","1",42,"AppInitiated","Other","Ricardo, Instagram",2,"Tracker","NA","NA"
+"126","dt.adsafeprotected.com",7,TRUE,TRUE,"2","1",13,"AppInitiated","Other","NFL, DER SPIEGEL, Tutti, 20 Minuten",4,"NA","NA","NA"
+"127","fls-na.amazon.com",7,TRUE,TRUE,"2","1",9,"AppInitiated","Amazon","Amazon, Amazon Kindle, Search.ch",3,"NA","NA","NA"
+"128","img.applovin.com",7,TRUE,TRUE,"2","1",9,"AppInitiated","Other","Solitaire, Traffic Escape, Coffee Golf",3,"NA","NA","NA"
+"129","mmg.whatsapp.net",7,TRUE,FALSE,"2","1",14,"AppInitiated","Meta","WhatsApp",1,"NA","NA","NA"
+"130","mz.unity3d.com",7,FALSE,FALSE,"1","1",20,"AppInitiated","Unity Inc.","Coffee Golf, Hitman, Solitaire",3,"NA","NA","NA"
+"131","open.spotify.com",7,TRUE,FALSE,"2","1",19,"AppInitiated, NonAppInitiated","Spotify","Signal, WhatsApp, Spotify",3,"NA","NA","NA"
+"132","play.google.com",7,TRUE,FALSE,"2","1",9,"AppInitiated","Google","Google App, Google Maps, Digitec, Signal",4,"NA","NA","NA"
+"133","preview.redd.it",7,TRUE,FALSE,"2","1",105,"AppInitiated","Other","Reddit, Brave, Perplexity",3,"NA","NA","NA"
+"134","region1.analytics.google.com",7,TRUE,FALSE,"2","1",16,"AppInitiated","Google","Search.ch, Salt, Instagram",3,"NA","NA","NA"
+"135","s0.2mdn.net",7,TRUE,TRUE,"2","1",28,"AppInitiated","Other","20 Minuten, DER SPIEGEL, Blick, Search.ch, Tutti, LEO",6,"NA","NA","NA"
+"136","static.adsafeprotected.com",7,TRUE,TRUE,"2","1",8,"AppInitiated","Other","NFL, DER SPIEGEL, Tutti, 20 Minuten",4,"NA","NA","NA"
+"137","tr.snapchat.com",7,TRUE,TRUE,"1","1",46,"AppInitiated","Snap Inc.","Snapchat, Ricardo",2,"Tracker","NA","NA"
+"138","tr6.snapchat.com",7,TRUE,TRUE,"1","1",48,"AppInitiated","Snap Inc.","Snapchat, Ricardo",2,"NA","NA","NA"
+"139","unagi.amazon.com",7,TRUE,FALSE,"2","1",9,"AppInitiated","Amazon","Amazon, Amazon Kindle, Search.ch",3,"NA","NA","NA"
+"140","ads.stickyadstv.com",6,TRUE,TRUE,"2","1",6,"AppInitiated","Other","Ricardo, Tutti, DER SPIEGEL, Blick",4,"NA","NA","NA"
+"141","amazon.com",6,TRUE,TRUE,"2","1",8,"AppInitiated","Amazon","Amazon, Amazon Kindle",2,"NA","Content","NA"
+"142","ams.creativecdn.com",6,TRUE,FALSE,"2","1",40,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"143","api16-access-sg.pangle.io",6,TRUE,TRUE,"2","1",60,"AppInitiated","Other","Jodel, Traffic Escape",2,"NA","NA","NA"
+"144","bbc.com",6,TRUE,FALSE,"2","1",8,"AppInitiated","Other","Firefox Klar, BBC",2,"NA","NA","NA"
+"145","browser-intake-datadoghq.com",6,TRUE,TRUE,"1","1",15,"AppInitiated","Datadog Inc.","ChatGPT, Lime",2,"Tracker","Analytics","NA"
+"146","c.amazon-adsystem.com",6,TRUE,TRUE,"2","1",14,"AppInitiated","Amazon","Amazon, DER SPIEGEL, Solitaire, Traffic Escape, Speedtest",5,"NA","NA","NA"
+"147","cdn-settings.appsflyersdk.com",6,TRUE,TRUE,"2","1",23,"AppInitiated","AppsFlyer","Ricardo",1,"NA","NA","NA"
+"148","cdn.confiant-integrations.net",6,TRUE,TRUE,"2","1",12,"AppInitiated","Other","Firefox, Blick, Search.ch",3,"NA","NA","NA"
+"149","cdn.scarabresearch.com",6,TRUE,TRUE,"2","1",32,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"150","cdnjs.cloudflare.com",6,TRUE,TRUE,"1, 2","1",8,"AppInitiated","Cloudflare, Other","Brave, Firefox, Instagram, Blick, Local.ch, Search.ch",6,"NA","NA","NA"
+"151","cm.teads.tv",6,TRUE,FALSE,"2","1",45,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"152","cmp.lemonde.fr",6,TRUE,TRUE,"2","1",25,"AppInitiated","Other","Le Monde",1,"NA","NA","NA"
+"153","config.inmobi.com",6,TRUE,TRUE,"1","1",19,"AppInitiated","InMobi Pte","Jodel, Traffic Escape",2,"NA","NA","NA"
+"154","data.adobedc.net",6,TRUE,FALSE,"1","1",16,"AppInitiated","Adobe","NFL, DER SPIEGEL, FAZ",3,"NA","NA","NA"
+"155","eservice.emarsys.net",6,FALSE,FALSE,"1","1",138,"AppInitiated","SAP SE","Ricardo",1,"NA","NA","NA"
+"156","fast.appcues.com",6,TRUE,FALSE,"2","1",37,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"157","gum.criteo.com",6,TRUE,TRUE,"1","1",15,"AppInitiated","Criteo SA","DER SPIEGEL, Salt, Search.ch",3,"NA","NA","NA"
+"158","id5-sync.com",6,TRUE,TRUE,"2, 1","1",17,"AppInitiated","Other, ID5 Technology","DER SPIEGEL, Firefox, Search.ch",3,"Advertising","Advertising","NA"
+"159","ih.adscale.de",6,TRUE,TRUE,"2","1",10,"AppInitiated","Other","Ricardo, Instagram, Search.ch",3,"NA","NA","NA"
+"160","images-na.ssl-images-amazon.com",6,TRUE,TRUE,"2","1",6,"AppInitiated","Amazon","Amazon, Amazon Kindle, Search.ch",3,"NA","Analytics","NA"
+"161","inbox.google.com",6,TRUE,TRUE,"2","1",27,"AppInitiated","Google","Gmail",1,"NA","NA","social"
+"162","m.stripe.com",6,TRUE,TRUE,"2","1",6,"AppInitiated","Other","Ricardo, Instagram, RoamResearch, Firefox",4,"NA","NA","NA"
+"163","p.teads.tv",6,TRUE,TRUE,"2","1",37,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"164","pangolin16.isnssdk.com",6,TRUE,TRUE,"2","1",15,"AppInitiated","Other","Jodel, Traffic Escape",2,"NA","NA","NA"
+"165","ping.chartbeat.net",6,TRUE,TRUE,"2","1",63,"AppInitiated","Other","Play SRF, RTS",2,"NA","NA","NA"
+"166","platform.twitter.com",6,TRUE,TRUE,"2","1",14,"AppInitiated","Twitter Inc.","Le Monde, 20 Minuten, DER SPIEGEL",3,"NA","NA","NA"
+"167","recaptcha.net",6,TRUE,TRUE,"1, 2","1",27,"AppInitiated","Google, Other","Reddit, Firefox, PayPal",3,"NA","Content, Anti-fraud","NA"
+"168","recommender.scarabresearch.com",6,TRUE,TRUE,"2","1",40,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"169","ricardo.ch",6,TRUE,TRUE,"2","1",45,"AppInitiated","SMG AG","Ricardo",1,"NA","NA","NA"
+"170","s.pinimg.com",6,TRUE,TRUE,"2","1",27,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"171","search.ch",6,TRUE,TRUE,"2","1",15,"AppInitiated","Other","Search.ch",1,"NA","NA","NA"
+"172","sessions.bugsnag.com",6,TRUE,TRUE,"1","1",6,"AppInitiated","Bugsnag Inc.","YNAB, Tinder, BlueWallet",3,"NA","NA","NA"
+"173","skadnetworks.fyber.com",6,TRUE,FALSE,"2","1",7,"AppInitiated","Other","Coffee Golf, Hitman, Solitaire, Traffic Escape",4,"NA","NA","NA"
+"174","ssdk-sg.pangle.io",6,FALSE,FALSE,"1","1",32,"AppInitiated","ByteDance Ltd.","Jodel, Traffic Escape",2,"NA","NA","NA"
+"175","ssl.google-analytics.com",6,TRUE,TRUE,"1","1",44,"AppInitiated","Google","BBCWorldService, Watson, Blick, Speedtest",4,"NA","NA","NA"
+"176","static.scarabresearch.com",6,TRUE,FALSE,"2","1",19,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"177","syndication.twitter.com",6,TRUE,FALSE,"2","1",14,"AppInitiated","Twitter Inc.","Le Monde, 20 Minuten, DER SPIEGEL",3,"NA","NA","NA"
+"178","t.co",6,TRUE,TRUE,"1","1",17,"AppInitiated","Twitter Inc.","Twitter, 20 Minuten, Firefox",3,"NA","Advertising","NA"
+"179","tags.creativecdn.com",6,TRUE,FALSE,"2","1",29,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"180","unagi-na.amazon.com",6,TRUE,FALSE,"2","1",24,"AppInitiated","Amazon","Amazon, Amazon Kindle",2,"Tracker","NA","NA"
+"181","watson.ch",6,TRUE,FALSE,"2","1",8,"AppInitiated, NonAppInitiated","Other","Watson, Signal, WhatsApp, Apple Passwords",4,"NA","NA","NA"
+"182","ws.batch.com",6,TRUE,TRUE,"2","1",133,"AppInitiated","Other","Le Monde",1,"NA","NA","NA"
+"183","abs.twimg.com",5,TRUE,FALSE,"2","1",6,"AppInitiated","Other","Twitter, 20 Minuten",2,"NA","NA","NA"
+"184","ad.yieldlab.net",5,TRUE,TRUE,"2","1",11,"AppInitiated","Other","DER SPIEGEL, Ricardo, Blick",3,"NA","NA","NA"
+"185","adx.adform.net",5,TRUE,TRUE,"2","1",15,"AppInitiated","Other","DER SPIEGEL, Search.ch",2,"NA","NA","NA"
+"186","analytics.tiktok.com",5,TRUE,TRUE,"1, 2","1",11,"AppInitiated","ByteDance Ltd.","Snapchat, DER SPIEGEL, Ricardo, Firefox",4,"Tracker","NA","NA"
+"187","api.adnz.co",5,TRUE,TRUE,"2","1",13,"AppInitiated","Other","DER SPIEGEL, Blick, Search.ch",3,"NA","NA","NA"
+"188","api.twitter.com",5,TRUE,FALSE,"2","1",69,"AppInitiated","Twitter Inc.","Twitter, 20 Minuten",2,"NA","NA","NA"
+"189","books-analytics-events.apple.com",5,TRUE,FALSE,"2","1",19,"AppInitiated","Apple","Apple Books",1,"Tracker","NA","NA"
+"190","cdn-lb.vungle.com",5,TRUE,TRUE,"2","1",5,"AppInitiated","Other","Hitman, Solitaire, Traffic Escape, Coffee Golf, Jodel",5,"NA","NA","NA"
+"191","cm.creativecdn.com",5,TRUE,FALSE,"2","1",6,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"192","crashlogs.whatsapp.net",5,TRUE,TRUE,"2","1",7,"AppInitiated","Meta","WhatsApp",1,"NA","NA","NA"
+"193","customerhub.vermoegenszentrum.ch",5,FALSE,FALSE,"1, 2","1",7,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"194","grid-bidder.criteo.com",5,TRUE,TRUE,"2","1",15,"AppInitiated","Other","DER SPIEGEL, Search.ch",2,"NA","NA","NA"
+"195","launches.appsflyer.com",5,TRUE,TRUE,"1","1",52,"AppInitiated","AppsFlyer","Ricardo",1,"NA","NA","NA"
+"196","lb.eu-1-id5-sync.com",5,TRUE,TRUE,"2","1",14,"AppInitiated","Other","DER SPIEGEL, Search.ch",2,"NA","NA","NA"
+"197","links.reply.ricardo.ch",5,FALSE,FALSE,"1, 2","1",9,"NonAppInitiated, AppInitiated","SMG AG","Apple Mail, Outlook",2,"NA","NA","NA"
+"198","m.facebook.com",5,TRUE,TRUE,"2","1",11,"AppInitiated","Meta","Facebook, 20 Minuten",2,"NA","NA","NA"
+"199","me-client.eservice.emarsys.net",5,FALSE,FALSE,"1","1",36,"AppInitiated","SAP SE","Ricardo",1,"NA","NA","NA"
+"200","media.licdn.com",5,TRUE,FALSE,"2","1",14,"AppInitiated, NonAppInitiated","Other","LinkedIn, Apple Mail",2,"NA","NA","NA"
+"201","mobile-events.eservice.emarsys.net",5,FALSE,FALSE,"1","1",43,"AppInitiated","SAP SE","Ricardo",1,"NA","NA","NA"
+"202","mobile.adsafeprotected.com",5,TRUE,TRUE,"2","1",7,"AppInitiated","Other","NFL, Tutti, 20 Minuten",3,"NA","NA","NA"
+"203","perplexity.ai",5,TRUE,TRUE,"2","1",31,"AppInitiated","Other","Perplexity",1,"NA","NA","NA"
+"204","reddit.com",5,TRUE,TRUE,"2, 1","1",51,"AppInitiated","Reddit","Reddit, Firefox",2,"NA","Social","social"
+"205","rupload.facebook.com",5,TRUE,FALSE,"2","1",7,"AppInitiated","Meta","Messenger, Facebook",2,"NA","NA","NA"
+"206","s.deepl.com",5,TRUE,FALSE,"2","1",45,"AppInitiated","Other","DeepL",1,"Tracker","NA","NA"
+"207","s.youtube.com",5,TRUE,FALSE,"2","1",819,"AppInitiated","Google","Youtube",1,"NA","NA","NA"
+"208","sentry.io",5,TRUE,TRUE,"2","1",8,"AppInitiated","Other","Ricardo, Firefox, Flatfox",3,"NA","Analytics","NA"
+"209","statsigapi.net",5,TRUE,TRUE,"2","1",20,"AppInitiated","Other","Bluesky, Notion",2,"NA","NA","NA"
+"210","telemetry.sdk.inmobi.com",5,TRUE,TRUE,"2","1",16,"AppInitiated","Other","Jodel",1,"NA","NA","NA"
+"211","tracking.komoot.de",5,TRUE,FALSE,"2","1",23,"AppInitiated","Other","Komoot",1,"Tracker","NA","NA"
+"212","uct.service.usercentrics.eu",5,TRUE,TRUE,"2","1",5,"AppInitiated","Other","RTS, Smood, Nextbike",3,"NA","NA","NA"
+"213","whatsapp.com",5,TRUE,FALSE,"2","1",440,"AppInitiated","Meta","WhatsApp",1,"NA","NA","NA"
+"214","wikihow.com",5,TRUE,TRUE,"2","1",9,"AppInitiated, NonAppInitiated","Other","wikiHow, WhatsApp",2,"NA","NA","NA"
+"215","20min.ch",4,TRUE,TRUE,"2","1",48,"AppInitiated","TX Group AG","20 Minuten",1,"NA","NA","NA"
+"216","aax-eu.amazon-adsystem.com",4,TRUE,TRUE,"1","1",13,"AppInitiated","Amazon","DER SPIEGEL, Solitaire, Speedtest",3,"NA","NA","NA"
+"217","aax.amazon-adsystem.com",4,TRUE,TRUE,"1","1",13,"AppInitiated","Amazon","DER SPIEGEL, Solitaire, Speedtest",3,"NA","NA","NA"
+"218","acs.m.taobao.com",4,TRUE,TRUE,"2","1",7,"AppInitiated","Other","AliExpress, Alibaba",2,"NA","NA","NA"
+"219","ads.yieldmo.com",4,TRUE,TRUE,"1","1",4,"AppInitiated","YieldMo Inc.","Ricardo, Blick",2,"NA","NA","NA"
+"220","adsensecustomsearchads.com",4,TRUE,TRUE,"2","1",12,"AppInitiated","Other","Tutti",1,"NA","NA","NA"
+"221","alb.reddit.com",4,TRUE,TRUE,"1","1",24,"AppInitiated","Reddit","Reddit",1,"Tracker","NA","NA"
+"222","analytics.twitter.com",4,TRUE,TRUE,"1","1",5,"AppInitiated","Twitter Inc.","Twitter",1,"Tracker","NA","NA"
+"223","api-0-4-2.twitter.com",4,TRUE,FALSE,"2","1",6,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"224","api-0-4-3.twitter.com",4,TRUE,FALSE,"2","1",12,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"225","api-1-0-0.twitter.com",4,TRUE,FALSE,"2","1",6,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"226","api-24-0-0.twitter.com",4,TRUE,FALSE,"2","1",7,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"227","api-26-0-0.twitter.com",4,TRUE,FALSE,"2","1",9,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"228","api-36-0-0.twitter.com",4,TRUE,FALSE,"2","1",6,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"229","api-43-0-0.twitter.com",4,TRUE,FALSE,"2","1",9,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"230","api-stream.twitter.com",4,TRUE,FALSE,"2","1",23,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"231","api.mixpanel.com",4,TRUE,TRUE,"1","1",5,"AppInitiated","Mixpanel Inc.","TrainerDay, Avira PWM, Wise",3,"NA","NA","NA"
+"232","app-analytics-v2.snapchat.com",4,TRUE,TRUE,"2","1",180,"AppInitiated","Snap Inc.","Snapchat",1,"Tracker","NA","NA"
+"233","app.adjust.com",4,TRUE,TRUE,"1","1",5,"AppInitiated","AppLovin Corp.","Voi, Watson, PayPal",3,"NA","NA","NA"
+"234","app.snapchat.com",4,TRUE,FALSE,"2","1",351,"AppInitiated","Snap Inc.","Snapchat",1,"NA","NA","NA"
+"235","aws-proxy-gcp.api.snapchat.com",4,TRUE,FALSE,"2","1",26,"AppInitiated","Snap Inc.","Snapchat",1,"NA","NA","NA"
+"236","aws.api.snapchat.com",4,TRUE,FALSE,"2","1",421,"AppInitiated","Snap Inc.","Snapchat",1,"NA","NA","NA"
+"237","b-api.facebook.com",4,TRUE,FALSE,"2","1",8,"AppInitiated","Meta","Facebook",1,"NA","NA","NA"
+"238","cdn.doubleverify.com",4,TRUE,TRUE,"2","1",7,"AppInitiated","DoubleVerify Holdings Inc.","20 Minuten, Blick, Search.ch, Tutti",4,"NA","NA","NA"
+"239","cm.everesttech.net",4,TRUE,TRUE,"1","1",5,"AppInitiated","Adobe","DER SPIEGEL, NFL",2,"NA","NA","NA"
+"240","dc-api.twitter.com",4,TRUE,FALSE,"2","1",7,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"241","dsum-sec.casalemedia.com",4,TRUE,TRUE,"1","1",4,"AppInitiated","Index Exchange","Ricardo, Instagram, Blick",3,"NA","NA","NA"
+"242","e.reddit.com",4,TRUE,FALSE,"2","1",137,"AppInitiated","Reddit","Reddit",1,"Tracker","NA","NA"
+"243","eu-mobile.events.data.microsoft.com",4,TRUE,TRUE,"2","1",9,"AppInitiated","Microsoft","Outlook",1,"NA","NA","NA"
+"244","events.bsky.app",4,TRUE,TRUE,"2","1",36,"AppInitiated","Bluesky Social PBC","Bluesky",1,"NA","NA","NA"
+"245","events.ocdn.eu",4,TRUE,TRUE,"2","1",14,"AppInitiated","Other","Blick, Search.ch",2,"NA","NA","NA"
+"246","excess.duolingo.com",4,TRUE,TRUE,"2","1",6,"AppInitiated","Other","Duolingo",1,"NA","NA","NA"
+"247","external-preview.redd.it",4,TRUE,FALSE,"2","1",37,"AppInitiated","Other","Reddit",1,"NA","NA","NA"
+"248","f-log-mobile-ios.grammarly.io",4,TRUE,TRUE,"2","1",6,"AppInitiated","Other","Grammarly",1,"Tracker","NA","NA"
+"249","fonts.googleapis.com",4,FALSE,FALSE,"2, 1","1",84,"AppInitiated, NonAppInitiated","Google","Snapchat, Ricardo, Instagram, Twitter, Apple Mail, NFL, WhiteRisk, Brave, Firefox, FAZ, Solitaire, DER SPIEGEL, Traffic Escape, 20 Minuten, Blick, Search.ch, Revolut, Speedtest, Jodel",19,"NA","NA","NA"
+"250","fra1-ib.adnxs-simple.com",4,TRUE,TRUE,"2","1",11,"AppInitiated","Microsoft","20 Minuten, Tutti",2,"NA","NA","NA"
+"251","gcdn.2mdn.net",4,TRUE,TRUE,"2","1",8,"AppInitiated","Other","20 Minuten, Blick, Search.ch",3,"NA","NA","NA"
+"252","gcp.api.snapchat.com",4,TRUE,FALSE,"2","1",347,"AppInitiated","Snap Inc.","Snapchat",1,"NA","NA","NA"
+"253","gql-fed.reddit.com",4,TRUE,FALSE,"2","1",137,"AppInitiated","Reddit","Reddit",1,"NA","NA","NA"
+"254","gql-realtime.reddit.com",4,TRUE,FALSE,"2","1",20,"AppInitiated","Reddit","Reddit",1,"NA","NA","NA"
+"255","i.redd.it",4,TRUE,FALSE,"2","1",26,"AppInitiated","Other","Reddit, Brave",2,"NA","NA","NA"
+"256","img.ricardostatic.ch",4,FALSE,FALSE,"2, 1","1",168,"AppInitiated, NonAppInitiated","SMG AG","Ricardo, Tutti, Apple Mail, Outlook",4,"NA","NA","NA"
+"257","logs13.xiti.com",4,TRUE,FALSE,"2","1",14,"AppInitiated","Other","Le Monde",1,"NA","NA","NA"
+"258","mail.google.com",4,TRUE,TRUE,"2","1",31,"AppInitiated","Google","Gmail",1,"NA","NA","social"
+"259","mcdp-chidc2.outbrain.com",4,TRUE,TRUE,"2","1",7,"AppInitiated","Other","Le Monde, DER SPIEGEL",2,"NA","NA","NA"
+"260","mv.outbrain.com",4,TRUE,TRUE,"2","1",6,"AppInitiated","Other","Le Monde, DER SPIEGEL",2,"NA","NA","NA"
+"261","order.info.sbb.ch",4,FALSE,FALSE,"1","1",5,"NonAppInitiated","SBB CFF FFS","Apple Mail",1,"NA","NA","NA"
+"262","pixel.rubiconproject.com",4,TRUE,TRUE,"1","1",4,"AppInitiated","Magnite Inc.","Ricardo, DER SPIEGEL",2,"NA","NA","NA"
+"263","probe.twitter.com",4,TRUE,FALSE,"2","1",27,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"264","redditstatic.com",4,TRUE,TRUE,"2, 1","1",18,"AppInitiated","Reddit","Reddit, Firefox",2,"NA","Advertising","NA"
+"265","scontent.cdninstagram.com",4,TRUE,FALSE,"2","1",4,"AppInitiated, NonAppInitiated","Meta","Signal, WhatsApp",2,"NA","NA","NA"
+"266","scontent.whatsapp.net",4,TRUE,FALSE,"2","1",394,"AppInitiated","Meta","WhatsApp",1,"NA","NA","NA"
+"267","secure.adnxs.com",4,TRUE,TRUE,"2","1",10,"AppInitiated","Microsoft","DER SPIEGEL, Ricardo, Instagram",3,"NA","NA","NA"
+"268","securepubads.g.doubleclick.net",4,TRUE,TRUE,"1","1",4,"AppInitiated","Google","NFL, Spotify, Search.ch",3,"NA","NA","NA"
+"269","stocks-analytics-events.apple.com",4,TRUE,TRUE,"2","1",20,"AppInitiated","Apple","Apple Stocks",1,"Tracker","NA","NA"
+"270","styles.redditmedia.com",4,TRUE,FALSE,"2","1",58,"AppInitiated","Reddit","Reddit",1,"NA","NA","NA"
+"271","tps.doubleverify.com",4,TRUE,TRUE,"2","1",9,"AppInitiated","DoubleVerify Holdings Inc.","20 Minuten, Blick, Search.ch, Tutti",4,"NA","NA","NA"
+"272","track.adform.net",4,TRUE,TRUE,"2","1",6,"AppInitiated","Other","Salt, Ricardo, Instagram, Search.ch",4,"NA","NA","advertising"
+"273","us-central1-gcp.api.snapchat.com",4,TRUE,FALSE,"2","1",95,"AppInitiated","Snap Inc.","Snapchat",1,"NA","NA","NA"
+"274","us-east1-aws.api.snapchat.com",4,TRUE,FALSE,"2","1",377,"AppInitiated","Snap Inc.","Snapchat",1,"NA","NA","NA"
+"275","us-u.openx.net",4,TRUE,TRUE,"1","1",4,"AppInitiated","OpenX Inc.","Ricardo, Blick",2,"NA","NA","NA"
+"276","usc1-gcp-v61.api.snapchat.com",4,TRUE,FALSE,"2","1",89,"AppInitiated","Snap Inc.","Snapchat",1,"NA","NA","NA"
+"277","usc1-gcp-v62.api.snapchat.com",4,TRUE,FALSE,"2","1",171,"AppInitiated","Snap Inc.","Snapchat",1,"NA","NA","NA"
+"278","v.whatsapp.net",4,TRUE,FALSE,"2","1",4,"AppInitiated","Meta","Messenger, Facebook",2,"NA","NA","NA"
+"279","w3-reporting-nel.reddit.com",4,TRUE,FALSE,"2","1",25,"AppInitiated","Reddit","Reddit",1,"NA","NA","NA"
+"280","w3-reporting.reddit.com",4,TRUE,TRUE,"2","1",25,"AppInitiated","Reddit","Reddit",1,"Tracker","NA","NA"
+"281","webchannel-content.eservice.emarsys.net",4,FALSE,FALSE,"1","1",12,"AppInitiated","SAP SE","Ricardo",1,"NA","NA","NA"
+"282","widgets.outbrain.com",4,TRUE,TRUE,"2","1",6,"AppInitiated","Other","Le Monde, DER SPIEGEL",2,"NA","NA","NA"
+"283","a1.api.bbc.co.uk",3,TRUE,TRUE,"2","1",35,"AppInitiated","Other","BBC",1,"Tracker","NA","NA"
+"284","adashx4ae.ut.taobao.com",3,TRUE,TRUE,"2","1",22,"AppInitiated","Other","AliExpress",1,"Advertising","NA","NA"
+"285","ads.linkedin.com",3,TRUE,TRUE,"1","1",5,"AppInitiated","Microsoft","LinkedIn",1,"Advertising","NA","NA"
+"286","ads.mozilla.org",3,TRUE,TRUE,"2","1",6,"AppInitiated","Mozilla Firefox","Firefox",1,"NA","NA","NA"
+"287","aeis.alicdn.com",3,TRUE,TRUE,"2","1",5,"AppInitiated","Alibaba Group","AliExpress, Alibaba",2,"NA","FingerprintingInvasive","NA"
+"288","aliexpress.com",3,TRUE,TRUE,"2","1",4,"AppInitiated","Alibaba Group","AliExpress, Brave",2,"NA","NA","NA"
+"289","ap.lijit.com",3,TRUE,TRUE,"2","1",8,"AppInitiated","Other","DER SPIEGEL, Blick",2,"NA","NA","NA"
+"290","api-0-4-0.twitter.com",3,TRUE,FALSE,"2","1",7,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"291","api-0-4-6.twitter.com",3,TRUE,FALSE,"2","1",4,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"292","api-0-4-8.twitter.com",3,TRUE,FALSE,"2","1",4,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"293","api-2-0-0.twitter.com",3,TRUE,FALSE,"2","1",6,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"294","api-20-0-0.twitter.com",3,TRUE,FALSE,"2","1",5,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"295","api-21-0-0.twitter.com",3,TRUE,FALSE,"2","1",4,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"296","api-23-0-0.twitter.com",3,TRUE,FALSE,"2","1",3,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"297","api-28-0-0.twitter.com",3,TRUE,FALSE,"2","1",7,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"298","api-30-0-0.twitter.com",3,TRUE,FALSE,"2","1",9,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"299","api-32-0-0.twitter.com",3,TRUE,FALSE,"2","1",3,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"300","api-33-0-0.twitter.com",3,TRUE,FALSE,"2","1",5,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"301","api-34-0-0.twitter.com",3,TRUE,FALSE,"2","1",4,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"302","api-37-0-0.twitter.com",3,TRUE,FALSE,"2","1",7,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"303","api-38-0-0.twitter.com",3,TRUE,FALSE,"2","1",8,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"304","api-42-0-0.twitter.com",3,TRUE,FALSE,"2","1",4,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"305","api-m.paypal.com",3,FALSE,FALSE,"1","1",4,"AppInitiated","PayPal","Voi, PayPal",2,"NA","NA","NA"
+"306","api.segment.io",3,TRUE,TRUE,"1","1",4,"AppInitiated","Segment Inc.","Zwift, Exodus",2,"NA","NA","NA"
+"307","assets.alicdn.com",3,TRUE,TRUE,"2","1",11,"AppInitiated","Alibaba Group","AliExpress, Alibaba",2,"NA","FingerprintingInvasive","NA"
+"308","at.teads.tv",3,TRUE,FALSE,"2","1",7,"AppInitiated","Other","Search.ch",1,"NA","NA","NA"
+"309","beacon.shazam.com",3,TRUE,TRUE,"2","1",5,"AppInitiated","Other","Shazam",1,"NA","NA","NA"
+"310","beacons.ai",3,TRUE,TRUE,"2","1",3,"AppInitiated","Other","Instagram",1,"NA","NA","NA"
+"311","cdn-a.yieldlove.com",3,TRUE,TRUE,"2","1",5,"AppInitiated","Other","Search.ch",1,"NA","NA","NA"
+"312","cdn.braze.eu",3,TRUE,TRUE,"2","1",3,"AppInitiated","Other","Voi, Dott",2,"NA","NA","NA"
+"313","cdn.forter.com",3,TRUE,FALSE,"1","1",8,"AppInitiated","Forter Inc.","eBay",1,"NA","NA","NA"
+"314","cdn.mcauto-images-production.sendgrid.net",3,TRUE,FALSE,"1","1",4,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"315","cdn.syndication.twimg.com",3,TRUE,FALSE,"2","1",10,"AppInitiated","Other","20 Minuten, DER SPIEGEL",2,"NA","NA","NA"
+"316","cdn.teads.tv",3,TRUE,TRUE,"2","1",21,"AppInitiated","Other","20 Minuten, Blick",2,"NA","NA","NA"
+"317","cdn4.forter.com",3,TRUE,TRUE,"1","1",8,"AppInitiated","Forter Inc.","eBay",1,"NA","FingerprintingGeneral","NA"
+"318","cdp.cloud.unity3d.com",3,TRUE,TRUE,"1","1",13,"AppInitiated","Unity Inc.","Coffee Golf",1,"Tracker","NA","NA"
+"319","clarity.ms",3,TRUE,TRUE,"2","1",9,"AppInitiated","Other","Freedom",1,"Tracker","Analytics","NA"
+"320","config.claspws.tv",3,TRUE,TRUE,"1","1",7,"AppInitiated","Vizbee Inc.","NFL",1,"Tracker","NA","NA"
+"321","config.uca.cloud.unity3d.com",3,TRUE,TRUE,"1","1",11,"AppInitiated","Unity Inc.","Coffee Golf",1,"Tracker","NA","NA"
+"322","creativecdn.com",3,TRUE,TRUE,"2","1",8,"AppInitiated","Other","Tutti, DER SPIEGEL",2,"Advertising","Advertising","advertising"
+"323","csr.onet.pl",3,TRUE,TRUE,"2","1",6,"AppInitiated","Other","Search.ch",1,"NA","NA","NA"
+"324","dms.licdn.com",3,TRUE,FALSE,"2","1",6,"AppInitiated","Other","LinkedIn",1,"NA","NA","NA"
+"325","doubleclick.net",3,TRUE,TRUE,"1","1",5,"AppInitiated","Google","Firefox, Brave",2,"Advertising","Email, Advertising, FingerprintingGeneral","advertising"
+"326","eb2.3lift.com",3,TRUE,TRUE,"1","1",3,"AppInitiated","TripleLift","Ricardo, Blick",2,"NA","NA","NA"
+"327","facebook.net",3,TRUE,TRUE,"1","1",3,"AppInitiated","Meta","Firefox, Brave",2,"NA","FingerprintingGeneral, Social","social"
+"328","faq.whatsapp.com",3,TRUE,FALSE,"2","1",43,"AppInitiated","Meta","WhatsApp",1,"NA","NA","NA"
+"329","fourier.taobao.com",3,TRUE,TRUE,"2","1",3,"AppInitiated","Other","AliExpress, Alibaba",2,"Tracker","NA","NA"
+"330","g.alicdn.com",3,TRUE,TRUE,"2","1",3,"AppInitiated","Alibaba Group","AliExpress, Alibaba",2,"NA","FingerprintingInvasive","NA"
+"331","get.geojs.io",3,TRUE,FALSE,"2","1",7,"AppInitiated","Other","Search.ch",1,"NA","NA","NA"
+"332","h-adashx4ae.ut.taobao.com",3,TRUE,TRUE,"2","1",35,"AppInitiated","Other","AliExpress",1,"NA","NA","NA"
+"333","hb.adscale.de",3,TRUE,TRUE,"2","1",7,"AppInitiated","Other","Search.ch",1,"NA","NA","NA"
+"334","hcaptcha.com",3,TRUE,TRUE,"2","1",3,"AppInitiated","Other","Ricardo, Discord",2,"NA","FingerprintingInvasive, Anti-fraud","NA"
+"335","hqporner.com",3,TRUE,FALSE,"2","1",4,"AppInitiated","Other","Firefox, Brave",2,"NA","NA","NA"
+"336","htlb.casalemedia.com",3,TRUE,TRUE,"2, 1","1",9,"AppInitiated","Other","DER SPIEGEL, Firefox",2,"NA","NA","NA"
+"337","iad-06.braze.com",3,TRUE,TRUE,"1","1",9,"AppInitiated","Braze Inc.","Freedom",1,"NA","NA","NA"
+"338","images.outbrainimg.com",3,TRUE,TRUE,"2","1",4,"AppInitiated","Other","Le Monde, DER SPIEGEL",2,"NA","NA","NA"
+"339","img.onesignal.com",3,TRUE,FALSE,"2","1",5,"AppInitiated","OneSignal","NFL",1,"NA","NA","NA"
+"340","impression.appsflyer.com",3,TRUE,TRUE,"1","1",5,"AppInitiated","AppsFlyer","Tutti, Reddit, Traffic Escape",3,"NA","NA","NA"
+"341","js.adscale.de",3,TRUE,TRUE,"2","1",5,"AppInitiated","Other","Search.ch",1,"NA","NA","NA"
+"342","jsdelivr.net",3,TRUE,TRUE,"1","1",8,"AppInitiated","Prospect One","Brave, Firefox",2,"NA","NA","NA"
+"343","l.instagram.com",3,TRUE,FALSE,"2","1",7,"AppInitiated","Meta","Instagram",1,"NA","NA","NA"
+"344","m.hqporner.com",3,TRUE,FALSE,"2","1",4,"AppInitiated","Other","Firefox, Brave",2,"NA","NA","NA"
+"345","match.adsrvr.org",3,TRUE,TRUE,"1","1",4,"AppInitiated","Trade Desk Inc.","DER SPIEGEL, Blick",2,"NA","NA","NA"
+"346","o170101.ingest.sentry.io",3,FALSE,FALSE,"1","1",5,"AppInitiated","Functional Software","Ricardo",1,"NA","NA","NA"
+"347","o2129.ingest.sentry.io",3,FALSE,FALSE,"1","1",4,"AppInitiated","Functional Software","Jodel",1,"NA","NA","NA"
+"348","o228883.ingest.sentry.io",3,FALSE,FALSE,"1","1",16,"AppInitiated","Functional Software","Working Bicycle",1,"NA","NA","NA"
+"349","pagead2.googleadservices.com",3,TRUE,TRUE,"2","1",3,"AppInitiated","Google","Twitter, 20 Minuten, Speedtest",3,"NA","NA","NA"
+"350","prod-ingestion.tracking.v2.yieldlove-ad-serving.net",3,TRUE,TRUE,"2","1",8,"AppInitiated","Other","Search.ch",1,"NA","NA","NA"
+"351","protected-by.clarium.io",3,TRUE,FALSE,"2","1",6,"AppInitiated","Other","Firefox, Search.ch",2,"NA","NA","NA"
+"352","r.teads.tv",3,TRUE,TRUE,"2","1",34,"AppInitiated","Other","20 Minuten, Blick",2,"NA","NA","NA"
+"353","radar.cedexis.com",3,TRUE,TRUE,"2","1",5,"AppInitiated","Other","LinkedIn",1,"NA","NA","advertising"
+"354","rpt.cedexis.com",3,TRUE,FALSE,"2","1",5,"AppInitiated","Other","LinkedIn",1,"NA","NA","NA"
+"355","rt.udmserve.net",3,TRUE,TRUE,"2","1",3,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"356","rtb-csync.smartadserver.com",3,TRUE,TRUE,"2","1",3,"AppInitiated","Other","Tutti, Instagram, Blick",3,"NA","NA","NA"
+"357","s2.adform.net",3,TRUE,TRUE,"2","1",3,"AppInitiated","Other","Salt, Ricardo, Instagram",3,"NA","NA","NA"
+"358","s2s.singular.net",3,TRUE,TRUE,"2","1",5,"AppInitiated","Other","LinkedIn",1,"NA","NA","NA"
+"359","s8t.teads.tv",3,TRUE,TRUE,"2","1",13,"AppInitiated","Other","20 Minuten, Blick",2,"NA","NA","NA"
+"360","sb.scorecardresearch.com",3,TRUE,TRUE,"1","1",4,"AppInitiated","comScore Inc.","Watson, Search.ch",2,"NA","NA","NA"
+"361","scontent-tpe1-1.xx.fbcdn.net",3,TRUE,FALSE,"2","1",3,"AppInitiated","Meta","Spotify",1,"NA","NA","NA"
+"362","sdk-assets.teads.tv",3,TRUE,FALSE,"2","1",53,"AppInitiated","Other","20 Minuten, Blick",2,"NA","NA","NA"
+"363","ssp-csync.smartadserver.com",3,TRUE,TRUE,"2","1",3,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"364","static.ads-twitter.com",3,TRUE,TRUE,"2","1",9,"AppInitiated","Twitter Inc.","DER SPIEGEL, Firefox",2,"NA","NA","NA"
+"365","static.cdninstagram.com",3,TRUE,FALSE,"2","1",6,"AppInitiated","Meta","Instagram, 20 Minuten",2,"NA","NA","NA"
+"366","stats.paypal.com",3,TRUE,FALSE,"1","1",4,"AppInitiated","PayPal","Voi, PayPal",2,"Tracker","NA","NA"
+"367","sync.teads.tv",3,TRUE,TRUE,"2","1",3,"AppInitiated","Other","Ricardo, Blick",2,"NA","NA","NA"
+"368","theverge.com",3,TRUE,FALSE,"2","1",3,"AppInitiated","Other","Firefox Klar",1,"NA","NA","NA"
+"369","token.rubiconproject.com",3,TRUE,TRUE,"2","1",9,"AppInitiated","Other","DER SPIEGEL, Blick",2,"NA","NA","NA"
+"370","tt.omtrdc.net",3,TRUE,TRUE,"1","1",7,"AppInitiated","Adobe","NFL",1,"NA","NA","NA"
+"371","tutti.ch",3,TRUE,TRUE,"2","1",3,"AppInitiated","SMG AG","Ricardo",1,"NA","NA","NA"
+"372","twitter.com",3,TRUE,TRUE,"2, 1","1",3,"AppInitiated","Twitter Inc.","20 Minuten, Twitter, Firefox",3,"NA","Social","social"
+"373","u31231550.ct.sendgrid.net",3,FALSE,FALSE,"1","1",3,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"374","userimg-assets.customeriomail.com",3,FALSE,FALSE,"1","1",4,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"375","usersync.gumgum.com",3,TRUE,FALSE,"2","1",8,"AppInitiated","Other","DER SPIEGEL, Blick",2,"NA","NA","NA"
+"376","v.redd.it",3,TRUE,FALSE,"2","1",19,"AppInitiated","Other","Reddit",1,"NA","NA","NA"
+"377","weather-analytics-events.apple.com",3,TRUE,TRUE,"2","1",4,"AppInitiated","Apple","Apple Weather",1,"Tracker","NA","NA"
+"378","wv.inner-active.mobi",3,TRUE,TRUE,"1","1",5,"AppInitiated","Digital Turbine","Solitaire, Coffee Golf",2,"NA","NA","NA"
+"379","x.bidswitch.net",3,TRUE,TRUE,"1","1",9,"AppInitiated","IPONWEB","DER SPIEGEL, Instagram",2,"NA","NA","NA"
+"380","x.com",3,TRUE,TRUE,"2","1",3,"AppInitiated","Other","Signal, Brave, 20 Minuten",3,"NA","Social","NA"
+"381","zendesk-eu.my.sentry.io",3,TRUE,FALSE,"2","1",3,"AppInitiated","Other","Ricardo, Firefox",2,"NA","NA","NA"
+"382","acdn.adnxs-simple.com",2,TRUE,TRUE,"2","1",4,"AppInitiated","Microsoft","Tutti, Blick",2,"NA","NA","NA"
+"383","adnz.co",2,TRUE,TRUE,"2","1",3,"AppInitiated","Other","DER SPIEGEL, Blick",2,"NA","NA","NA"
+"384","ads.creative-serving.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","advertising"
+"385","ads.pubmatic.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"386","ae.mmstat.com",2,TRUE,FALSE,"2","1",2,"AppInitiated","Other","AliExpress",1,"NA","NA","NA"
+"387","ams3-ib.adnxs.com",2,TRUE,FALSE,"2","1",3,"AppInitiated","Microsoft","DER SPIEGEL, Blick",2,"NA","NA","NA"
+"388","api-0-4-4.twitter.com",2,TRUE,FALSE,"2","1",4,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"389","api-0-4-5.twitter.com",2,TRUE,FALSE,"2","1",4,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"390","api-0-4-7.twitter.com",2,TRUE,FALSE,"2","1",4,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"391","api-0-5-0.twitter.com",2,TRUE,FALSE,"2","1",4,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"392","api-40-0-0.twitter.com",2,TRUE,FALSE,"2","1",3,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"393","api-45-0-0.twitter.com",2,TRUE,FALSE,"2","1",3,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"394","api-analytics.prod.birdapp.com",2,TRUE,FALSE,"2","1",3,"AppInitiated","Other","Bird",1,"Tracker","NA","NA"
+"395","api.facebook.com",2,TRUE,FALSE,"2","1",3,"AppInitiated","Meta","Facebook",1,"NA","NA","NA"
+"396","api.iterable.com",2,TRUE,TRUE,"1","1",2,"AppInitiated","Iterable","Zwift",1,"NA","NA","NA"
+"397","api.permutive.com",2,TRUE,TRUE,"2","1",10,"AppInitiated","Other","BBC",1,"NA","NA","NA"
+"398","api3.siftscience.com",2,TRUE,TRUE,"1","1",7,"AppInitiated","Sift Science Inc.","Claude, Relai",2,"NA","NA","NA"
+"399","apple.com",2,TRUE,TRUE,"2","1",19,"AppInitiated","Apple","Dott",1,"NA","NA","NA"
+"400","assets.pinterest.com",2,TRUE,FALSE,"2","1",2,"AppInitiated","Other","Instagram",1,"NA","NA","NA"
+"401","audid-api.taobao.com",2,TRUE,TRUE,"1","1",5,"AppInitiated","Alibaba Group","AliExpress",1,"NA","NA","NA"
+"402","b-graph.facebook.com",2,TRUE,FALSE,"2","1",5,"AppInitiated","Meta","Facebook",1,"NA","NA","NA"
+"403","b.thumbs.redditmedia.com",2,TRUE,FALSE,"2","1",20,"AppInitiated","Reddit","Reddit",1,"NA","NA","NA"
+"404","b1sync.zemanta.com",2,TRUE,TRUE,"2","1",7,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"405","bh.contextweb.com",2,TRUE,TRUE,"1","1",2,"AppInitiated","Pulsepoint","Ricardo, Blick",2,"NA","NA","NA"
+"406","bimi.entrust.net",2,FALSE,FALSE,"1","1",2,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"407","browser.sentry-cdn.com",2,TRUE,FALSE,"2","1",2,"AppInitiated","Other","Brave, Firefox",2,"NA","NA","NA"
+"408","c2.piano.io",2,TRUE,TRUE,"2","1",6,"AppInitiated","Other","Brave, Blick",2,"NA","NA","NA"
+"409","caps.twitter.com",2,TRUE,FALSE,"2","1",2,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"410","cdn-settings.segment.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Zwift",1,"NA","NA","NA"
+"411","cdn.adnxs.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Microsoft","DER SPIEGEL, Blick",2,"NA","NA","NA"
+"412","cdn.adsafeprotected.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","NFL",1,"NA","NA","NA"
+"413","cdn.id5-sync.com",2,TRUE,TRUE,"2","1",8,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"414","cdn.onesignal.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","OneSignal","NFL",1,"NA","NA","NA"
+"415","cdn.pbstck.com",2,TRUE,FALSE,"2","1",3,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"416","cdn.shopify.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Instagram, Apple Passwords",2,"NA","Content","NA"
+"417","cdn.xplosion.de",2,TRUE,FALSE,"2","1",2,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"418","client.protechts.net",2,TRUE,TRUE,"2","1",3,"AppInitiated","Other","LinkedIn",1,"NA","Anti-fraud","NA"
+"419","cloudflareinsights.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Ricardo",1,"NA","Analytics","NA"
+"420","cm.adform.net",2,TRUE,TRUE,"2","1",7,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"421","collector.lunalabs.io",2,FALSE,FALSE,"1","1",2,"AppInitiated","Unity Inc., Other","Solitaire, Traffic Escape",2,"NA","NA","NA"
+"422","config.aps.amazon-adsystem.com",2,TRUE,FALSE,"2","1",7,"AppInitiated","Amazon","DER SPIEGEL",1,"NA","NA","NA"
+"423","configv2.unityads.unity3d.com",2,TRUE,TRUE,"1","1",7,"AppInitiated","Unity Inc.","Coffee Golf",1,"NA","NA","NA"
+"424","developers.facebook.com",2,TRUE,FALSE,"2","1",2,"AppInitiated","Meta","Facebook",1,"NA","NA","NA"
+"425","dms-akam.licdn.com",2,TRUE,FALSE,"2","1",2,"AppInitiated","Other","LinkedIn",1,"NA","NA","NA"
+"426","downloads.intercomcdn.com",2,FALSE,FALSE,"1","1",2,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"427","ds-aksb-a.akamaihd.net",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","AliExpress",1,"NA","NA","NA"
+"428","dyn.emetriq.de",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"429","e16.whatsapp.net",2,TRUE,FALSE,"2","1",2,"AppInitiated","Meta","WhatsApp",1,"NA","NA","NA"
+"430","ebayadservices.com",2,TRUE,TRUE,"2","1",2,"NonAppInitiated, AppInitiated","Other","Apple Mail, eBay",2,"NA","Advertising","NA"
+"431","email.repebble.com",2,FALSE,FALSE,"1, 2","1",3,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"432","europe-west1-gcp.api.snapchat.com",2,TRUE,FALSE,"2","1",3,"AppInitiated","Snap Inc.","Snapchat",1,"NA","NA","NA"
+"433","eus.rubiconproject.com",2,TRUE,TRUE,"2","1",4,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"434","events.claspws.tv",2,TRUE,TRUE,"2","1",5,"AppInitiated","Other","NFL",1,"NA","NA","NA"
+"435","fastlane.rubiconproject.com",2,TRUE,TRUE,"2","1",8,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"436","files.ricardostatic.ch",2,FALSE,FALSE,"2, 1","1",6,"AppInitiated, NonAppInitiated","SMG AG","Ricardo, Outlook, Apple Mail",3,"NA","NA","NA"
+"437","fonts.gstatic.com",2,FALSE,FALSE,"2, 1","1",136,"AppInitiated, NonAppInitiated","Google","Youtube, Google App, Ricardo, Instagram, Twitter, NFL, RoamResearch, Google Maps, Brave, Digitec, Firefox, FAZ, Solitaire, DER SPIEGEL, Traffic Escape, 20 Minuten, Blick, Search.ch, Apple Mail, PayPal, Revolut, Speedtest, Jodel",23,"NA","NA","NA"
+"438","functions.adnami.io",2,TRUE,FALSE,"2","1",6,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"439","g2.gumgum.com",2,TRUE,TRUE,"2","1",8,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"440","gj.mmstat.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","AliExpress, Alibaba",2,"NA","NA","NA"
+"441","gm.mmstat.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","AliExpress, Alibaba",2,"NA","NA","NA"
+"442","googlesyndication.com",2,TRUE,TRUE,"1","1",2,"AppInitiated","Google","Firefox",1,"Tracker","Advertising, FingerprintingGeneral","advertising"
+"443","h-sdk.online-metrix.net",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","eBay",1,"NA","NA","NA"
+"444","h64.online-metrix.net",2,TRUE,FALSE,"2","1",2,"AppInitiated","Other","eBay",1,"NA","NA","NA"
+"445","hbopenbid.pubmatic.com",2,TRUE,TRUE,"2","1",7,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"446","himovies.sx",2,TRUE,FALSE,"2","1",5,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"447","homegate.ch",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Apple Passwords",1,"NA","NA","NA"
+"448","i.connectad.io",2,TRUE,TRUE,"2","1",8,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"449","iad-01.braze.com",2,TRUE,TRUE,"1","1",2,"AppInitiated","Braze Inc.","Just Eat",1,"NA","NA","NA"
+"450","ice.360yield.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"451","imagesrv.adition.com",2,TRUE,TRUE,"2","1",4,"AppInitiated","Other","DER SPIEGEL, Instagram",2,"NA","NA","NA"
+"452","ingress.linktr.ee",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Instagram",1,"NA","NA","NA"
+"453","intake.pbstck.com",2,TRUE,FALSE,"2","1",8,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"454","iqdigital.demdex.net",2,TRUE,TRUE,"2","1",9,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"455","l.teads.tv",2,TRUE,FALSE,"2","1",12,"AppInitiated","Other","20 Minuten",1,"NA","NA","NA"
+"456","linktr.ee",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Instagram",1,"NA","NA","NA"
+"457","lithium.facebook.com",2,TRUE,FALSE,"2","1",5,"AppInitiated","Meta","Facebook",1,"NA","NA","NA"
+"458","log.outbrainimg.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Le Monde, DER SPIEGEL",2,"NA","NA","NA"
+"459","log.pinterest.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Instagram",1,"Tracker","NA","NA"
+"460","m.api.forter.com",2,TRUE,FALSE,"2","1",6,"AppInitiated","Other","eBay",1,"NA","NA","NA"
+"461","macro.adnami.io",2,TRUE,TRUE,"2","1",7,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"462","mads.amazon-adsystem.com",2,TRUE,TRUE,"1","1",3,"AppInitiated","Amazon","Solitaire, Speedtest",2,"NA","NA","NA"
+"463","match.justpremium.com",2,TRUE,TRUE,"2","1",4,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"464","mc.sendgrid.com",2,FALSE,FALSE,"1","1",2,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"465","mcusercontent.com",2,FALSE,FALSE,"2, 1","1",8,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"466","mediation.adnxs.com",2,TRUE,TRUE,"2","1",3,"AppInitiated","Microsoft","Blick, Tutti",2,"NA","NA","NA"
+"467","merchantpool1.linkedin.com",2,TRUE,FALSE,"2","1",3,"AppInitiated","Microsoft","LinkedIn",1,"NA","NA","NA"
+"468","mobiletelemetry.ebay.com",2,TRUE,FALSE,"2","1",8,"AppInitiated","Other","eBay",1,"Tracker","NA","NA"
+"469","mybbc-analytics.files.bbci.co.uk",2,TRUE,TRUE,"2","1",4,"AppInitiated","Other","BBC",1,"Tracker","NA","NA"
+"470","nfl.demdex.net",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","NFL",1,"NA","NA","NA"
+"471","notion.so",2,TRUE,TRUE,"2","1",29,"AppInitiated","Other","Notion",1,"NA","NA","NA"
+"472","o1069899.ingest.sentry.io",2,TRUE,FALSE,"1","1",8,"AppInitiated","Functional Software","Firefox Klar",1,"NA","NA","NA"
+"473","ogads-pa.googleapis.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Google","Firefox",1,"NA","NA","NA"
+"474","orbidder.otto.de",2,TRUE,TRUE,"2","1",8,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"475","p.nfltags.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","NFL",1,"NA","Analytics","NA"
+"476","p16-sign-sg.tiktokcdn.com",2,TRUE,FALSE,"2","1",6,"AppInitiated","ByteDance Ltd.","TikTok",1,"NA","NA","NA"
+"477","p16-sign.tiktokcdn-us.com",2,TRUE,FALSE,"2","1",4,"AppInitiated","ByteDance Ltd.","TikTok",1,"NA","NA","NA"
+"478","p19-sign.tiktokcdn-us.com",2,TRUE,FALSE,"2","1",2,"AppInitiated","ByteDance Ltd.","TikTok",1,"NA","NA","NA"
+"479","partner.googleadservices.com",2,TRUE,TRUE,"2","1",6,"AppInitiated","Google","Tutti",1,"NA","NA","advertising"
+"480","paypal.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","PayPal",1,"NA","Content","NA"
+"481","pixel.everesttech.net",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","NFL",1,"NA","NA","NA"
+"482","playboy.com",2,TRUE,FALSE,"2","1",2,"AppInitiated","Other","Apple Passwords",1,"NA","NA","NA"
+"483","pornhub.com",2,TRUE,FALSE,"2","1",2,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"484","pub.doubleverify.com",2,TRUE,TRUE,"2","1",10,"AppInitiated","DoubleVerify Holdings Inc.","BBC",1,"NA","NA","NA"
+"485","publish.twitter.com",2,TRUE,FALSE,"2","1",11,"AppInitiated","Twitter Inc.","20 Minuten",1,"NA","NA","NA"
+"486","roam-research-6a2c436dc9f6.intercom-mail.com",2,FALSE,FALSE,"1","1",3,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"487","rumcdn.geoedge.be",2,TRUE,TRUE,"2","1",6,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"488","sdk.snapkit.com",2,TRUE,FALSE,"2","1",2,"AppInitiated","Other","Instagram",1,"NA","NA","NA"
+"489","secureir.ebaystatic.com",2,TRUE,TRUE,"1, 2","1",2,"NonAppInitiated, AppInitiated","Other","Apple Mail, eBay",2,"NA","NA","NA"
+"490","sharethis.com",2,TRUE,TRUE,"1","1",5,"AppInitiated","ShareThis Inc.","Brave",1,"Advertising","Social","social"
+"491","simage2.pubmatic.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Ricardo, Instagram",2,"NA","NA","NA"
+"492","spiegel.de",2,TRUE,FALSE,"2","1",7,"AppInitiated","Rudolf Augstein GmbH & Co. KG","DER SPIEGEL",1,"NA","NA","NA"
+"493","ssl.connextra.com",2,TRUE,FALSE,"2","1",4,"AppInitiated","Other","NFL",1,"NA","NA","NA"
+"494","static.criteo.net",2,TRUE,TRUE,"2","1",4,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"495","static.hotjar.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Snapchat, Instagram",2,"NA","NA","NA"
+"496","static.licdn.com",2,TRUE,FALSE,"2","1",2,"AppInitiated, NonAppInitiated","Other","LinkedIn, Apple Mail",2,"NA","NA","NA"
+"497","stripe-images.s3.amazonaws.com",2,FALSE,FALSE,"1","1",2,"NonAppInitiated","Amazon","Apple Mail",1,"NA","NA","NA"
+"498","studio-t.teads.tv",2,TRUE,TRUE,"2","1",9,"AppInitiated","Other","20 Minuten",1,"NA","NA","NA"
+"499","sync.1rx.io",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Ricardo, Blick",2,"NA","NA","NA"
+"500","sync.connectad.io",2,TRUE,TRUE,"2","1",8,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"501","sync.mathtag.com",2,TRUE,TRUE,"2","1",3,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"502","sync.outbrain.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"503","sync.taboola.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"504","t.adcell.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Brave, Instagram",2,"NA","FingerprintingInvasive","NA"
+"505","thind.unityads.unity3d.com",2,TRUE,TRUE,"1","1",7,"AppInitiated","Unity Inc.","Coffee Golf",1,"NA","NA","NA"
+"506","tlx.3lift.com",2,TRUE,TRUE,"2","1",7,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"507","tr.outbrain.com",2,TRUE,TRUE,"2","1",9,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"508","u.openx.net",2,TRUE,TRUE,"2","1",7,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"509","u41709400.ct.sendgrid.net",2,FALSE,FALSE,"1","1",2,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"510","udm.scorecardresearch.com",2,TRUE,TRUE,"2","1",4,"AppInitiated","Other","Watson, Spotify",2,"NA","NA","NA"
+"511","ups.xplosion.de",2,TRUE,TRUE,"2","1",9,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"512","uss.xplosion.de",2,TRUE,FALSE,"2","1",9,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"513","v16m.tiktokcdn-eu.com",2,TRUE,FALSE,"2","1",12,"AppInitiated","ByteDance Ltd.","TikTok",1,"NA","NA","NA"
+"514","view.adjust.com",2,TRUE,TRUE,"1","1",4,"AppInitiated","AppLovin Corp.","Reddit, Traffic Escape",2,"NA","NA","NA"
+"515","vmc.digicert.com",2,FALSE,FALSE,"1","1",3,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"516","widget-pixels.outbrain.com",2,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Le Monde, DER SPIEGEL",2,"NA","NA","NA"
+"517","zc.adswizz.com",2,TRUE,TRUE,"2","1",15,"AppInitiated","Other","20 Minuten",1,"NA","NA","NA"
+"518","0.0.0.1",1,TRUE,TRUE,"2","2",2,"AppInitiated","Other","WeChat",1,"NA","NA","NA"
+"519","1.1.1.1",1,TRUE,TRUE,"2","2",1,"AppInitiated","Other","Signal",1,"NA","NA","NA"
+"520","3lift.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","TripleLift","Firefox",1,"Advertising","Advertising","advertising"
+"521","9gag.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Apple Passwords",1,"NA","NA","NA"
+"522","a.klaviyo.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Instagram",1,"NA","NA","NA"
+"523","a.pub.network",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"524","a.thumbs.redditmedia.com",1,TRUE,FALSE,"2","1",12,"AppInitiated","Reddit","Reddit",1,"NA","NA","NA"
+"525","a.twiago.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Instagram",1,"NA","NA","NA"
+"526","a4.applovin.com",1,TRUE,TRUE,"2","1",3,"AppInitiated","Other","Hitman",1,"NA","NA","NA"
+"527","a5156.casalemedia.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"528","aax-eu.amazon.de",1,TRUE,TRUE,"2","1",1,"AppInitiated","Amazon","Amazon",1,"NA","NA","NA"
+"529","ad-delivery.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"Advertising","Advertising","advertising"
+"530","ad.360yield.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Blick",1,"NA","NA","NA"
+"531","ad.ad-srv.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Instagram",1,"NA","NA","NA"
+"532","ad.sxp.smartclip.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Blick",1,"NA","NA","NA"
+"533","ad11.adfarm1.adition.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Instagram",1,"NA","NA","NA"
+"534","ad4m.at",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Instagram",1,"Tracker","Advertising","NA"
+"535","adashx.m.taobao.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Alibaba",1,"Tracker","NA","NA"
+"536","adclick.g.doubleclick.net",1,TRUE,TRUE,"1","1",1,"AppInitiated","Google","Spotify",1,"NA","NA","NA"
+"537","adf0901f1861.cdn4.forter.com",1,TRUE,FALSE,"1","1",1,"AppInitiated","Forter Inc.","eBay",1,"NA","NA","NA"
+"538","adnxs.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","WarnerMedia","Firefox",1,"Tracker","Advertising","advertising"
+"539","adobedtm.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Adobe","Brave",1,"Tracker","NA","NA"
+"540","adrta.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","BBCWorldService",1,"Advertising","NA","NA"
+"541","ads.betweendigital.com",1,TRUE,TRUE,"2","1",2,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"542","ads.smartstream.tv",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Blick",1,"NA","NA","NA"
+"543","adsrvr.org",1,TRUE,TRUE,"1","1",1,"AppInitiated","Trade Desk Inc.","Firefox",1,"Advertising","Advertising, FingerprintingGeneral","advertising"
+"544","ae01.alicdn.com",1,FALSE,FALSE,"1, 2","1",8,"AppInitiated","Alibaba Group","Brave, AliExpress, Perplexity",3,"NA","NA","NA"
+"545","ajax.cloudflare.com",1,FALSE,FALSE,"2, 1","1",4,"AppInitiated","Other","DER SPIEGEL, Brave",2,"NA","NA","NA"
+"546","akamai.tiqcdn.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Coop Supercard",1,"NA","NA","NA"
+"547","alibaba.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Alibaba Group","Alibaba",1,"NA","NA","NA"
+"548","alicdn.com",1,TRUE,TRUE,"1","1",3,"AppInitiated","Alibaba Group","Brave",1,"NA","NA","NA"
+"549","amazon-adsystem.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Amazon","Firefox",1,"NA","Advertising","advertising"
+"550","amplitude.com",1,TRUE,TRUE,"1","1",2,"AppInitiated","Amplitude","Brave",1,"Tracker","Analytics","NA"
+"551","analytics-ios-tcp.rayjump.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Hitman",1,"NA","NA","NA"
+"552","analytics.google.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Google","Snapchat",1,"Tracker","Analytics","advertising"
+"553","analytics.localytics.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","FAZ",1,"NA","NA","NA"
+"554","analytics.yahoo.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Verizon Media","Blick",1,"Tracker","Analytics","privacy"
+"555","api-3-0-0.twitter.com",1,TRUE,FALSE,"2","1",3,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"556","api-46-0-0.twitter.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Twitter Inc.","Twitter",1,"NA","NA","NA"
+"557","api-iam.intercom.io",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","RoamResearch",1,"NA","NA","NA"
+"558","api.brandsforstudents.ch",1,FALSE,FALSE,"2, 1","1",5,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"559","api.btloader.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"560","api.gameanalytics.com",1,TRUE,TRUE,"1","1",3,"AppInitiated","Mobvista","Traffic Escape",1,"NA","NA","NA"
+"561","api.helpshift.com",1,FALSE,FALSE,"1","1",1,"AppInitiated","Helpshift","Solitaire",1,"NA","NA","NA"
+"562","api.piano.io",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Blick",1,"NA","NA","NA"
+"563","api.pubnative.net",1,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Speedtest",1,"NA","NA","NA"
+"564","api.sprig.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","PayPal",1,"NA","NA","NA"
+"565","api.transferwise.com",1,FALSE,FALSE,"1, 2","1",2,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"566","applets.ebxcdn.com",1,TRUE,TRUE,"2","1",2,"AppInitiated","Apple","Le Monde",1,"NA","NA","NA"
+"567","appslix.g2afse.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Traffic Escape",1,"NA","NA","NA"
+"568","arg.atomex.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Tutti",1,"NA","NA","NA"
+"569","arttrk.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Spotify",1,"NA","NA","NA"
+"570","as.ad4m.at",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Instagram",1,"NA","NA","NA"
+"571","assets-jpcust.jwpsrv.com",1,TRUE,TRUE,"2","1",4,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"572","assets.a-mo.net",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"573","assets.applovin.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Coffee Golf",1,"NA","NA","NA"
+"574","assets.prod.leanplum.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Dott",1,"NA","NA","NA"
+"575","assets.revolut.com",1,FALSE,FALSE,"2, 1","1",14,"AppInitiated, NonAppInitiated","Other","Revolut, Apple Mail",2,"NA","NA","NA"
+"576","ats.otto.de",1,TRUE,TRUE,"2","1",2,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"577","attr.appsflyer.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","AppsFlyer","Ricardo",1,"NA","NA","NA"
+"578","b.cdnst.net",1,TRUE,FALSE,"2","1",2,"AppInitiated","Other","Speedtest",1,"NA","NA","NA"
+"579","b.clarity.ms",1,TRUE,FALSE,"2","1",2,"AppInitiated","Other","Freedom",1,"NA","NA","NA"
+"580","baechli-bergsport.zendesk.com",1,FALSE,FALSE,"1","1",1,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"581","bcp.crwdcntrl.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Blick",1,"NA","NA","NA"
+"582","bidswitch.net",1,TRUE,TRUE,"1","1",1,"AppInitiated","IPONWEB","Firefox",1,"Tracker","Advertising","advertising"
+"583","bing.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Microsoft","Firefox",1,"NA","Content","NA"
+"584","brwsrfrm.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"585","btloader.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"Tracker","Advertising","NA"
+"586","businessclick.ch",1,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Blick",1,"NA","NA","NA"
+"587","buy.tinypass.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"588","c.bannerflow.net",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Blick",1,"NA","NA","NA"
+"589","c.go-mpulse.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","AliExpress",1,"NA","NA","NA"
+"590","c.pub.network",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"591","c1.adform.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"592","cadmus.script.ac",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Traffic Escape",1,"NA","NA","NA"
+"593","carbonateinvention.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"594","casalemedia.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Index Exchange","Firefox",1,"Advertising","Advertising","advertising"
+"595","cdn.amplitude.com",1,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Le Monde",1,"NA","NA","NA"
+"596","cdn.atomex.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Tutti",1,"NA","NA","NA"
+"597","cdn.browsiprod.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"598","cdn.connectad.io",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"599","cdn.hadronid.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"600","cdn.iubenda.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"601","cdn.liftoff-creatives.io",1,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Solitaire",1,"NA","NA","NA"
+"602","cdn.optimizely.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"603","cdn.pdst.fm",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"604","cdn.piano.io",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"605","cdn.pubnative.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Traffic Escape",1,"NA","NA","NA"
+"606","cdn.quantummetric.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Coop Supercard",1,"NA","NA","NA"
+"607","cdn.revolut.com",1,FALSE,FALSE,"1","1",1,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"608","cdn.siftscience.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"609","cdn.taboola.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","FAZ",1,"NA","NA","NA"
+"610","cdntechone.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"611","ce.lijit.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"612","ced-ns.sascdn.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Blick",1,"NA","NA","NA"
+"613","cf.perf.linkedin.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Microsoft","LinkedIn",1,"NA","NA","NA"
+"614","chat.cdn.whatsapp.net",1,TRUE,FALSE,"2","1",59,"AppInitiated","Meta","WhatsApp",1,"NA","NA","NA"
+"615","choices.trustarc.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","20 Minuten",1,"NA","NA","NA"
+"616","claude.ai",1,TRUE,TRUE,"2","1",6,"AppInitiated","Other","Claude",1,"NA","NA","NA"
+"617","click.oneplus.ch",1,FALSE,FALSE,"1","1",2,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"618","click.revolut.com",1,FALSE,FALSE,"1","1",1,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"619","clicks.eventbrite.com",1,TRUE,TRUE,"1","1",1,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"620","cloudflare.com",1,TRUE,TRUE,"1","1",2,"AppInitiated","Cloudflare","Brave",1,"NA","Content","NA"
+"621","cm.adsafety.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Blick",1,"NA","NA","NA"
+"622","cmp.osano.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"623","collect.igodigital.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Salesforce","Coop Supercard",1,"NA","NA","NA"
+"624","combine.asnapieu.com",1,TRUE,TRUE,"1","1",5,"AppInitiated","United Airship Inc.","Play SRF",1,"NA","NA","NA"
+"625","comcluster.cxense.com",1,TRUE,TRUE,"2","1",4,"AppInitiated","Other","Blick",1,"NA","NA","NA"
+"626","confiant-integrations.global.ssl.fastly.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"627","configure.rayjump.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Mobvista","Hitman",1,"NA","NA","NA"
+"628","consent.api.osano.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"629","consent.trustarc.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Snapchat",1,"NA","NA","NA"
+"630","conversions.appsflyer.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","AppsFlyer","Ricardo",1,"NA","NA","NA"
+"631","corruptobstacle.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"632","criteo.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Criteo SA","Firefox",1,"Advertising","Advertising","advertising"
+"633","crwdcntrl.net",1,TRUE,TRUE,"1","1",1,"AppInitiated","Lotame Solutions","Firefox",1,"Advertising","Advertising, FingerprintingGeneral","privacy"
+"634","cs.iubenda.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"635","cstat.cdn-apple.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Apple","Apple Wallet",1,"NA","NA","NA"
+"636","csync.loopme.me",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Tutti",1,"NA","NA","NA"
+"637","d.adroll.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Snapchat",1,"NA","NA","advertising"
+"638","d.pub.network",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"639","d15k2d11r6t6rl.cloudfront.net",1,FALSE,FALSE,"1","1",1,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"640","data.dianomi.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"641","datatechone.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"642","datatechonert.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"643","de.eporner.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"644","de.pornhub.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"645","device-api.asnapieu.com",1,TRUE,TRUE,"2","1",3,"AppInitiated","Other","Play SRF",1,"NA","NA","NA"
+"646","device.marketingcloudapis.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Salesforce","Coop Supercard",1,"NA","NA","NA"
+"647","dianomi.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","DER SPIEGEL",1,"Advertising","Advertising","advertising"
+"648","diffuser-cdn.app-us1.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Speedtest",1,"NA","NA","NA"
+"649","dk9ps7goqoeef.cloudfront.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Amazon",1,"NA","NA","NA"
+"650","dmp.theadex.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Coop Supercard",1,"NA","NA","NA"
+"651","dropbox.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Dropbox",1,"NA","NA","NA"
+"652","dsp.active-agent.com",1,TRUE,FALSE,"2","1",3,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"653","dspcluster.adfarm1.adition.com",1,TRUE,TRUE,"2","1",2,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"654","dynamic-config-api.appsflyer.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","AppsFlyer","Ricardo",1,"NA","NA","NA"
+"655","dynamic.criteo.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Salt",1,"NA","NA","NA"
+"656","e10.whatsapp.net",1,TRUE,FALSE,"2","1",1,"AppInitiated","Meta","WhatsApp",1,"NA","NA","NA"
+"657","e11.whatsapp.net",1,TRUE,FALSE,"2","1",1,"AppInitiated","Meta","WhatsApp",1,"NA","NA","NA"
+"658","e12.whatsapp.net",1,TRUE,FALSE,"2","1",1,"AppInitiated","Meta","WhatsApp",1,"NA","NA","NA"
+"659","e13.whatsapp.net",1,TRUE,FALSE,"2","1",1,"AppInitiated","Meta","WhatsApp",1,"NA","NA","NA"
+"660","e3.whatsapp.net",1,TRUE,FALSE,"2","1",1,"AppInitiated","Meta","WhatsApp",1,"NA","NA","NA"
+"661","e4.whatsapp.net",1,TRUE,FALSE,"2","1",1,"AppInitiated","Meta","WhatsApp",1,"NA","NA","NA"
+"662","e8.whatsapp.net",1,TRUE,FALSE,"2","1",2,"AppInitiated","Meta","WhatsApp",1,"NA","NA","NA"
+"663","e9.whatsapp.net",1,TRUE,FALSE,"2","1",1,"AppInitiated","Meta","WhatsApp",1,"NA","NA","NA"
+"664","edge.eu1.fullstory.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Local.ch",1,"NA","FingerprintingGeneral","NA"
+"665","edge.fullstory.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Local.ch",1,"NA","FingerprintingGeneral","NA"
+"666","edge.safedk.com",1,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Traffic Escape",1,"NA","NA","NA"
+"667","embed.filekitcdn.com",1,FALSE,FALSE,"1, 2","1",2,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"668","embed.reddit.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Reddit","20 Minuten",1,"NA","NA","NA"
+"669","emoji.redditmedia.com",1,TRUE,FALSE,"2","1",3,"AppInitiated","Reddit","Reddit",1,"NA","NA","NA"
+"670","entitlements.jwplayer.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Speedtest",1,"NA","NA","NA"
+"671","esp.rtbhouse.com",1,TRUE,FALSE,"2","1",3,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"672","euc-ice.360yield.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Blick",1,"NA","NA","NA"
+"673","eventgw.twilio.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Revolut",1,"NA","NA","NA"
+"674","events.browsiprod.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"675","events.mz.unity3d.com",1,FALSE,FALSE,"1","1",5,"AppInitiated","Unity Inc.","Coffee Golf",1,"NA","NA","NA"
+"676","exp.notion.so",1,TRUE,TRUE,"2","1",7,"AppInitiated","Other","Notion",1,"NA","NA","NA"
+"677","experttrafficcounter.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"678","facebookmail.com",1,FALSE,FALSE,"1","1",1,"NonAppInitiated","Meta","Apple Mail",1,"NA","NA","NA"
+"679","fandom.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"680","fast.a.klaviyo.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Instagram",1,"NA","NA","NA"
+"681","firebaselogging.googleapis.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Google","Voi",1,"Tracker","NA","NA"
+"682","fra1-ib.adnxs.com",1,TRUE,TRUE,"2","1",2,"AppInitiated","Microsoft","Blick",1,"NA","NA","NA"
+"683","freestar-io.videoplayerhub.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"684","fvcm.net",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"685","fw.adsafeprotected.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","20 Minuten",1,"NA","NA","NA"
+"686","g.ign.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"687","gab.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Apple Passwords",1,"NA","NA","NA"
+"688","ganalyticshub.net",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"689","gateway.unityads.unity3d.com",1,TRUE,TRUE,"1","1",4,"AppInitiated","Unity Inc.","Coffee Golf",1,"NA","NA","NA"
+"690","github.com",1,TRUE,TRUE,"2","1",3,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"691","google.de",1,TRUE,TRUE,"2","1",1,"AppInitiated","Google","Firefox",1,"NA","Content","NA"
+"692","gumgum.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","GumGum","Firefox",1,"Tracker","Advertising","advertising"
+"693","gw.geoedge.be",1,TRUE,TRUE,"2","1",2,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"694","gw.mediation.unity3d.com",1,TRUE,TRUE,"2","1",7,"AppInitiated","Unity Software","Hitman",1,"NA","NA","NA"
+"695","hb.yellowblue.io",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"696","hbx.media.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"697","hcmanager.swifteq.com",1,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Komoot",1,"NA","NA","NA"
+"698","hexagon-analytics.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"Tracker","NA","NA"
+"699","hp.com",1,TRUE,TRUE,"2","1",3,"AppInitiated","Other","Brave",1,"NA","NA","advertising"
+"700","hqporn.xxx",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"701","i.clean.gg",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Traffic Escape",1,"NA","NA","NA"
+"702","i.ipromote.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Search.ch",1,"NA","NA","NA"
+"703","idsync.rlcdn.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"704","ign.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"705","image2.pubmatic.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Blick",1,"NA","NA","NA"
+"706","image6.pubmatic.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Blick",1,"NA","NA","NA"
+"707","images.mediago.io",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"708","imcdn.pro",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"709","imdb.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Search.ch",1,"NA","Advertising","NA"
+"710","in.treasuredata.com",1,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Solitaire",1,"NA","NA","NA"
+"711","indexww.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Index Exchange","Firefox",1,"Advertising","Advertising","advertising"
+"712","indodrioor.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"713","intake-analytics.wikimedia.org",1,TRUE,TRUE,"2","1",10,"AppInitiated","Other","Wikipedia",1,"Tracker","NA","NA"
+"714","inv-nets.admixer.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"715","invstatic101.creativecdn.com",1,TRUE,FALSE,"2","1",3,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"716","ipds.adrta.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","BBCWorldService",1,"NA","NA","NA"
+"717","ir.ebaystatic.com",1,FALSE,FALSE,"1, 2","1",3,"NonAppInitiated, AppInitiated","Other","Apple Mail, eBay",2,"NA","NA","NA"
+"718","isx.unity3d.com",1,FALSE,FALSE,"1","1",3,"AppInitiated","Unity Inc.","Hitman",1,"NA","NA","NA"
+"719","jrpkizae.com",1,TRUE,FALSE,"2","1",3,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"720","js-sec.indexww.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"721","lemonde.fr",1,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Le Monde",1,"NA","NA","NA"
+"722","liadm.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","LiveIntent Inc.","Firefox",1,"Tracker","Email, Advertising","advertising"
+"723","lijit.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Sovrn Holdings","Firefox",1,"Tracker","Advertising","advertising"
+"724","linkbux.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"725","links.iterable.com",1,TRUE,TRUE,"1","1",1,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"726","links.notifications.galaxus.ch",1,FALSE,FALSE,"1, 2","1",3,"NonAppInitiated","Digitec Galaxus AG","Apple Mail",1,"NA","NA","NA"
+"727","loadingscripts.com",1,TRUE,FALSE,"2","1",3,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"728","loadm.exelator.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Blick",1,"NA","NA","NA"
+"729","locusflourishgarlic.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"730","luckyforbet.com",1,TRUE,FALSE,"2","1",4,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"731","mab.chartbeat.com",1,TRUE,TRUE,"2","1",3,"AppInitiated","Other","Play SRF",1,"NA","NA","NA"
+"732","mabping.chartbeat.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Play SRF",1,"NA","NA","NA"
+"733","mailing.rad-marathon.ch",1,FALSE,FALSE,"1","1",1,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"734","mailing.sbb.ch",1,FALSE,FALSE,"1","1",1,"NonAppInitiated","SBB CFF FFS","Apple Mail",1,"NA","NA","NA"
+"735","mandrillapp.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Outlook",1,"Advertising","EmailAggressive","NA"
+"736","manifest.localytics.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","FAZ",1,"NA","NA","NA"
+"737","marketingplatform.google.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Google","Local.ch",1,"NA","NA","NA"
+"738","match.360yield.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Blick",1,"NA","NA","NA"
+"739","match.sharethrough.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"740","media.admob.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","20 Minuten",1,"NA","NA","NA"
+"741","media.ticketmaster.eu",1,FALSE,FALSE,"1, 2","1",3,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"742","mediamarkt.de",1,FALSE,FALSE,"1","1",1,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"743","merchant-center-analytics.goog",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Instagram",1,"NA","Analytics","NA"
+"744","metricreceiver.cellrebel.com",1,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Speedtest",1,"NA","NA","NA"
+"745","microsoft.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Microsoft","Apple Passwords",1,"NA","Content","NA"
+"746","mobile.twitter.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Twitter Inc.","20 Minuten",1,"NA","NA","NA"
+"747","mollusk.apis.ign.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"748","mozilla.org",1,TRUE,TRUE,"2","1",1,"AppInitiated","Mozilla Firefox","Apple Passwords",1,"NA","NA","NA"
+"749","mqtt.c10r.facebook.com",1,TRUE,FALSE,"2","1",2,"AppInitiated","Meta","Instagram",1,"NA","NA","NA"
+"750","my.rtmark.net",1,TRUE,TRUE,"1","1",1,"AppInitiated","Propeller Ads","Brave",1,"NA","NA","NA"
+"751","n.sni.global.fastly.net",1,FALSE,FALSE,"1","1",1,"AppInitiated","Fastly","Brave",1,"NA","NA","NA"
+"752","nannyirrationalacquainted.com",1,TRUE,FALSE,"2","1",2,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"753","npttech.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Other","Brave",1,"Tracker","Advertising","NA"
+"754","o-iab-notifications.mediation.unity3d.com",1,TRUE,TRUE,"2","1",7,"AppInitiated","Unity Software","Hitman",1,"NA","NA","NA"
+"755","o.alicdn.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Alibaba Group","AliExpress",1,"NA","Content","NA"
+"756","o.iads.unity3d.com",1,TRUE,TRUE,"2","1",7,"AppInitiated","Unity Software","Hitman",1,"NA","NA","NA"
+"757","o4505071687041024.ingest.sentry.io",1,FALSE,FALSE,"1","1",3,"AppInitiated","Functional Software","Bluesky",1,"NA","NA","NA"
+"758","o488710.ingest.sentry.io",1,FALSE,FALSE,"1","1",4,"AppInitiated","Functional Software","Coffee Golf",1,"NA","NA","NA"
+"759","odr.mookie1.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"760","offer.alibaba.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Alibaba Group","Traffic Escape",1,"NA","NA","NA"
+"761","omtrdc.net",1,TRUE,TRUE,"1","1",1,"AppInitiated","Adobe","Brave",1,"Tracker","Email, Advertising, FingerprintingGeneral","advertising"
+"762","onetag-sys.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Tutti",1,"Tracker","Advertising","NA"
+"763","open.convertkit-mail2.com",1,FALSE,FALSE,"1, 2","1",2,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"764","openx.net",1,TRUE,TRUE,"1","1",1,"AppInitiated","OpenX Inc.","Firefox",1,"Tracker","Advertising, FingerprintingGeneral","advertising"
+"765","outlook.live.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Apple Passwords",1,"NA","NA","NA"
+"766","p.typekit.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","FAZ",1,"Tracker","NA","NA"
+"767","pastelspittle.com",1,TRUE,FALSE,"2","1",2,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"768","pictures.cumulus.migros.ch",1,FALSE,FALSE,"1","1",1,"NonAppInitiated","Migros-Genossenschafts-Bund (MGB)","Apple Mail",1,"NA","NA","NA"
+"769","pippio.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","LiveRamp","Firefox",1,"Tracker","Email, Advertising","NA"
+"770","pix.hyj.mobi",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Instagram",1,"NA","NA","NA"
+"771","pixel.mathtag.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Instagram",1,"NA","NA","NA"
+"772","pixel.spotify.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Spotify","Spotify",1,"Tracker","NA","NA"
+"773","pixel.tapad.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Snapchat",1,"NA","NA","NA"
+"774","pl02.owen.prolitteris.ch",1,TRUE,FALSE,"2","1",3,"AppInitiated","Other","Blick",1,"NA","NA","NA"
+"775","platform-static.tutti.ch",1,FALSE,FALSE,"1","1",1,"NonAppInitiated","SMG AG","Apple Mail",1,"NA","NA","NA"
+"776","pm.w55c.net",1,TRUE,TRUE,"2","1",2,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"777","poawooptugroo.com",1,TRUE,FALSE,"2","1",3,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"778","pool.admedo.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"779","poplardealtcarrying.com",1,TRUE,FALSE,"2","1",3,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"780","post.ch",1,FALSE,FALSE,"2, 1","1",21,"AppInitiated, NonAppInitiated","Other","Post, Apple Mail",2,"NA","NA","NA"
+"781","prd.jwpltx.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Speedtest",1,"NA","NA","NA"
+"782","prebid-server-aws.dianomi.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"783","prebid.a-mo.net",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"784","prebid.cootlogix.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"785","prism.app-us1.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Speedtest",1,"NA","NA","NA"
+"786","privacy-policy.truste.com",1,TRUE,TRUE,"2","1",2,"AppInitiated","Other","WeChat",1,"NA","NA","NA"
+"787","pubmatic.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","PubMatic Inc.","Firefox",1,"Tracker","Advertising","advertising"
+"788","px-intl.ucweb.com",1,TRUE,TRUE,"2","1",4,"AppInitiated","Other","Alibaba",1,"NA","NA","NA"
+"789","quantserve.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Quantcast Corp.","Firefox",1,"Tracker","Advertising","advertising"
+"790","quickerapparently.com",1,TRUE,FALSE,"2","1",2,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"791","r.bbci.co.uk",1,TRUE,TRUE,"2","1",9,"AppInitiated","Other","BBC",1,"NA","NA","NA"
+"792","r.linksprf.com",1,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"793","recordedthereby.com",1,TRUE,FALSE,"2","1",2,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"794","register.appsflyer.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","AppsFlyer","Ricardo",1,"NA","NA","NA"
+"795","remote-data.asnapieu.com",1,TRUE,TRUE,"2","1",4,"AppInitiated","Other","Play SRF",1,"NA","NA","NA"
+"796","rezync.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Zeta Global","Firefox",1,"Tracker","Advertising","NA"
+"797","rfihub.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Zeta Global","Firefox",1,"Tracker","Advertising","advertising"
+"798","rlcdn.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","LiveRamp","Firefox",1,"Tracker","Advertising","advertising"
+"799","rs.eu1.fullstory.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Local.ch",1,"NA","NA","NA"
+"800","rtb0.doubleverify.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","DoubleVerify Holdings Inc.","20 Minuten",1,"NA","NA","NA"
+"801","rubiconproject.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Rubicon Project","Firefox",1,"Tracker","Advertising","advertising"
+"802","rules.quantcount.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"803","rum.hlx.page",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"804","s.ad.smaato.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Tutti",1,"NA","NA","NA"
+"805","s.adroll.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Snapchat",1,"NA","NA","advertising"
+"806","s.amazon-adsystem.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Amazon","Solitaire",1,"NA","NA","NA"
+"807","s.click.aliexpress.com",1,TRUE,TRUE,"2","1",3,"AppInitiated","Alibaba Group","Brave",1,"Tracker","NA","NA"
+"808","s.go-mpulse.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","AliExpress",1,"NA","NA","NA"
+"809","s.seedtag.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"810","s.yimg.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"811","s1.adform.net",1,TRUE,TRUE,"2","1",2,"AppInitiated","Other","Search.ch",1,"NA","NA","NA"
+"812","s2s.t13.io",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"813","s3-eu-west-1.amazonaws.com",1,FALSE,FALSE,"1, 2","1",22,"NonAppInitiated, AppInitiated","Amazon","Apple Mail, 20 Minuten",2,"NA","NA","NA"
+"814","samsung.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Snapchat",1,"NA","NA","NA"
+"815","scar.unityads.unity3d.com",1,TRUE,TRUE,"1","1",2,"AppInitiated","Unity Inc.","Coffee Golf",1,"NA","NA","NA"
+"816","scontent-fra5-2.cdninstagram.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Meta","Instagram",1,"NA","NA","NA"
+"817","scribd.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"818","script.hotjar.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Instagram",1,"NA","NA","NA"
+"819","scripts.swifteq.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Komoot",1,"NA","NA","NA"
+"820","sdk-api-v1.singular.net",1,TRUE,TRUE,"1","1",1,"AppInitiated","Singular Labs","Wise",1,"NA","NA","NA"
+"821","sdk.fra-02.braze.eu",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Nextbike",1,"NA","NA","NA"
+"822","sdk.iad-01.braze.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Braze Inc.","Just Eat",1,"NA","NA","NA"
+"823","sdk.streamrail.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"824","secure.cdn.fastclick.net",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"825","server.prebid.dianomi.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"826","sf16-website-login.neutral.ttwstatic.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","20 Minuten",1,"NA","FingerprintingGeneral","NA"
+"827","sharethrough.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Sharethrough Inc.","Firefox",1,"Advertising","Advertising","advertising"
+"828","skadsdk.appsflyer.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","AppsFlyer","Ricardo",1,"NA","NA","NA"
+"829","speedtest.net",1,TRUE,FALSE,"2","1",2,"AppInitiated","Other","Speedtest",1,"NA","NA","NA"
+"830","spiegel.met.vgwort.de",1,TRUE,FALSE,"2","1",1,"AppInitiated","Rudolf Augstein GmbH & Co. KG","DER SPIEGEL",1,"NA","NA","NA"
+"831","srgssr01.wt-eu02.net",1,TRUE,TRUE,"2","1",5,"AppInitiated","SRG SRF","Play SRF",1,"NA","NA","NA"
+"832","ssb-euw2.smartadserver.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Blick",1,"NA","NA","NA"
+"833","ssbsync.smartadserver.com",1,TRUE,TRUE,"2","1",6,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"834","ssc-cms.33across.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"835","sslwidget.criteo.com",1,TRUE,TRUE,"1","1",2,"AppInitiated","Criteo SA","Salt",1,"NA","NA","NA"
+"836","ssum-sec.casalemedia.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"837","static-akam.licdn.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","LinkedIn",1,"NA","NA","NA"
+"838","static-forms.klaviyo.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Instagram",1,"NA","NA","NA"
+"839","static-tracking.klaviyo.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Instagram",1,"NA","NA","NA"
+"840","static.chartbeat.com",1,TRUE,TRUE,"2","1",3,"AppInitiated","Other","Play SRF",1,"NA","NA","NA"
+"841","static.klaviyo.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Instagram",1,"NA","NA","NA"
+"842","static.woopra.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Local.ch",1,"NA","NA","NA"
+"843","striderotund.com",1,TRUE,FALSE,"2","1",2,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"844","style-6a38.kxcdn.com",1,FALSE,FALSE,"2, 1","1",2,"AppInitiated, NonAppInitiated","Other","Ricardo, Apple Mail",2,"NA","NA","NA"
+"845","supportsentparticle.com",1,TRUE,FALSE,"2","1",2,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"846","survey.survicate.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"847","suspectplainrevulsion.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"848","swiss.us20.list-manage.com",1,FALSE,FALSE,"2, 1","1",4,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"849","sync-eu.connectad.io",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","DER SPIEGEL",1,"NA","NA","NA"
+"850","sync.go.sonobi.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"851","sync.inmobi.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"852","sysmeasuring.net",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"853","t.adx.opera.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Tutti",1,"NA","NA","NA"
+"854","t.paypal.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","PayPal",1,"NA","NA","NA"
+"855","t2.chartboost.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Solitaire",1,"NA","NA","NA"
+"856","tags.tiqcdn.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Coop Supercard",1,"NA","FingerprintingInvasive","NA"
+"857","teads.tv",1,TRUE,TRUE,"1","1",1,"AppInitiated","Teads","Firefox",1,"Advertising","Advertising","advertising"
+"858","temu.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Traffic Escape",1,"NA","NA","NA"
+"859","thesun.co.uk",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","ChatGPT",1,"NA","NA","NA"
+"860","thingortwo.g2afse.com",1,TRUE,TRUE,"2","1",3,"AppInitiated","Other","Traffic Escape",1,"NA","NA","NA"
+"861","thrtle.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Throtle","Firefox",1,"Tracker","Advertising","NA"
+"862","ticketcorner.ch",1,FALSE,FALSE,"1","1",1,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"863","tiktok.com",1,TRUE,TRUE,"2","1",2,"AppInitiated","ByteDance Ltd.","20 Minuten",1,"NA","Advertising, Social","NA"
+"864","tms.post.ch",1,FALSE,FALSE,"2, 1","1",2,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"865","tmxx-static.s3.amazonaws.com",1,FALSE,FALSE,"2, 1","1",4,"NonAppInitiated","Amazon","Apple Mail",1,"NA","NA","NA"
+"866","tpsc-video-eu.doubleverify.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","DoubleVerify Holdings Inc.","20 Minuten",1,"NA","NA","NA"
+"867","tr-eu.adsmoloco.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Traffic Escape",1,"NA","NA","NA"
+"868","trackcmp.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Speedtest",1,"Tracker","Advertising","NA"
+"869","trackmaxx.ch",1,FALSE,FALSE,"2, 1","1",4,"NonAppInitiated","Other","WhatsApp, Apple Mail",2,"NA","NA","NA"
+"870","trafiko-prod-public.s3.eu-west-3.amazonaws.com",1,FALSE,FALSE,"1","1",1,"NonAppInitiated","Amazon","Apple Mail",1,"NA","NA","NA"
+"871","transa.my.salesforce.com",1,FALSE,FALSE,"2, 1","1",3,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"872","trk.atomex.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Tutti",1,"NA","NA","NA"
+"873","trk.brands4students.ch",1,FALSE,FALSE,"2, 1","1",5,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"874","trustpilot.com",1,TRUE,TRUE,"1","1",4,"AppInitiated","Trustpilot","Brave",1,"NA","Advertising","NA"
+"875","tse1.explicit.bing.net",1,TRUE,FALSE,"2","1",2,"AppInitiated","Microsoft","WhatsApp",1,"NA","NA","NA"
+"876","undertone.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Undertone Networks","Firefox",1,"Advertising","Advertising","advertising"
+"877","unified.adsafeprotected.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","20 Minuten",1,"NA","NA","NA"
+"878","unilu.ch",1,FALSE,FALSE,"2, 1","1",4,"AppInitiated, NonAppInitiated","Other","Facebook, Apple Mail, WhatsApp",3,"NA","NA","NA"
+"879","us-east4-gcp.api.snapchat.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Snap Inc.","Snapchat",1,"NA","NA","NA"
+"880","usermatch.targeting.unrulymedia.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Blick",1,"NA","NA","NA"
+"881","va.tawk.to",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Instagram",1,"NA","NA","NA"
+"882","vast.doubleverify.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","DoubleVerify Holdings Inc.","20 Minuten",1,"NA","NA","NA"
+"883","vc.hotjar.io",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Instagram",1,"NA","NA","NA"
+"884","verify.ridedott.com",1,FALSE,FALSE,"1","1",1,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"885","vg-aws-cdn-us-east-1a-hb-bid-feedback.mtgglobals.com",1,TRUE,TRUE,"2","1",4,"AppInitiated","Other","Hitman",1,"NA","NA","NA"
+"886","visitor.omnitagjs.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Ricardo",1,"NA","NA","NA"
+"887","visualwebsiteoptimizer.com",1,TRUE,TRUE,"1","1",2,"AppInitiated","Wingify","Brave",1,"Tracker","Analytics","NA"
+"888","vpaid.doubleverify.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","DoubleVerify Holdings Inc.","20 Minuten",1,"NA","NA","NA"
+"889","wearychallengeraise.com",1,TRUE,FALSE,"2","1",2,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"890","web.inxmail-commerce.com",1,FALSE,FALSE,"1","1",1,"NonAppInitiated","Other","Apple Mail",1,"NA","NA","NA"
+"891","webrental.s3.eu-west-3.amazonaws.com",1,FALSE,FALSE,"1","1",1,"NonAppInitiated","Amazon","Apple Mail",1,"NA","NA","NA"
+"892","webview.unityads.unity3d.com",1,TRUE,TRUE,"1","1",3,"AppInitiated","Unity Inc.","Coffee Golf",1,"NA","NA","NA"
+"893","woopra.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Local.ch",1,"Tracker","Analytics","privacy"
+"894","www3.doubleclick.net",1,TRUE,TRUE,"2","1",1,"AppInitiated","Google","Local.ch",1,"NA","NA","NA"
+"895","xxxbule.com",1,TRUE,FALSE,"2","1",1,"AppInitiated","Other","Brave",1,"NA","NA","NA"
+"896","yahoo.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Verizon Media","Firefox",1,"NA","Content","NA"
+"897","yield-manager.browsiprod.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Other","Firefox",1,"NA","NA","NA"
+"898","yieldlove.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","Yieldlove","Firefox",1,"NA","NA","advertising"
+"899","yieldmo.com",1,TRUE,TRUE,"1","1",1,"AppInitiated","YieldMo Inc.","Firefox",1,"Tracker","Advertising, FingerprintingGeneral","advertising"
+"900","youtube-nocookie.com",1,TRUE,TRUE,"2","1",1,"AppInitiated","Google","Digitec",1,"NA","Content","NA"
+"901","z-m-static.xx.fbcdn.net",1,TRUE,FALSE,"2","1",1,"AppInitiated","Meta","20 Minuten",1,"NA","NA","NA"
