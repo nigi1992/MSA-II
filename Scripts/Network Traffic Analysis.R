@@ -3657,20 +3657,39 @@ table(merged_data_ct_on_more_info$domainType)
 table(merged_data_ct_on_more_info$domainType, merged_data_ct_on_more_info$TrackerBlackListXL)
 
 
+## Tracker prevalence - Statistical comparison CT on/off -------------------
+
+# comparing tracker prevalence between conditions
+comparison_stats_ct_on_off <- data.frame(
+  condition = c("CT_OFF", "CT_ON"),
+  total_trackers = c(sum(merged_data_ct_off_more_info$TrackerBlackListXL), sum(merged_data_ct_on_more_info$TrackerBlackListXL)),
+  unique_trackers = c(length(unique(merged_data_ct_off_more_info$domain[merged_data_ct_off_more_info$TrackerBlackListXL])), 
+                      length(unique(merged_data_ct_on_more_info$domain[merged_data_ct_on_more_info$TrackerBlackListXL]))),
+  total_hits = c(sum(merged_data_ct_off_more_info$hits[merged_data_ct_off_more_info$TrackerBlackListXL]), 
+                 sum(merged_data_ct_on_more_info$hits[merged_data_ct_on_more_info$TrackerBlackListXL]))
+)
+print(comparison_stats_ct_on_off)
+
+# statistical test for difference
+wilcox.test(merged_data_ct_off_more_info$hits[merged_data_ct_off_more_info$TrackerBlackListXL], 
+            merged_data_ct_on_more_info$hits[merged_data_ct_on_more_info$TrackerBlackListXL])
+
+
 # 7. Network Traffic Analysis of complete Df -------------------------------------------------------
 
-# Network Traffic Analysis of merged_data_all_more_info
-rm(network_traffic_analysis_all)
+## Network Traffic Analysis of merged_data_all_more_info by occurrence --------
+
+rm(network_traffic_analysis_all_n)
 # Show ranking of DomainOwnerName by occurence, where TrackerBlackListXL = TRUE | domainType == 1
-network_traffic_analysis_all <- merged_data_all_more_info %>%
+network_traffic_analysis_all_n <- merged_data_all_more_info %>%
   filter(TrackerBlackListXL == TRUE | domainType == 1) %>%
   group_by(DomainOwnerName) %>%
   summarise(total_accesses = n()) %>%
   #summarise(total_accesses = n(), .groups = "drop") %>%
   arrange(desc(total_accesses))
 
-rm(network_traffic_analysis_all_tracker_domains)
-network_traffic_analysis_all_tracker_domains <- merged_data_all_more_info %>%
+rm(network_traffic_analysis_all_tracker_domains_n)
+network_traffic_analysis_all_tracker_domains_n <- merged_data_all_more_info %>%
   filter(TrackerBlackListXL == TRUE | domainType == 1) %>%
   group_by(domain) %>%
   #summarise(total_accesses = n()) %>%
@@ -3701,21 +3720,68 @@ network_traffic_analysis_all_tracker_domains <- merged_data_all_more_info %>%
 
 
 # print only duplicate domains
-network_traffic_analysis_all_tracker_domains_duplicates <- network_traffic_analysis_all_tracker_domains %>%
+network_traffic_analysis_all_tracker_domains_n_duplicates <- network_traffic_analysis_all_tracker_domains_n %>%
   group_by(domain) %>%
   filter(n() > 1) %>%
   distinct(domain, .keep_all = TRUE)
-print(network_traffic_analysis_all_tracker_domains_duplicates)
-rm(network_traffic_analysis_all_tracker_domains_duplicates)
+print(network_traffic_analysis_all_tracker_domains_n_duplicates)
+rm(network_traffic_analysis_all_tracker_domains_n_duplicates)
 
 
-# checking some domains based on hits
-# sum hits of the tracker domains "mmg.whatsapp.net" and "g.whatsapp.net" in merged_data_all_more_info
+## Network Traffic Analysis of merged_data_all_more_info by hit occurence --------------------------------------------------------
+
+rm(network_traffic_analysis_all_hits)
+# Show ranking of DomainOwnerName by hits, where TrackerBlackListXL = TRUE | domainType == 1
+network_traffic_analysis_all_hits <- merged_data_all_more_info %>%
+  filter(TrackerBlackListXL == TRUE | domainType == 1) %>%
+  group_by(DomainOwnerName) %>%
+  summarise(total_hits = sum(hits)) %>% #, .groups = "drop") %>%
+  arrange(desc(total_hits))
+
+rm(network_traffic_analysis_all_tracker_domains_hits)
+network_traffic_analysis_all_tracker_domains_hits <- merged_data_all_more_info %>%
+  filter(TrackerBlackListXL == TRUE | domainType == 1) %>%
+  group_by(domain) %>%
+  summarise(total_hits = sum(hits), .groups = "drop") %>%
+  arrange(desc(total_hits)) %>%
+  # add DomainOwnerName column
+  left_join(
+    merged_data_all_more_info %>%
+      select(domain, TrackerBlackListXL, TrackerBlackList) %>%
+      distinct(), by = "domain"
+  ) %>%
+  # add columns with per domain occuring domainTypes and apps and initiatedType
+  rowwise() %>%
+  mutate(
+    DomainOwnerName = paste(unique(merged_data_all_more_info$DomainOwnerName[merged_data_all_more_info$domain == domain]), collapse = ", "),
+    domainType = paste(unique(merged_data_all_more_info$domainType[merged_data_all_more_info$domain == domain]), collapse = ", "),
+    domainClassification = paste(unique(merged_data_all_more_info$domainClassification[merged_data_all_more_info$domain == domain]), collapse = ", "),
+    #hits_sum = sum(merged_data_all_more_info$hits[merged_data_all_more_info$domain == domain]),
+    #hits = paste(merged_data_all_more_info$hits[merged_data_all_more_info$domain == domain], collapse = ", "),
+    initiatedType = paste(unique(merged_data_all_more_info$initiatedType[merged_data_all_more_info$domain == domain]), collapse = ", "),
+    apps = paste(unique(merged_data_all_more_info$AppName[merged_data_all_more_info$domain == domain]), collapse = ", "),
+    apps_count = length(unique(merged_data_all_more_info$AppName[merged_data_all_more_info$domain == domain])),
+    CategoryNoTrack = paste(unique(merged_data_all_more_info$CategoryNoTrack[merged_data_all_more_info$domain == domain]), collapse = ", "),
+    CategoryDisconnect = paste(unique(merged_data_all_more_info$CategoryDisconnect[merged_data_all_more_info$domain == domain]), collapse = ", "),
+    CategoryLockdown = paste(unique(merged_data_all_more_info$CategoryLockdown[merged_data_all_more_info$domain == domain]), collapse = ", ")
+  ) %>%
+  ungroup()
+
+
+## Checking some tracking domains hit occurrence ---------------------------
+
+# checking some domains based on sum hits of the tracker domains
 whatsapp_hits_sum <- merged_data_all_more_info %>%
-  filter(domain %in% c("mmg.whatsapp.net", "g.whatsapp.net")) %>%
+  filter(domain == "g.whatsapp.net") %>%
   summarise(total_hits = sum(hits))
 print(whatsapp_hits_sum)
 rm(whatsapp_hits_sum)
+
+graph.facebook.com_hits_sum <- merged_data_all_more_info %>%
+  filter(domain == "graph.facebook.com") %>%
+  summarise(total_hits = sum(hits))
+print(graph.facebook.com_hits_sum)
+rm(graph.facebook.com_hits_sum)
 
 cdn.branch_hits_sum <- merged_data_all_more_info %>%
   filter(AppName)
@@ -3723,6 +3789,43 @@ cdn.branch_hits_sum <- merged_data_all_more_info %>%
   summarise(total_hits = sum(hits))
 print(cdn.branch_hits_sum)
 rm(cdn.branch_hits_sum)
+
+ingest.sentry.io_hits_sum <- merged_data_all_more_info %>%
+  filter(domain == "ingest.sentry.io") %>%
+  summarise(total_hits = sum(hits))
+print(ingest.sentry.io_hits_sum)
+rm(ingest.sentry.io_hits_sum)
+
+events.mapbox.com_hits_sum <- merged_data_all_more_info %>%
+  filter(domain == "events.mapbox.com") %>%
+  summarise(total_hits = sum(hits))
+print(events.mapbox.com_hits_sum)
+rm(events.mapbox.com_hits_sum)
+
+
+
+# Optional: Temporal Pattern Analysis -------------------------------------
+
+# converting timestamp to datetime
+df$timeStamp <- as.POSIXct(df$timeStamp, format="%Y-%m-%dT%H:%M:%SZ", tz="UTC")
+
+# extracting temporal features
+df$hour <- hour(df$timeStamp)
+df$day_of_week <- wday(df$timeStamp, label=TRUE)
+df$date <- as.Date(df$timeStamp)
+
+# analyzing tracker activity by time of day
+tracker_by_hour <- df %>%
+  filter(TrackerBlackListXL == TRUE) %>%
+  group_by(hour, domain) %>%
+  summarise(total_hits = sum(hits), .groups = 'drop')
+
+# visualizing peak tracker activity times
+ggplot(tracker_by_hour, aes(x = hour, y = total_hits)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(title = "Tracker Activity by Hour of Day",
+       x = "Hour", y = "Total Hits")
+
 
 ### Fin du Script ###
 
