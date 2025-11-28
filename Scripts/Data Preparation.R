@@ -468,5 +468,56 @@ rm(df1_ct_off, df2_ct_off, df3_ct_off, df4_ct_on, df5_ct_on, df6_ct_on, df7_ct_o
 
 rm(category_data)
 
+# 8. Extra df's for data protection requests ----------------------------------
+## 
+
+# Merging all relevant data frames into one
+merged_data_all_0 <- bind_rows(
+  df1_ct_off_relevant,
+  df2_ct_off_relevant,
+  df3_ct_off_relevant,
+  df4_ct_on_relevant,
+  df5_ct_on_relevant,
+  df6_ct_on_relevant,
+  df7_ct_on_relevant,
+  df8_ct_off_relevant,
+  df9_ct_off_relevant,
+  df10_ct_unknown_relevant,
+  df11_ct_unknown_relevant
+)
+
+# filter for spotify only
+merged_data_spotify <- merged_data_all_0 %>%
+  filter(bundleID == "com.spotify.client")
+
+# save as .csv file
+write.csv(merged_data_spotify, "Output/Tables/merged_data_spotify.csv", row.names = TRUE)
+rm(merged_data_spotify)
+
+# filter for strava only
+merged_data_strava <- merged_data_all_0 %>%
+  filter(bundleID == "com.strava.stravaride")
+
+# save as .csv file
+write.csv(merged_data_strava, "Output/Tables/merged_data_strava.csv", row.names = TRUE)
+rm(merged_data_strava)
+
+# filter for ricardo only
+merged_data_ricardo <- merged_data_all_0 %>%
+  filter(bundleID == "swiss.ricardo.iphone")
+
+# save as .csv file
+write.csv(merged_data_ricardo, "Output/Tables/merged_data_ricardo.csv", row.names = TRUE)
+rm(merged_data_ricardo)
+
+# filter for tutti only
+merged_data_tutti <- merged_data_all_0 %>%
+  filter(bundleID == "ch.tutti.iphone")
+
+# save as .csv file
+write.csv(merged_data_tutti, "Output/Tables/merged_data_tutti.csv", row.names = TRUE)
+rm(merged_data_tutti)
+
+
 # ### Fin du script ### ---------------------------------------------------
 ### Fin du script ###
