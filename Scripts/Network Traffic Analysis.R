@@ -3825,9 +3825,14 @@ merged_data_all_0 <- bind_rows(
 merged_data_spotify <- merged_data_all_0 %>%
   filter(bundleID == "com.spotify.client")
 
+merged_data_spotify_info <- merged_data_all_more_info %>%
+  filter(bundleID == "com.spotify.client") %>%
+  select(DomainOwnerName, AppName, domain, domainType, TrackerBlackList, TrackerBlackListXL, 
+         firstTimeStamp, timeStamp, hits, initiatedType, domainClassification)
 # save as .csv file
 write.csv(merged_data_spotify, "Output/Tables/merged_data_spotify.csv", row.names = TRUE)
 rm(merged_data_spotify)
+rm(merged_data_spotify_info)
 
 # filter for strava only
 merged_data_strava <- merged_data_all_0 %>%
