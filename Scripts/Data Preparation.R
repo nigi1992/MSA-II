@@ -469,5 +469,95 @@ rm(df1_ct_off, df2_ct_off, df3_ct_off, df4_ct_on, df5_ct_on, df6_ct_on, df7_ct_o
 rm(category_data)
 
 
-# ### Fin du script ### ---------------------------------------------------
+# 8. Extra Dfs for Spotify Analysis Sep - Nov 2025 ---------------------------------------
+
+library(ndjson) # For reading ndjson files
+library(dplyr)
+library(tidyverse) 
+
+# Defining File Path
+file_path_spotify <- '/Users/nicolaswaser/New-project-GitHub-first/R/MSA II/Input Data/Spotify Extra Dfs'
+
+## Loading the NDJSON files into R
+
+df_spotify1 <- ndjson::stream_in(paste0(file_path_spotify, "/App_Privacy_Report_v4_2025-09-07T22_31_11.ndjson"))
+
+df_spotify2 <- ndjson::stream_in(paste0(file_path_spotify, "/App_Privacy_Report_v4_2025-09-15T00_38_37.ndjson"))
+
+df_spotify3 <- ndjson::stream_in(paste0(file_path_spotify, "/App_Privacy_Report_v4_2025-09-21T23_46_45.ndjson"))
+
+df_spotify4 <- ndjson::stream_in(paste0(file_path_spotify, "/App_Privacy_Report_v4_2025-09-28T23_19_35.ndjson"))
+
+df_spotify5 <- ndjson::stream_in(paste0(file_path_spotify, "/App_Privacy_Report_v4_2025-10-05T23_03_32.ndjson"))
+
+df_spotify6 <- ndjson::stream_in(paste0(file_path_spotify, "/App_Privacy_Report_v4_2025-10-12T22_59_05.ndjson"))
+
+df_spotify7 <- ndjson::stream_in(paste0(file_path_spotify, "/App_Privacy_Report_v4_2025-10-19T22_39_39.ndjson"))
+
+df_spotify8 <- ndjson::stream_in(paste0(file_path_spotify, "/App_Privacy_Report_v4_2025-10-26T22_50_08.ndjson"))
+
+df_spotify9 <- ndjson::stream_in(paste0(file_path_spotify, "/App_Privacy_Report_v4_2025-11-02T23_13_18.ndjson"))
+
+df_spotify10 <- ndjson::stream_in(paste0(file_path_spotify, "/App_Privacy_Report_v4_2025-11-09T23_04_53.ndjson"))
+
+df_spotify11 <- ndjson::stream_in(paste0(file_path_spotify, "/App_Privacy_Report_v4_2025-11-17T01_49_13.ndjson"))
+
+df_spotify12 <- ndjson::stream_in(paste0(file_path_spotify, "/App_Privacy_Report_v4_2025-11-23T22_40_56.ndjson"))
+
+df_spotify13 <- ndjson::stream_in(paste0(file_path_spotify, "/App_Privacy_Report_v4_2025-11-30T23_06_59.ndjson"))
+
+
+## Merging Spotify data frames into one -------------------------------------
+
+df_spotify_merged_all <- bind_rows(
+  df_spotify1,
+  df_spotify2,
+  df_spotify3,
+  df_spotify4,
+  df_spotify5,
+  df_spotify6,
+  df_spotify7,
+  df_spotify8,
+  df_spotify9,
+  df_spotify10,
+  df_spotify11,
+  df_spotify12,
+  df_spotify13
+)
+
+rm(df_spotify1, df_spotify2, df_spotify3, df_spotify4, df_spotify5,
+   df_spotify6, df_spotify7, df_spotify8, df_spotify9, df_spotify10,
+   df_spotify11, df_spotify12, df_spotify13)
+
+## convert to tibble
+is_tibble(df_spotify_merged_all) # FALSE
+df_spotify_merged_all_tibble <- convert_to_tibble(df_spotify_merged_all)
+is_tibble(df_spotify_merged_all_tibble) # TRUE
+
+## unnest
+library(tidyr)
+names(df_spotify_merged_all_tibble)
+df_spotify_merged_all_unnest <- unnest(df_spotify_merged_all_tibble, cols = c("accessCount", "accessor.identifier", "accessor.identifierType", 
+                                                          "category", "identifier", "kind", "timeStamp", "type", 
+                                                          "outOfProcess", "bundleID", "context", "contextVerificationType", 
+                                                          "domain", "domainClassification", "domainOwner", "domainType", 
+                                                          "firstTimeStamp", "hits", "initiatedType"))
+
+## selecting relevant columns
+# Selecting only the relevant columns for analysis that concern "networkActivity"
+df_spotify_merged_all_relevant <- df_spotify_merged_all_unnest %>%
+  filter() %>%
+  filter(type == "networkActivity") %>%
+  filter(bundleID == "com.spotify.client") %>%
+  select(firstTimeStamp, timeStamp, hits,
+         bundleID, domain, domainOwner, domainType, domainClassification,
+         initiatedType)
+#rm(df_spotify_merged_all_relevant) 
+rm(df_spotify_merged_all, df_spotify_merged_all_tibble)#, df_spotify_merged_all_unnest)
+
+#save as .csv file
+write.csv(df_spotify_merged_all_relevant, "Output/Tables/df_spotify_merged_all_Sep_Nov_25.csv", row.names = TRUE)
+
+
+### Fin du script ---------------------------------------------------
 ### Fin du script ###
