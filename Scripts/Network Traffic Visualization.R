@@ -83,5 +83,46 @@ ggraph(tracker_network, layout = 'fr') +
   labs(title = "App-Tracker Network Relationships")
 
 
+# Branch-TikTok-Spotify Diagram -------------------------------------------
+
+# Install package if needed
+if (!require("igraph")) install.packages("igraph")
+
+library(igraph)
+
+# 1. Create the data frame of connections (From -> To)
+relations <- data.frame(
+  from = c("USER",      "TikTok AD", "Branch",   "Spotify",     "Spotify",   "USER",    "Branch"),
+  to   = c("TikTok AD", "Branch",    "Spotify",  "Branch",      "USER",      "Spotify", "TikTok AD"),
+  label = c("clicks",   "triggers",   "opens",   "Reports back","SHOWS SONG","Interacts", "")
+)
+
+
+#relations <- data.frame(
+ # from = c("Branch",   "Spotify", "USER",      "TikTok AD",     "Spotify",   "USER",    "Branch"),
+#  to   = c("Spotify",  "Branch",  "TikTok AD", "Branch",          "USER",      "Spotify", "TikTok AD"),
+#  label = c("opens",   "Reports back","clicks",   "triggers",   "SHOWS SONG","Interacts", "")
+#)
+
+# 2. Create the graph object
+g <- graph_from_data_frame(relations, directed=TRUE)
+
+# 3. specific Layout (so it looks like a circle/cycle)
+l <- layout_in_circle(g)
+
+# 4. Plotting
+plot(g,
+     layout = l,
+     edge.label = relations$label,           # Add the text on lines
+     edge.label.cex = 0.8,                   # Size of text on lines
+     edge.arrow.size = 0.5,                  # Size of arrowheads
+     vertex.color = c("lightblue", "white", "white", "#1DB954"), # Colors for nodes
+     vertex.size = 30,                       # Size of bubbles
+     vertex.label.color = "black",           # Text color inside bubbles
+     vertex.label.cex = 0.9,                 # Text size inside bubbles
+     main = "User Acquisition Flow"          # Title
+)
+
+
 # ### Fin du script ### ---------------------------------------------------
 ### Fin du script ###
