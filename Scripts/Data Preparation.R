@@ -546,7 +546,7 @@ df_spotify_merged_all_unnest <- unnest(df_spotify_merged_all_tibble, cols = c("a
 ## selecting relevant columns
 # Selecting only the relevant columns for analysis that concern "networkActivity"
 df_spotify_merged_all_relevant <- df_spotify_merged_all_unnest %>%
-  filter() %>%
+  #filter() %>%
   filter(type == "networkActivity") %>%
   filter(bundleID == "com.spotify.client") %>%
   select(firstTimeStamp, timeStamp, hits,
@@ -557,6 +557,41 @@ rm(df_spotify_merged_all, df_spotify_merged_all_tibble)#, df_spotify_merged_all_
 
 #save as .csv file
 write.csv(df_spotify_merged_all_relevant, "Output/Tables/df_spotify_merged_all_Sep_Nov_25.csv", row.names = TRUE)
+
+
+## Extra Spotify Df for Analytics Comp. ------------------------------------
+
+df_spotify1 <- ndjson::stream_in(paste0(file_path, "/App_Privacy_Report_v4_2025-02-10_T00_01_39_CT-OFF.ndjson"))
+
+library(tibble)
+is_tibble(df_spotify1) # FALSE
+df_spotify1_tibble <- convert_to_tibble(df_spotify1)
+is_tibble(df_spotify1_tibble) # TRUE
+
+## unnest
+library(tidyr)
+names(df_spotify1_tibble)
+df_spotify1_unnest <- unnest(df_spotify1_tibble, 
+                             cols = c("accessCount", "accessor.identifier", "accessor.identifierType", 
+                                      "category", "identifier", "kind", "timeStamp", "type", 
+                                      "outOfProcess", "bundleID", "context", "contextVerificationType", 
+                                      "domain", "domainClassification", "domainOwner", "domainType", 
+                                      "firstTimeStamp", "hits", "initiatedType"))
+
+## selecting relevant columns
+library(dplyr)
+# Selecting only the relevant columns for analysis that concern "networkActivity"
+df_spotify1_relevant <- df_spotify1_unnest %>%
+  #filter(type == "networkActivity") %>%
+  filter(bundleID == "com.spotify.client") %>%
+  select(firstTimeStamp, timeStamp, type, hits,
+         bundleID, domain, domainOwner, domainType, domainClassification,
+         initiatedType)
+
+rm(df_spotify1, df_spotify1_tibble, df_spotify1_unnest) 
+
+write.csv(df_spotify1_relevant, "Output/Tables/df_spotify1_Feb_25.csv", row.names = TRUE)
+#rm(df_spotify1_relevant)
 
 
 ### Fin du script ---------------------------------------------------
