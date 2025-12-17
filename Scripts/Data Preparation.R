@@ -594,5 +594,44 @@ write.csv(df_spotify1_relevant, "Output/Tables/df_spotify1_Feb_25.csv", row.name
 #rm(df_spotify1_relevant)
 
 
+# Extra Df Timestamp 7.2.25 -----------------------------------------------
+
+df_spotify1 <- ndjson::stream_in(paste0(file_path, "/App_Privacy_Report_v4_2025-02-10_T00_01_39_CT-OFF.ndjson"))
+
+library(tibble)
+is_tibble(df_spotify1) # FALSE
+df_spotify1_tibble <- convert_to_tibble(df_spotify1)
+is_tibble(df_spotify1_tibble) # TRUE
+
+## unnest
+library(tidyr)
+names(df_spotify1_tibble)
+df_spotify1_unnest <- unnest(df_spotify1_tibble, 
+                             cols = c("accessCount", "accessor.identifier", "accessor.identifierType", 
+                                      "category", "identifier", "kind", "timeStamp", "type", 
+                                      "outOfProcess", "bundleID", "context", "contextVerificationType", 
+                                      "domain", "domainClassification", "domainOwner", "domainType", 
+                                      "firstTimeStamp", "hits", "initiatedType"))
+
+## selecting relevant columns
+library(dplyr)
+# Selecting only the relevant columns for analysis that concern "networkActivity"
+# Date/Time:           2025-02-07 07:13:03.0953 +0100
+# Launch Time:         2025-02-07 07:12:57.0705 +0100
+df_spotify1_timestamp <- df_spotify1_unnest %>%
+  # filter time stamp 2025-02-07 06:12 - 08:14
+  filter(timeStamp >= "2025-02-07T06:12:00.000+0100" & timeStamp <= "2025-02-07T08:14:00.000+0100") %>%
+  #filter(type == "networkActivity") %>%
+  #filter(bundleID == "com.spotify.client") %>%
+  select(firstTimeStamp, timeStamp, type, hits, accessor.identifier, category, kind, 
+         bundleID, domain, domainOwner, domainType, domainClassification,
+         initiatedType)
+
+rm(df_spotify1, df_spotify1_tibble, df_spotify1_unnest) 
+
+write.csv(df_spotify1_timestamp, "Output/Tables/df_spotify1_Feb_25.csv", row.names = TRUE)
+rm(df_spotify1_timestamp)
+
+
 ### Fin du script ---------------------------------------------------
 ### Fin du script ###
