@@ -594,7 +594,7 @@ write.csv(df_spotify1_relevant, "Output/Tables/df_spotify1_Feb_25.csv", row.name
 #rm(df_spotify1_relevant)
 
 
-# Extra Df Timestamp 7.2.25 -----------------------------------------------
+## Extra Df Timestamp 7.2.25 -----------------------------------------------
 
 df_spotify1 <- ndjson::stream_in(paste0(file_path, "/App_Privacy_Report_v4_2025-02-10_T00_01_39_CT-OFF.ndjson"))
 
@@ -629,7 +629,7 @@ df_spotify1_timestamp <- df_spotify1_unnest %>%
 
 rm(df_spotify1, df_spotify1_tibble, df_spotify1_unnest) 
 
-write.csv(df_spotify1_timestamp, "Output/Tables/df_spotify1_Feb_25.csv", row.names = TRUE)
+write.csv(df_spotify1_timestamp, "Output/Tables/df_spotify1_Feb_25_6-8.csv", row.names = TRUE)
 rm(df_spotify1_timestamp)
 
 
