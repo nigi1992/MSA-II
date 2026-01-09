@@ -890,6 +890,16 @@ merged_data_all %>%
   )) %>%
   write.csv("Output/Tables/DomainOwnerName_summary.csv", row.names = TRUE)
 
+merged_data_all %>%
+  group_by(DomainOwnerName) %>%
+  summarise(total_hits = sum(hits), .groups = "drop") %>%
+  arrange(desc(total_hits)) %>%
+  print(n=104) %>%
+  # add new empty "notes" column
+  mutate(notes = case_when(
+    TRUE ~ "" # Default case for all other domains
+  )) %>%
+  write.csv("Output/Tables/DomainOwnerName_hits_summary.csv", row.names = TRUE)
 
 merged_data_all %>%
   group_by(domain) %>%
@@ -907,7 +917,7 @@ merged_data_all_domain_10plus <- merged_data_all %>%
   arrange(desc(total_accesses)) %>%
   # add DomainOwnerName and domainType columns
   left_join(merged_data_all %>% 
-              select(domain, domainOwner, DomainOwnerName, domainType, domainClassification, initiatedType) %>%
+              select(domain, DomainOwnerName, domainType, domainClassification) %>%
               distinct(), by = "domain") %>%
   # add new empty "notes" column
   mutate(notes = case_when(
@@ -929,10 +939,42 @@ merged_data_all_domain_10plus_full <- merged_data_all %>%
 write.csv(merged_data_all_domain_10plus_full, "Output/Tables/most_accessed_domains_10plus_full.csv", row.names = TRUE)
 
 
+## Filtered Df domain > 10 hits -------------------------------------------------------------
+
+# New df with domains that have more than 10 hits
+rm(merged_data_all_domain_10plus_hits)
+merged_data_all_domain_10plus_hits <- merged_data_all %>%
+  group_by(domain) %>%
+  summarise(total_hits = sum(hits), .groups = "drop") %>%
+  #reframe(hits) %>%
+  filter(total_hits > 10) %>%
+  arrange(desc(total_hits)) %>%
+  # add DomainOwnerName and domainType columns
+  left_join(merged_data_all %>% 
+              select(domain, DomainOwnerName, domainType, domainClassification) %>%
+              distinct(), by = "domain") %>%
+  #mutate(notes = case_when(   # add new empty "notes" column
+   # TRUE ~ "")) %>% # Default case for all other domains
+  print(n=150)
+
+# Save df as CSV
+write.csv(merged_data_all_domain_10plus_hits, "Output/Tables/most_accessed_domains_10plus_hits.csv", row.names = TRUE)
+
+
+# New df with domains that have more than 10 accesses and all selected columns
+merged_data_all_domain_10plus_hits_full <- merged_data_all %>%
+  filter(domain %in% merged_data_all_domain_10plus_hits$domain) %>%
+  select(firstTimeStamp, timeStamp, hits, bundleID, AppName, domain, domainOwner, DomainOwnerName, everything()) %>%
+  arrange(desc(timeStamp)) 
+
+# Save df as CSV
+write.csv(merged_data_all_domain_10plus_hits_full, "Output/Tables/most_accessed_domains_10plus_hits_full.csv", row.names = TRUE)
+
+
 ## New df's with domain Owners ---------------------------------------
 
 # New df for domain Owner Names with domains that have more than 10 accesses
-merged_data_all_domain_10plus_domainOwners <- merged_data_all_domain_10plus %>%
+merged_data_all_domain_10plus_domainOwners <- merged_data_all %>%
   #group_by(domainOwner) %>%
   group_by(DomainOwnerName) %>%
   summarise(total_accesses = n()) %>%
@@ -3717,7 +3759,7 @@ network_traffic_analysis_all_tracker_domains_n <- merged_data_all_more_info %>%
     CategoryLockdown = paste(unique(merged_data_all_more_info$CategoryLockdown[merged_data_all_more_info$domain == domain]), collapse = ", ")
   ) %>%
   ungroup()
-
+write.csv(network_traffic_analysis_all_tracker_domains_n, "Output/Tables/network_traffic_analysis_all_tracker_domains_n.csv", row.names = TRUE)
 
 # print only duplicate domains
 network_traffic_analysis_all_tracker_domains_n_duplicates <- network_traffic_analysis_all_tracker_domains_n %>%
@@ -3766,7 +3808,7 @@ network_traffic_analysis_all_tracker_domains_hits <- merged_data_all_more_info %
     CategoryLockdown = paste(unique(merged_data_all_more_info$CategoryLockdown[merged_data_all_more_info$domain == domain]), collapse = ", ")
   ) %>%
   ungroup()
-
+write.csv(network_traffic_analysis_all_tracker_domains_hits, "Output/Tables/network_traffic_analysis_all_tracker_domains_hits.csv", row.names = TRUE)
 
 ## Checking some tracking domains hit occurrence ---------------------------
 
