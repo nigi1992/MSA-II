@@ -1878,8 +1878,7 @@ print(tracker_summary_XL, n = 50)
 
 # save as CSV
 write.csv(tracker_summary_XL, "Output/Tables/most_hit_blacklist_XL_trackers.csv", row.names = TRUE)
-
-
+  
 ## Summary with more info
 tracker_summary_XL_extended <- merged_data_all_more_info %>%
   filter(TrackerBlackListXL == TRUE | domainType == 1) %>% # == TRUE or domainType == 1
@@ -3729,6 +3728,7 @@ network_traffic_analysis_all_n <- merged_data_all_more_info %>%
   summarise(total_accesses = n()) %>%
   #summarise(total_accesses = n(), .groups = "drop") %>%
   arrange(desc(total_accesses))
+write.csv(network_traffic_analysis_all_n, "Output/Tables/network_traffic_analysis_all_owners_n.csv", row.names = TRUE)
 
 rm(network_traffic_analysis_all_tracker_domains_n)
 network_traffic_analysis_all_tracker_domains_n <- merged_data_all_more_info %>%
@@ -3779,6 +3779,7 @@ network_traffic_analysis_all_hits <- merged_data_all_more_info %>%
   group_by(DomainOwnerName) %>%
   summarise(total_hits = sum(hits)) %>% #, .groups = "drop") %>%
   arrange(desc(total_hits))
+write.csv(network_traffic_analysis_all_hits, "Output/Tables/network_traffic_analysis_all_owners_hits.csv", row.names = TRUE)
 
 rm(network_traffic_analysis_all_tracker_domains_hits)
 network_traffic_analysis_all_tracker_domains_hits <- merged_data_all_more_info %>%

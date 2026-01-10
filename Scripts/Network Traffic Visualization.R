@@ -1,6 +1,26 @@
 ### Network Traffic Analysis Visualization Script ###
 # Network Analysis Visualization -----------------------------------------------
 
+# Filter down df for Visualizations
+
+## Create new df with only tracker entries
+df_all_trackers_XL_dType1 <- merged_data_all_more_info %>% # (True/False Positives and False Negatives)
+  filter(TrackerBlackListXL == TRUE | domainType == 1) %>%
+  select(AppName, domain, DomainOwnerName, hits, domainType, TrackerBlackListXL)
+
+table(df_all_trackers_XL_dType1$domainType, df_all_trackers_XL_dType1$TrackerBlackListXL)
+
+# Number of unique domains in df
+length(unique(df_all_trackers_XL_dType1$domain))  # 901 unique domains
+
+# Number of unique apps in df
+length(unique(df_all_trackers_XL_dType1$AppName))  # 150 unique apps
+
+# Number of unique DomainOwnerName in df
+length(unique(df_all_trackers_XL_dType1$DomainOwnerName))  # 90
+
+# Next step: Filter down to small enough number of apps and domains for visualization!!!!
+
 
 # Tracker Heatmap ---------------------------------------------------------
 
