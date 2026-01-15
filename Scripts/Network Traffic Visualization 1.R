@@ -28,6 +28,8 @@ length(unique(df_all_trackers_XL_dType1$AppName))  # 150 unique apps
 # Number of unique DomainOwnerName in df
 length(unique(df_all_trackers_XL_dType1$DomainOwnerName))  # 90 unique domain owners
 
+#save.csv(df_all_trackers_XL_dType1, "Output/Tables/df_all_trackers_XL_dType1.csv", row.names = FALSE)
+
 
 ## Filtering down to Top24 Apps --------------------------------------------
 
@@ -142,6 +144,29 @@ length(unique(Top24apps_no_unique_domains$DomainOwnerName))  # 25 unique domain 
 
 # Show number of unique rows
 nrow(Top24apps_no_unique_domains)  # 458 rows
+
+
+# Top 10 Apps even smaller df ---------------------------------------------
+
+# aggregating hits to find the most active apps and domains
+# filtering to top 10 apps and top 50 domains to prevent visual clutter ("hairball" graph)
+top_apps <- df %>%
+  group_by(AppName) %>%
+  summarise(total_hits = sum(hits, na.rm = TRUE)) %>%
+  slice_max(order_by = total_hits, n = 10) %>%
+  pull(AppName)
+
+df_filtered <- df %>%
+  filter(AppName %in% top_apps)
+
+top_domains <- df_filtered %>%
+  group_by(domain) %>%
+  summarise(total_hits = sum(hits, na.rm = TRUE)) %>%
+  slice_max(order_by = total_hits, n = 50) %>%
+  pull(domain)
+
+df_filtered <- df_filtered %>%
+  filter(domain %in% top_domains)
 
 
 ## Final Filtered df for Visualization --------------------------------------
@@ -447,7 +472,7 @@ vertex.label.values <- sapply(V(g4)$name, function(name) {
   return(name)
 })
 
-weight_threshold <- 20  # Set the threshold for minimum edge weight
+#weight_threshold <- 20  # Set the threshold for minimum edge weight
 #weight_threshold <- 25  # Set the threshold for minimum edge weight
 #weight_threshold <- 30  # Set the threshold for minimum edge weight
 weight_threshold <- 50  # Set the threshold for minimum edge weight
@@ -492,6 +517,23 @@ plot(g4,
 dev.off()
 
 
+# Plots without overlaps --------------------------------------------------
+
+#vertex.label.dist <- ifelse(V(g4)$layer == 2, 1.5, # pushes labels away from nodes
+ #                           ifelse(V(g4)$layer == 1, 0,
+  #                                 0))     
+#vertex.label.degree <- ifelse(V(g4)$layer == 2,  pi/4, # fixed direction
+ #                             ifelse(V(g4)$layer == 1, 0,
+  #                                   0))    
+
+ggraph(g4, layout = "manual", x = layout2[,1], y = layout2[,2]) +
+  #geom_edge_link(aes(width = weight/1000)) +
+  geom_edge_arc(aes(alpha = ..index..), strength = 0.1, color = "grey50", show.legend = FALSE) +
+  #scale_edge_width_continuous(range = c(0.1, 10) ) + #, guide = "none") +
+  geom_node_point(aes(color = color)) +#, size = size)) +
+  geom_node_text(aes(label = name), repel = TRUE)
+
+
 # 5. Plot with less pixels for higher resolution? -------------------------
 
 png("Output/Plots/concentric_network_adjusted5.png", width = 1500, height = 1500)
@@ -500,6 +542,8 @@ plot(g4,
      vertex.label = vertex.label.values, 
      vertex.label.color = "black",
      vertex.label.cex = 1.2,  # Increase the font size for vertex labels
+     #vertex.label.dist = vertex.label.dist,
+     #vertex.label.degree = vertex.label.degree,
      vertex.size = vertex.size.values,  # Keep vertex sizes as defined earlier
      edge.width = E(g4)$weight / max(E(g4)$weight) * 30, #1, #40, #20,  # Normalize edge width
      layout = layout2, 

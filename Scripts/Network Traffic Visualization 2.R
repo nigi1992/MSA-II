@@ -1,4 +1,4 @@
-
+### Network Traffic Analysis Visualization Script 2###
 
 # Clean Up previous variables
 rm(g4)  
@@ -334,3 +334,5 @@ cat("  Apps:", sum(V(g4_filtered)$layer == 1), "\n")
 cat("  Domains (visible):", sum(V(g4_filtered)$layer == 2 & !is.na(vertex.label.values)), "\n")
 cat("  Domain Owners:", sum(V(g4_filtered)$layer == 3), "\n")
 cat("Weight threshold applied:", weight_threshold, "\n")
+# ### Fin du script ### ---------------------------------------------------
+### Fin du script ###
