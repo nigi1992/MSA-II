@@ -1,8 +1,7 @@
 ### To DO:
 
-# 1. Look at new df. Is even smaller even better? maybe even smaller? (top15)
+# 1. Look at new df. Is even smaller even better? maybe even smaller? (top10)
 # 2. Farbenskalen anpassen: colorramps? grDevices?
-# 3. Domain Label überlappung -> threshold anpassen? was mit domain nodes machen?
 
 ### Dann aber fertig!!!! du musst endlich schreiben!!!
 

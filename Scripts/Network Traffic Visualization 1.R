@@ -148,26 +148,32 @@ nrow(Top24apps_no_unique_domains)  # 458 rows
 
 # Top 10 Apps even smaller df ---------------------------------------------
 
+rm(filtered_df)  # Clean up
+
 # aggregating hits to find the most active apps and domains
 # filtering to top 10 apps and top 50 domains to prevent visual clutter ("hairball" graph)
-top_apps <- df %>%
+top10_apps <- df_all_trackers_XL_dType1 %>%
   group_by(AppName) %>%
   summarise(total_hits = sum(hits, na.rm = TRUE)) %>%
   slice_max(order_by = total_hits, n = 10) %>%
   pull(AppName)
 
-df_filtered <- df %>%
-  filter(AppName %in% top_apps)
+filtered_df <- df_all_trackers_XL_dType1 %>%
+  filter(AppName %in% top10_apps)
 
-top_domains <- df_filtered %>%
+top50_domains <- filtered_df %>%
   group_by(domain) %>%
   summarise(total_hits = sum(hits, na.rm = TRUE)) %>%
   slice_max(order_by = total_hits, n = 50) %>%
   pull(domain)
 
-df_filtered <- df_filtered %>%
-  filter(domain %in% top_domains)
+filtered_df <- filtered_df %>%
+  filter(domain %in% top50_domains)
 
+filtered_df <- filtered_df %>%
+  select(AppName, domain, hits, DomainOwnerName) %>%
+  # rename AppName to bundleID
+  rename(bundleID = AppName)
 
 ## Final Filtered df for Visualization --------------------------------------
 
