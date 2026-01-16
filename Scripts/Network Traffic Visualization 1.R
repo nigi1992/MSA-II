@@ -31,7 +31,7 @@ length(unique(df_all_trackers_XL_dType1$DomainOwnerName))  # 90 unique domain ow
 #save.csv(df_all_trackers_XL_dType1, "Output/Tables/df_all_trackers_XL_dType1.csv", row.names = FALSE)
 
 
-## Filtering down to Top24 Apps --------------------------------------------
+# Filtering down to Top24 Apps --------------------------------------------
 
 #rm(df_all_trackers_XL_dType1_Top24)  # Clean up
 df_all_trackers_XL_dType1_Top24 <- df_all_trackers_XL_dType1 %>%
@@ -102,7 +102,7 @@ length(unique(Top24apps_no_unique_domains$DomainOwnerName))  # 26 unique domain 
 nrow(Top24apps_no_unique_domains)  # 1354 rows
 
 
-## Top24 Apps smaller df --------------------------------------------
+# Top24 Apps smaller df --------------------------------------------
 
 rm(Top24apps_no_unique_domains)  # Clean up
 # Filter for domains that occur at least 5 times across all apps
@@ -146,36 +146,7 @@ length(unique(Top24apps_no_unique_domains$DomainOwnerName))  # 25 unique domain 
 nrow(Top24apps_no_unique_domains)  # 458 rows
 
 
-# Top 10 Apps even smaller df ---------------------------------------------
-
-rm(filtered_df)  # Clean up
-
-# aggregating hits to find the most active apps and domains
-# filtering to top 10 apps and top 50 domains to prevent visual clutter ("hairball" graph)
-top10_apps <- df_all_trackers_XL_dType1 %>%
-  group_by(AppName) %>%
-  summarise(total_hits = sum(hits, na.rm = TRUE)) %>%
-  slice_max(order_by = total_hits, n = 10) %>%
-  pull(AppName)
-
-filtered_df <- df_all_trackers_XL_dType1 %>%
-  filter(AppName %in% top10_apps)
-
-top50_domains <- filtered_df %>%
-  group_by(domain) %>%
-  summarise(total_hits = sum(hits, na.rm = TRUE)) %>%
-  slice_max(order_by = total_hits, n = 50) %>%
-  pull(domain)
-
-filtered_df <- filtered_df %>%
-  filter(domain %in% top50_domains)
-
-filtered_df <- filtered_df %>%
-  select(AppName, domain, hits, DomainOwnerName) %>%
-  # rename AppName to bundleID
-  rename(bundleID = AppName)
-
-## Final Filtered df for Visualization --------------------------------------
+# Final Filtered df for Visualization (Top24) --------------------------------------
 
 rm(filtered_df)  # Clean up
 # Reorder & Rename columns
@@ -184,9 +155,9 @@ filtered_df <- Top24apps_no_unique_domains %>%
   # rename AppName to bundleID
   rename(bundleID = AppName)
 
-length(unique(filtered_df$bundleID))  #  unique apps
-length(unique(filtered_df$domain))    #  unique domains
-length(unique(filtered_df$DomainOwnerName))  #  unique domain owners
+length(unique(filtered_df$bundleID))  #  24 unique apps
+length(unique(filtered_df$domain))    #  160 unique domains
+length(unique(filtered_df$DomainOwnerName))  #  25 unique domain owners
 
 
 ## Tibble Data -------------------------------------------------------------
@@ -198,22 +169,15 @@ is_tibble(Top24apps_no_unique_domains)  # True
 is_tibble(filtered_df)  # True
 
 
-# Concentric Network Visualization ----------------------------------------
+# 1. Concentric Network Visualization Top24 Apps ----------------------------------------
 
 # Loading necessary libraries
 library(igraph)
 
 # Clean Up for refinement
-rm(g4)  
-rm(unique_bundle_ids)  
-rm(layout2)  
-rm(vertex.size.values)  
-rm(vertex.label.values)  
-rm(layout_concentric2)  
-rm(weight_threshold)  
+rm(g4, layout2, unique_bundle_ids, vertex.size.values, vertex.label.values, layout_concentric2, weight_threshold)
 
-
-# Framework for Concentric Network Visual --------------------------------------
+## 1.1 Framework for Concentric Network Visual --------------------------------------
 
 # Filtering out rows where 'DomainOwnerName' is 'Other'
 #filtered_df <- df #subset(df, DomainOwnerName != "Other")
@@ -256,140 +220,7 @@ for (i in 1:nrow(filtered_df)) {
 }
 
 
-# 0. Basic Concentric Network ---------------------------------------------
-
-# Extracting node attributes
-V(g4)$color <- sapply(V(g4)$name, function(name) {
-  if (name == "User") {
-    return("white")
-  } else if (name %in% unique_bundle_ids) {
-    return("red")
-  } else if (name %in% filtered_df$domain) {
-    return("orange")
-  } else {
-    return("yellow")
-  }
-})
-
-layout_concentric2 <- function(g4) {
-  layers <- split(V(g4), V(g4)$layer)
-  positions <- list()
-  positions[["User"]] <- c(0, 0)  # Place 'User' at the center
-  for (i in seq_along(layers)) {
-    if (i == 1) next  # Skip layer 0 since 'User' is already placed
-    layer_size <- length(layers[[i]])
-    radius <- i * 1.5
-    angles <- seq(0, 2 * pi, length.out = layer_size + 1)[-1]
-    for (j in seq_along(layers[[i]])) {
-      positions[[layers[[i]][j]$name]] <- c(radius * cos(angles[j]), radius * sin(angles[j]))
-    }
-  }
-  return(do.call(rbind, positions))
-}
-
-layout2 <- layout_concentric2(g4)
-
-png("Output/Plots/concentric_network_adjusted0.png", width = 800, height = 800)
-plot(g4, 
-     vertex.color = V(g4)$color, 
-     vertex.label = V(g4)$name, 
-     vertex.label.color = "black", 
-     vertex.size = 20,
-     edge.width = E(g4)$weight, 
-     layout = layout2, 
-     main = "Concentric Network Visualization")
-dev.off()
-
-# 1. Normalized edges --------------------------------------
-
-# Adjust vertex sizes and labels
-vertex.size.values <- ifelse(V(g4)$layer == 0, 25, ifelse(V(g4)$layer == 1, 15, ifelse(V(g4)$layer == 2, 10, ifelse(V(g4)$layer == 3, 15, 8))))
-vertex.label.values <- ifelse(V(g4)$layer == 0 | V(g4)$layer == 1 | V(g4)$layer == 3, V(g4)$name, NA)
-
-# Plotting the graph using concentric circles with 'User' at the center
-layout_concentric2 <- function(g4) {
-  layers <- split(V(g4), V(g4)$layer)
-  positions <- list()
-  positions[["User"]] <- c(0, 0)  # Place 'User' at the center
-  for (i in seq_along(layers)) {
-    if (i == 1) next  # Skip layer 0 since 'User' is already placed
-    layer_size <- length(layers[[i]])
-    radius <- i * 2.5  # Increase spacing between layers
-    angles <- seq(0, 2 * pi, length.out = layer_size + 1)[-1]
-    for (j in seq_along(layers[[i]])) {
-      positions[[layers[[i]][j]$name]] <- c(radius * cos(angles[j]), radius * sin(angles[j]))
-    }
-  }
-  return(do.call(rbind, positions))
-}
-
-layout2 <- layout_concentric2(g4)
-
-png("Output/Plots/concentric_network_adjusted1.png", width = 1500, height = 1500)
-plot(g4, 
-     vertex.color = V(g4)$color, 
-     vertex.label = vertex.label.values, 
-     vertex.label.color = "black", 
-     vertex.size = vertex.size.values, 
-     edge.width = E(g4)$weight / max(E(g4)$weight) * 5,  # Normalize edge width
-     layout = layout2, 
-     main = "Concentric Network Visualization with Normalized Edges")
-dev.off()
-
-# 2. Edges are further adjusted + Plot Visual Refinement ---------------------
-
-# Extracting node attributes
-V(g4)$color <- sapply(V(g4)$name, function(name) {
-  if (name == "User") {
-    return("lightskyblue1")
-  } else if (name %in% unique_bundle_ids) {
-    return("tomato1")
-  } else if (name %in% filtered_df$domain) {
-    return("orange")
-  } else {
-    return("gold")
-  }
-})
-
-# Adjust vertex sizes and labels
-vertex.size.values <- ifelse(V(g4)$layer == 0, 20, ifelse(V(g4)$layer == 1, 12, ifelse(V(g4)$layer == 2, 1, ifelse(V(g4)$layer == 3, 25, 8))))
-vertex.label.values <- ifelse(V(g4)$layer == 0 | V(g4)$layer == 1 | V(g4)$layer == 3, V(g4)$name, NA)
-#vertex.label.size.values <- ifelse(V(g4)$layer == 0, 3, ifelse(V(g4)$layer == 1, 1, ifelse(V(g4)$layer == 2, 1, ifelse(V(g4)$layer == 3, 3, 1))))
-
-# Plotting the graph using concentric circles with 'User' at the center
-layout_concentric2 <- function(g4) {
-  layers <- split(V(g4), V(g4)$layer)
-  positions <- list()
-  positions[["User"]] <- c(0, 0)  # Place 'User' at the center
-  for (i in seq_along(layers)) {
-    if (i == 1) next  # Skip layer 0 since 'User' is already placed
-    layer_size <- length(layers[[i]])
-    radius <- i * 2.5  # Increase spacing between layers
-    angles <- seq(0, 2 * pi, length.out = layer_size + 1)[-1]
-    for (j in seq_along(layers[[i]])) {
-      positions[[layers[[i]][j]$name]] <- c(radius * cos(angles[j]), radius * sin(angles[j]))
-    }
-  }
-  return(do.call(rbind, positions))
-}
-
-layout2 <- layout_concentric2(g4)
-
-# Save the plot to a file
-png("Output/Plots/concentric_network_adjusted2.png", width = 1500, height = 1500)
-plot(g4, 
-     vertex.color = V(g4)$color, 
-     vertex.label = vertex.label.values, 
-     vertex.label.color = "black",
-     #vertex.label.size = vertex.label.size.values,
-     vertex.size = vertex.size.values, 
-     edge.width = E(g4)$weight / max(E(g4)$weight) * 20,  # Normalize edge width
-     layout = layout2, 
-     main = "Adjusted Concentric Network Visualization")
-dev.off()
-
-
-# 3. Plot displaying domain with more than 3 ---------------------------------
+## 1.2 Plot displaying domain with more than 3 ---------------------------------
 
 # Extracting node attributes
 V(g4)$color <- sapply(V(g4)$name, function(name) {
@@ -439,7 +270,7 @@ layout_concentric2 <- function(g4) {
 
 layout2 <- layout_concentric2(g4)
 
-png("Output/Plots/concentric_network_adjusted3.png", width = 1500, height = 1500)
+png("Output/Plots/concentric_network_adjusted0.png", width = 1500, height = 1500)
 plot(g4, 
      vertex.color = V(g4)$color, 
      vertex.label = vertex.label.values, 
@@ -451,7 +282,7 @@ plot(g4,
      main = "Concentric Network Visualization with Domains with 3 or more occurrences")
 dev.off()
 
-# 4. Plot displaying domains with high weights -------------------------------
+## 1.3 Plot displaying domains with high weights -------------------------------
 
 # Extracting node attributes
 V(g4)$color <- sapply(V(g4)$name, function(name) {
@@ -511,7 +342,9 @@ layout_concentric2 <- function(g4) {
 
 layout2 <- layout_concentric2(g4)
 
-png("Output/Plots/concentric_network_adjusted4.png", width = 1500, height = 1500)
+
+## Plots Top24
+png("Output/Plots/concentric_network_adjusted1.png", width = 1500, height = 1500)
 plot(g4, 
      vertex.color = V(g4)$color, 
      vertex.label = vertex.label.values, 
@@ -523,26 +356,7 @@ plot(g4,
 dev.off()
 
 
-# Plots without overlaps --------------------------------------------------
-
-#vertex.label.dist <- ifelse(V(g4)$layer == 2, 1.5, # pushes labels away from nodes
- #                           ifelse(V(g4)$layer == 1, 0,
-  #                                 0))     
-#vertex.label.degree <- ifelse(V(g4)$layer == 2,  pi/4, # fixed direction
- #                             ifelse(V(g4)$layer == 1, 0,
-  #                                   0))    
-
-ggraph(g4, layout = "manual", x = layout2[,1], y = layout2[,2]) +
-  #geom_edge_link(aes(width = weight/1000)) +
-  geom_edge_arc(aes(alpha = ..index..), strength = 0.1, color = "grey50", show.legend = FALSE) +
-  #scale_edge_width_continuous(range = c(0.1, 10) ) + #, guide = "none") +
-  geom_node_point(aes(color = color)) +#, size = size)) +
-  geom_node_text(aes(label = name), repel = TRUE)
-
-
-# 5. Plot with less pixels for higher resolution? -------------------------
-
-png("Output/Plots/concentric_network_adjusted5.png", width = 1500, height = 1500)
+png("Output/Plots/concentric_network_adjusted2.png", width = 1500, height = 1500)
 plot(g4, 
      vertex.color = V(g4)$color, 
      vertex.label = vertex.label.values, 
@@ -551,11 +365,261 @@ plot(g4,
      #vertex.label.dist = vertex.label.dist,
      #vertex.label.degree = vertex.label.degree,
      vertex.size = vertex.size.values,  # Keep vertex sizes as defined earlier
-     edge.width = E(g4)$weight / max(E(g4)$weight) * 30, #1, #40, #20,  # Normalize edge width
+     edge.width = E(g4)$weight / max(E(g4)$weight) * 20, #1, #30, #40,  # Normalize edge width
      layout = layout2, 
      main = "Concentric Network Visualization with Domains with High Weights",
      main.cex = 5)
 dev.off()
+
+
+# Top 10 Apps even smaller df ---------------------------------------------
+
+rm(filtered_df)  # Clean up
+
+# aggregating hits to find the most active apps and domains
+# filtering to top 10 apps and top 50 domains to prevent visual clutter ("hairball" graph)
+top10_apps <- df_all_trackers_XL_dType1 %>%
+  group_by(AppName) %>%
+  summarise(total_hits = sum(hits, na.rm = TRUE)) %>%
+  slice_max(order_by = total_hits, n = 10) %>%
+  pull(AppName)
+
+filtered_df <- df_all_trackers_XL_dType1 %>%
+  filter(AppName %in% top10_apps)
+
+top50_domains <- filtered_df %>%
+  group_by(domain) %>%
+  summarise(total_hits = sum(hits, na.rm = TRUE)) %>%
+  slice_max(order_by = total_hits, n = 50) %>%
+  pull(domain)
+
+filtered_df <- filtered_df %>%
+  filter(domain %in% top50_domains)
+
+filtered_df <- filtered_df %>%
+  select(AppName, domain, hits, DomainOwnerName) %>%
+  # rename AppName to bundleID
+  rename(bundleID = AppName)
+
+
+# 2. Concentric Network Visualization Top10 Apps -----------------------------
+
+# Loading necessary libraries
+library(igraph)
+
+# Clean Up for refinement
+rm(g4, layout2, unique_bundle_ids, vertex.size.values, vertex.label.values, layout_concentric2, weight_threshold)
+
+
+## 2.1 Framework for Concentric Network Visual --------------------------------------
+
+# Creating an empty graph
+g4 <- make_empty_graph(directed = FALSE)
+
+# Adding the 'User' node
+g4 <- add_vertices(g4, 1, name = "User", color = "black", layer = 0)
+
+# Adding 'bundleID' nodes and connecting to 'User' with weight 1
+unique_bundle_ids <- unique(filtered_df$bundleID)
+for (bundle in unique_bundle_ids) {
+  if (!(bundle %in% V(g4)$name)) {
+    g4 <- add_vertices(g4, 1, name = bundle, color = "red", layer = 1)
+  }
+  g4 <- add_edges(g4, c("User", bundle), weight = 1)
+}
+
+# Adding 'domain' nodes and connecting to 'bundleID' nodes using 'hits' as weights
+for (i in 1:nrow(filtered_df)) {
+  domain <- filtered_df$domain[i]
+  bundle <- filtered_df$bundleID[i]
+  hits <- filtered_df$hits[i]
+  if (!(domain %in% V(g4)$name)) {
+    g4 <- add_vertices(g4, 1, name = domain, color = "orange", layer = 2)
+  }
+  g4 <- add_edges(g4, c(bundle, domain), weight = hits)
+}
+
+# Adding 'DomainOwnerName' nodes and connecting to 'domain' nodes with weight 1
+for (i in 1:nrow(filtered_df)) {
+  domain <- filtered_df$domain[i]
+  domain_owner <- filtered_df$DomainOwnerName[i]
+  hits <- filtered_df$hits[i]
+  if (!(domain_owner %in% V(g4)$name)) {
+    g4 <- add_vertices(g4, 1, name = domain_owner, color = "yellow", layer = 3)
+  }
+  g4 <- add_edges(g4, c(domain, domain_owner), weight = hits)#2) #3) #5) #1) #hits)
+}
+
+
+## 2.2 Plot displaying domain with more than 3 ---------------------------------
+
+# Extracting node attributes
+V(g4)$color <- sapply(V(g4)$name, function(name) {
+  if (name == "User") {
+    return("lightblue1")
+  } else if (name %in% unique_bundle_ids) {
+    return("tomato1")
+  } else if (name %in% filtered_df$domain) {
+    return("snow2")
+  } else {
+    return("gold")
+  }
+})
+
+vertex.size.values <- ifelse(V(g4)$layer == 0, 20, ifelse(V(g4)$layer == 1, 12, ifelse(V(g4)$layer == 2, 1, ifelse(V(g4)$layer == 3, 25, 8))))
+vertex.label.values <- sapply(V(g4)$name, function(name) {
+  if (V(g4)$layer[V(g4)$name == name] == 2) {
+    domain_count <- sum(filtered_df$domain == name)
+    #if (domain_count >= 3) {
+    #if (domain_count >= 5) {
+    #if (domain_count >= 6) {  
+    if (domain_count >= 7) {  
+      #if (domain_count >= 10) {  
+      
+      return(name)
+    }
+    return(NA)
+  }
+  return(name)
+})
+
+layout_concentric2 <- function(g4) {
+  layers <- split(V(g4), V(g4)$layer)
+  positions <- list()
+  positions[["User"]] <- c(0, 0)  # Place 'User' at the center
+  for (i in seq_along(layers)) {
+    if (i == 1) next  # Skip layer 0 since 'User' is already placed
+    layer_size <- length(layers[[i]])
+    radius <- i * 1.5
+    angles <- seq(0, 2 * pi, length.out = layer_size + 1)[-1]
+    for (j in seq_along(layers[[i]])) {
+      positions[[layers[[i]][j]$name]] <- c(radius * cos(angles[j]), radius * sin(angles[j]))
+    }
+  }
+  return(do.call(rbind, positions))
+}
+
+layout2 <- layout_concentric2(g4)
+
+png("Output/Plots/concentric_network_adjusted0_Top10.png", width = 1500, height = 1500)
+plot(g4, 
+     vertex.color = V(g4)$color, 
+     vertex.label = vertex.label.values, 
+     vertex.label.color = "black",
+     #vertex.label.size = vertex.label.size.values,
+     vertex.size = vertex.size.values, 
+     edge.width = E(g4)$weight / max(E(g4)$weight) * 20,  # Normalize edge width
+     layout = layout2, 
+     main = "Concentric Network Visualization with Domains with 3 or more occurrences")
+dev.off()
+
+
+## 2.3 Plot displaying domains with high weights -------------------------------
+
+# Extracting node attributes
+V(g4)$color <- sapply(V(g4)$name, function(name) {
+  if (name == "User") {
+    return("lightblue1")
+  } else if (name %in% unique_bundle_ids) {
+    return("tomato1")
+  } else if (name %in% filtered_df$domain) {
+    return("snow2")
+  } else {
+    return("gold")
+  }
+})
+
+vertex.size.values <- ifelse(V(g4)$layer == 0, 20, ifelse(V(g4)$layer == 1, 13.5, ifelse(V(g4)$layer == 2, 1, ifelse(V(g4)$layer == 3, 25, 8))))
+vertex.label.values <- sapply(V(g4)$name, function(name) {
+  if (V(g4)$layer[V(g4)$name == name] == 2) {
+    domain_count <- sum(filtered_df$domain == name)
+    if (domain_count >= 1) {
+      return(name)
+    }
+    return(NA)
+  }
+  return(name)
+})
+
+weight_threshold <- 20  # Set the threshold for minimum edge weight
+#weight_threshold <- 25  # Set the threshold for minimum edge weight
+#weight_threshold <- 30  # Set the threshold for minimum edge weight
+#weight_threshold <- 50  # Set the threshold for minimum edge weight
+
+vertex.label.values <- sapply(V(g4)$name, function(name) {
+  if (name %in% filtered_df$domain) {
+    total_weight <- sum(E(g4)[.from(name)]$weight)
+    if (total_weight < weight_threshold) {
+      return(NA)
+    }
+  }
+  return(name)
+})
+
+layout_concentric2 <- function(g4) {
+  layers <- split(V(g4), V(g4)$layer)
+  positions <- list()
+  positions[["User"]] <- c(0, 0)  # Place 'User' at the center
+  for (i in seq_along(layers)) {
+    if (i == 1) next  # Skip layer 0 since 'User' is already placed
+    layer_size <- length(layers[[i]])
+    radius <- i * 1.5
+    angles <- seq(0, 2 * pi, length.out = layer_size + 1)[-1]
+    for (j in seq_along(layers[[i]])) {
+      positions[[layers[[i]][j]$name]] <- c(radius * cos(angles[j]), radius * sin(angles[j]))
+    }
+  }
+  return(do.call(rbind, positions))
+}
+
+layout2 <- layout_concentric2(g4)
+
+
+png("Output/Plots/concentric_network_adjusted1_Top10.png", width = 1500, height = 1500)
+plot(g4, 
+     vertex.color = V(g4)$color, 
+     vertex.label = vertex.label.values, 
+     vertex.label.color = "black",
+     vertex.size = vertex.size.values, 
+     edge.width = E(g4)$weight / max(E(g4)$weight) * 10,  # Normalize edge width
+     layout = layout2, 
+     main = "Concentric Network Visualization with Domains with High Weights")
+dev.off()
+
+
+## 2.4 Plots without overlaps --------------------------------------------------
+
+vertex.label.dist <- ifelse(V(g4)$layer == 2, 0.5, # pushes labels away from nodes
+                            ifelse(V(g4)$layer == 1, 0,
+                                   0))     
+vertex.label.degree <- ifelse(V(g4)$layer == 2,  pi/4, # fixed direction
+                              ifelse(V(g4)$layer == 1, 0,
+                                     0))    
+
+png("Output/Plots/concentric_network_adjusted2_Top10.png", width = 1500, height = 1500)
+plot(g4, 
+     vertex.color = V(g4)$color, 
+     vertex.label = vertex.label.values, 
+     vertex.label.color = "black",
+     vertex.label.cex = 1.2,  # Increase the font size for vertex labels
+     vertex.label.dist = vertex.label.dist,
+     vertex.label.degree = vertex.label.degree,
+     vertex.size = vertex.size.values,  # Keep vertex sizes as defined earlier
+     edge.width = E(g4)$weight / max(E(g4)$weight) * 7.5, #1, #20,  # Normalize edge width
+     layout = layout2, 
+     main = "Concentric Network Visualization with Domains with High Weights",
+     main.cex = 5)
+dev.off()
+
+
+
+# Using ggraph for better visualization 
+ggraph(g4, layout = "manual", x = layout2[,1], y = layout2[,2]) +
+  #geom_edge_link(aes(width = weight/1000)) +
+  geom_edge_arc(aes(alpha = ..index..), strength = 0.1, color = "grey50", show.legend = FALSE) +
+  #scale_edge_width_continuous(range = c(0.1, 10) ) + #, guide = "none") +
+  geom_node_point(aes(color = color)) +#, size = size)) +
+  geom_node_text(aes(label = name), repel = TRUE)
 
 
 # Tracker Heatmap ---------------------------------------------------------
