@@ -199,7 +199,7 @@ merged_data_all <- merged_data_all %>%
     bundleID == "com.shazam.Shazam" ~ "Shazam",
     bundleID == "com.apple.shortcuts" ~ "Apple Shortcuts",
     bundleID == "com.ubercab.UberEats" ~ "Uber Eats",
-    bundleID == "com.zwift.Zwift" ~ "Zwift",
+    bundleID == "com.zwift.Zwift" ~ "Zwift", # duplicate, but one is the game and the other the companion app, so keeping both
     bundleID == "com.google.Authenticator" ~ "Google Authenticator",
     bundleID == "com.linguee.DeepLMobileTranslator" ~ "DeepL",
     bundleID == "jp.co.sony.songpal.mdr" ~ "Sony Headphones",
@@ -231,7 +231,7 @@ merged_data_all <- merged_data_all %>%
     bundleID == "com.transferwise.Transferwise" ~ "Wise",
     bundleID == "net.Foddy.GettingOverIt" ~ "Getting Over It",
     bundleID == "com.getdropbox.Dropbox" ~ "Dropbox",
-    bundleID == "com.zwift.ZwiftGame" ~ "Zwift",
+    bundleID == "com.zwift.ZwiftGame" ~ "Zwift", #duplicate, but one is the game and the other the companion app, so keeping both
     bundleID == "us.zoom.videomeetings" ~ "Zoom",
     bundleID == "co.hinge.mobile.ios" ~ "Hinge",
     bundleID == "com.ndemiccreations.plagueinc" ~ "Plague.Inc",
@@ -3588,7 +3588,7 @@ confusion_matrix_ct_off[1,3] / confusion_matrix_ct_off[3,3]
 confusion_matrix_ct_on[1,3] / confusion_matrix_ct_on[3,3]
 
 
-## Confusion Matrix Ratios -------------------------------------------------
+## Confusion Matrix -------------------------------------------------
 
 confusion_matrix_ratio <- confusion_matrix
 confusion_matrix_ratio[1,1] <- confusion_matrix[1,1] / confusion_matrix[3,3] * 100
@@ -3664,7 +3664,7 @@ confusion_matrix_XL_ct_on_ratio[3,3] <- confusion_matrix_XL_ct_on[3,3] / confusi
 print(confusion_matrix_XL_ct_on_ratio)
 
 
-## Confusion Matrix Ratio Results ------------------------------------------
+## Results CF ------------------------------------------
 
 print(confusion_matrix_ratio)
 print(confusion_matrix_XL_ratio)
@@ -3698,7 +3698,8 @@ table(merged_data_ct_on_more_info$domainType)
 table(merged_data_ct_on_more_info$domainType, merged_data_ct_on_more_info$TrackerBlackListXL)
 
 
-## Tracker prevalence - Statistical comparison CT on/off -------------------
+## Tracker prevalence -------------------
+# Statistical comparison CT on/off
 
 # comparing tracker prevalence between conditions
 comparison_stats_ct_on_off <- data.frame(
@@ -3718,7 +3719,215 @@ wilcox.test(merged_data_ct_off_more_info$hits[merged_data_ct_off_more_info$Track
 
 # 7. Network Traffic Analysis of complete Df -------------------------------------------------------
 
-## Network Traffic Analysis of merged_data_all_more_info by occurrence --------
+library(dplyr)
+
+# 7.1 Descriptive Statistics --------------------------------------------------
+
+# Total number of observations in merged_data_all_more_info
+nrow(merged_data_all_more_info) # 15093
+
+# count number of unique bundleIDs in merged_data_all_more_info
+length(unique(merged_data_all_more_info$bundleID)) # 184
+
+length(unique(merged_data_all_more_info$AppName)) # 183
+
+duplicate_mappings <- merged_data_all_more_info %>%
+  group_by(AppName) %>%
+  summarise(
+    unique_bundles = n_distinct(bundleID),
+    bundle_list = paste(unique(bundleID), collapse = ", ")
+  ) %>%
+  filter(unique_bundles > 1)
+print(duplicate_mappings)
+
+
+# count number of unique domains in merged_data_all_more_info
+length(unique(merged_data_all_more_info$domain)) # 4398
+
+# count number of unique domains in merged_data_all_more_info that are suspected Trackers (TrackerBlackListXL == TRUE | domainType == 1)
+length(unique(merged_data_all_more_info$domain[merged_data_all_more_info$TrackerBlackListXL == TRUE | merged_data_all_more_info$domainType == 1])) # 901
+
+# count number of unique DomainOwnerName in merged_data_all_more_info
+length(unique(merged_data_all_more_info$DomainOwnerName)) # 103
+
+
+# New df to check suspected trackers (TrackerBlackListXL == TRUE | domainType == 1) 
+merged_data_all_blacklistXL_true_domainType1 <- merged_data_all_more_info %>%
+  filter(TrackerBlackListXL == TRUE | domainType == 1) # 4265
+
+# count number of unique DomainOwnerName that employ suspected Tracker Domains (TrackerBlackListXL == TRUE | domainType == 1)
+length(unique(merged_data_all_blacklistXL_true_domainType1$DomainOwnerName)) # 90
+
+# count number of unique bundleID that employ suspected Tracker Domains (TrackerBlackListXL == TRUE | domainType == 1)
+length(unique(merged_data_all_blacklistXL_true_domainType1$bundleID)) #151
+
+
+# Show unique DomainOwnerName that appear in merged_data_all_more_info, but not in merged_data_all_blacklistXL_true_domainType1
+unique(merged_data_all_more_info$DomainOwnerName[!merged_data_all_more_info$DomainOwnerName %in% merged_data_all_blacklistXL_true_domainType1$DomainOwnerName]) # 13
+
+# Show unique AppName that appear in merged_data_all_more_info, but not in merged_data_all_blacklistXL_true_domainType1
+unique(merged_data_all_more_info$AppName[!merged_data_all_more_info$AppName %in% merged_data_all_blacklistXL_true_domainType1$AppName]) # 33
+
+
+# Comparison table
+comparison_stats_merged_data_all <- data.frame(
+  total_observations = nrow(merged_data_all_more_info),
+  unique_bundleIDs = length(unique(merged_data_all_more_info$bundleID)),
+  unique_domains = length(unique(merged_data_all_more_info$domain)),
+  total_suspected_trackers = sum(merged_data_all_more_info$TrackerBlackListXL == TRUE | merged_data_all_more_info$domainType == 1), 
+  unique_suspected_trackers = length(unique(merged_data_all_more_info$domain[merged_data_all_more_info$TrackerBlackListXL == TRUE | merged_data_all_more_info$domainType == 1])),
+  unique_domain_owners = length(unique(merged_data_all_more_info$DomainOwnerName)),
+  total_hits = sum(merged_data_all_more_info$hits),
+  total_hits_by_trackers = sum(merged_data_all_more_info$hits[merged_data_all_more_info$TrackerBlackListXL == TRUE | merged_data_all_more_info$domainType == 1]),
+  tracker_prevalence_ratio = sum(merged_data_all_more_info$TrackerBlackListXL == TRUE | merged_data_all_more_info$domainType == 1) / nrow(merged_data_all_more_info) * 100
+)
+print(comparison_stats_merged_data_all)
+
+
+# 7.2 App Behaviour Analysis - Top10 most active apps -------------------------
+
+suppressPackageStartupMessages({
+  library(dplyr)
+  library(readr)
+  library(stringr)
+  library(tidyr)
+})
+
+top10_apps <- merged_data_all_more_info %>%
+  mutate(
+    TrackerBlackListXL = as.logical(TrackerBlackListXL),
+    domainType = suppressWarnings(as.integer(domainType)),
+    hits = suppressWarnings(as.numeric(hits))
+  )
+
+# defining tracker rows
+top10_apps <- top10_apps %>%
+  mutate(
+    is_tracker = (TrackerBlackListXL %in% TRUE) | (domainType == 1L)
+  )
+
+# helper: safe n_distinct ignoring NA
+n_distinct_na0 <- function(x) {
+  x <- x[!is.na(x)]
+  dplyr::n_distinct(x)
+}
+
+# app-level aggregation
+app_stats <- top10_apps %>%
+  group_by(AppName) %>%
+  summarise(
+    entries = n(),
+    hits_total = sum(hits, na.rm = TRUE),
+    tracker_entries = sum(is_tracker, na.rm = TRUE),
+    tracker_hits = sum(if_else(is_tracker, hits, 0), na.rm = TRUE),
+    
+    tracker_entry_share = tracker_entries / entries,
+    tracker_hit_share = if_else(hits_total > 0, tracker_hits / hits_total, NA_real_),
+    
+    unique_domains = n_distinct_na0(domain),
+    unique_domains_tracker = n_distinct_na0(domain[is_tracker]),
+    unique_owners = n_distinct_na0(DomainOwnerName),
+    unique_owners_tracker = n_distinct_na0(DomainOwnerName[is_tracker]),
+    
+    hits_per_entry = if_else(entries > 0, hits_total / entries, NA_real_),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(hits_total))
+
+
+# 1) top apps by total hits (usage + tracking exposure)
+top_by_total_hits <- app_stats %>%
+  slice_head(n = 10) %>%
+  arrange(desc(tracker_hit_share)) %>%
+  #slice_max(order_by = hits_total, n = 10, with_ties = FALSE) %>%
+  transmute(
+    AppName,
+    hits_total,
+    tracker_hits,
+    tracker_hit_share = round(tracker_hit_share, 4)*100,
+    entries,
+    tracker_entries,
+    tracker_entry_share = round(tracker_entry_share, 4)*100,
+    #unique_domains,
+    #unique_domains_tracker,
+    #unique_owners,
+    #unique_owners_tracker,
+    hits_per_entry = round(hits_per_entry, 2)
+  )
+top_by_total_hits
+# save csv
+write.csv(top_by_total_hits, "Output/Tables/top10_most_active_by_total_hits.csv", row.names = TRUE)
+
+
+top_by_tracker_hits <- app_stats %>%
+  slice_max(order_by = tracker_hits, n = 10, with_ties = FALSE) %>%
+  arrange(desc(tracker_hit_share)) %>%
+  transmute(
+    AppName,
+    hits_total,
+    tracker_hits,
+    tracker_hit_share = round(tracker_hit_share, 4)*100,
+    #entries,
+    #tracker_entries,
+    #tracker_entry_share = round(tracker_entry_share, 4)*100,
+    #unique_domains,
+    #unique_domains_tracker,
+    #unique_owners,
+    #unique_owners_tracker,
+    #hits_per_entry = round(hits_per_entry, 2)
+  )
+top_by_tracker_hits
+
+
+# 2) high tracker-entry share among apps with >= 50 entries
+high_tracker_entries_share_ge50 <- app_stats %>%
+  filter(entries >= 50) %>%
+  #arrange(desc(tracker_entry_share), desc(hits_total)) %>%
+  arrange(desc(tracker_entry_share)) %>%
+  slice_head(n = 5) %>%
+  transmute(
+    AppName,
+    entries,
+    tracker_entries,
+    tracker_entry_share = round(tracker_entry_share, 4)*100,
+    hits_total,
+    tracker_hits,
+    tracker_hit_share = round(tracker_hit_share, 4)*100,
+    #unique_domains,
+    #unique_domains_tracker,
+    #unique_owners,
+    #unique_owners_tracker
+  )
+high_tracker_entries_share_ge50
+# save csv
+write.csv(high_tracker_entries_share_ge50, "Output/Tables/top5_highest_tracker_entry_share_ge50_entries.csv", row.names = TRUE)
+
+
+# 3) high tracker-hits share among apps with >= 50 entries
+high_tracker_hit_share_ge50 <- app_stats %>%
+  filter(entries >= 50) %>%
+  #arrange(desc(tracker_entry_share), desc(hits_total)) %>%
+  arrange(desc(tracker_hit_share)) %>%
+  slice_head(n = 5) %>%
+  transmute(
+    AppName,
+    hits_total,
+    tracker_hits,
+    tracker_hit_share = round(tracker_hit_share, 4)*100,
+    entries,
+    tracker_entries,
+    tracker_entry_share = round(tracker_entry_share, 4)*100,
+    #unique_domains,
+    #unique_domains_tracker,
+    #unique_owners,
+    #unique_owners_tracker
+  )
+high_tracker_hit_share_ge50
+# save csv
+write.csv(high_tracker_hit_share_ge50, "Output/Tables/top5_highest_tracker_hit_share_ge50_entries.csv", row.names = TRUE)
+
+
+## By Occurrence (=n) --------
 
 rm(network_traffic_analysis_all_n)
 # Show ranking of DomainOwnerName by occurence, where TrackerBlackListXL = TRUE | domainType == 1
@@ -3770,7 +3979,7 @@ print(network_traffic_analysis_all_tracker_domains_n_duplicates)
 rm(network_traffic_analysis_all_tracker_domains_n_duplicates)
 
 
-## Network Traffic Analysis of merged_data_all_more_info by hit occurence --------------------------------------------------------
+## By Hit Occurence --------------------------------------------------------
 
 rm(network_traffic_analysis_all_hits)
 # Show ranking of DomainOwnerName by hits, where TrackerBlackListXL = TRUE | domainType == 1
@@ -3811,6 +4020,7 @@ network_traffic_analysis_all_tracker_domains_hits <- merged_data_all_more_info %
   ungroup()
 write.csv(network_traffic_analysis_all_tracker_domains_hits, "Output/Tables/network_traffic_analysis_all_tracker_domains_hits.csv", row.names = TRUE)
 
+
 ## Checking some tracking domains hit occurrence ---------------------------
 
 # checking some domains based on sum hits of the tracker domains
@@ -3844,79 +4054,6 @@ events.mapbox.com_hits_sum <- merged_data_all_more_info %>%
   summarise(total_hits = sum(hits))
 print(events.mapbox.com_hits_sum)
 rm(events.mapbox.com_hits_sum)
-
-
-# 8. Extra df's for data subject access requests ----------------------------------
-
-library(dplyr)
-# Merging all relevant data frames into one
-merged_data_all_0 <- bind_rows(
-  df1_ct_off_relevant,
-  df2_ct_off_relevant,
-  df3_ct_off_relevant,
-  df4_ct_on_relevant,
-  df5_ct_on_relevant,
-  df6_ct_on_relevant,
-  df7_ct_on_relevant,
-  df8_ct_off_relevant,
-  df9_ct_off_relevant,
-  df10_ct_unknown_relevant,
-  df11_ct_unknown_relevant
-)
-
-# filter for spotify only
-merged_data_spotify <- merged_data_all_0 %>%
-  filter(bundleID == "com.spotify.client")
-
-merged_data_spotify_info <- merged_data_all_more_info %>%
-  filter(bundleID == "com.spotify.client") %>%
-  select(DomainOwnerName, AppName, domain, domainType, TrackerBlackList, TrackerBlackListXL, 
-         firstTimeStamp, timeStamp, hits, initiatedType, domainClassification)
-# save as .csv file
-write.csv(merged_data_spotify, "Output/Tables/merged_data_spotify.csv", row.names = TRUE)
-rm(merged_data_spotify)
-rm(merged_data_spotify_info)
-
-# filter for strava only
-merged_data_strava <- merged_data_all_0 %>%
-  filter(bundleID == "com.strava.stravaride")
-
-# save as .csv file
-write.csv(merged_data_strava, "Output/Tables/merged_data_strava.csv", row.names = TRUE)
-rm(merged_data_strava)
-
-# filter for ricardo only
-merged_data_ricardo <- merged_data_all_0 %>%
-  filter(bundleID == "swiss.ricardo.iphone")
-
-# save as .csv file
-write.csv(merged_data_ricardo, "Output/Tables/merged_data_ricardo.csv", row.names = TRUE)
-rm(merged_data_ricardo)
-
-# filter for tutti only
-merged_data_tutti <- merged_data_all_0 %>%
-  filter(bundleID == "ch.tutti.iphone")
-
-# save as .csv file
-write.csv(merged_data_tutti, "Output/Tables/merged_data_tutti.csv", row.names = TRUE)
-rm(merged_data_tutti)
-
-# filter for reddit only
-merged_data_reddit <- merged_data_all_0 %>%
-  filter(bundleID == "com.reddit.Reddit")
-
-# save as .csv file
-write.csv(merged_data_reddit, "Output/Tables/merged_data_reddit.csv", row.names = TRUE)
-rm(merged_data_reddit)
-
-## filter for domains that contain "branch" in their name
-library(stringr)
-merged_data_branch_io <- merged_data_all_0 %>%
-  filter(str_detect(domain, "branch"))
-
-# save as .csv file
-write.csv(merged_data_branch_io, "Output/Tables/merged_data_branch_io.csv", row.names = TRUE)
-rm(merged_data_branch_io)
 
 
 # Optional: Temporal Pattern Analysis -------------------------------------
