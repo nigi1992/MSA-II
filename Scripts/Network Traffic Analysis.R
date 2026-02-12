@@ -3769,11 +3769,8 @@ unique(merged_data_all_more_info$DomainOwnerName[!merged_data_all_more_info$Doma
 unique(merged_data_all_more_info$AppName[!merged_data_all_more_info$AppName %in% merged_data_all_blacklistXL_true_domainType1$AppName]) # 33
 
 
-# Show ratio of AppInitiated vs. NonAppInitiated in merged_data_all_more_info
-table(merged_data_all_more_info$initiatedType)
-
-# Show ratio of AppInitiated vs. NonAppInitiated in merged_data_all_blacklistXL_true_domainType1
-table(merged_data_all_blacklistXL_true_domainType1$initiatedType)
+# Show table domainType
+table(merged_data_all_more_info$domainType)
 
 # Show table domainClassification
 table(merged_data_all_more_info$domainClassification)
@@ -3781,8 +3778,19 @@ table(merged_data_all_more_info$domainClassification)
 # Show table domainClassification for suspected trackers (TrackerBlackListXL == TRUE | domainType == 1)
 table(merged_data_all_blacklistXL_true_domainType1$domainClassification)
 
-# Show table domainType
-table(merged_data_all_more_info$domainType)
+comparison_stats_domainClassification <- data.frame(
+  tracker_domains = c(sum(merged_data_all_blacklistXL_true_domainType1$domainClassification == 1), sum(merged_data_all_blacklistXL_true_domainType1$domainClassification == 2)),
+  all_domains = c(sum(merged_data_all_more_info$domainClassification == 1), sum(merged_data_all_more_info$domainClassification == 2)),
+  ratio = c(round(sum(merged_data_all_blacklistXL_true_domainType1$domainClassification == 1) / sum(merged_data_all_more_info$domainClassification == 1) * 100,2),
+             round(sum(merged_data_all_blacklistXL_true_domainType1$domainClassification == 2) / sum(merged_data_all_more_info$domainClassification == 2) * 100,2)))
+print(comparison_stats_domainClassification)
+
+
+# Show ratio of AppInitiated vs. NonAppInitiated in merged_data_all_more_info
+table(merged_data_all_more_info$initiatedType)
+
+# Show ratio of AppInitiated vs. NonAppInitiated in merged_data_all_blacklistXL_true_domainType1
+table(merged_data_all_blacklistXL_true_domainType1$initiatedType)
 
 comparison_stats_initiatedType <- data.frame(
   condition = c("AppInitiated", "NonAppInitiated", "Ratio NonAppIni"),
