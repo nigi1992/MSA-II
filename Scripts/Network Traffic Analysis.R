@@ -3769,6 +3769,25 @@ unique(merged_data_all_more_info$DomainOwnerName[!merged_data_all_more_info$Doma
 unique(merged_data_all_more_info$AppName[!merged_data_all_more_info$AppName %in% merged_data_all_blacklistXL_true_domainType1$AppName]) # 33
 
 
+# Show ratio of AppInitiated vs. NonAppInitiated in merged_data_all_more_info
+table(merged_data_all_more_info$initiatedType)
+
+comparison_stats_initiatedType <- data.frame(
+  condition = c("AppInitiated", "NonAppInitiated", "Ratio"),
+  tracker_domains = c(sum(merged_data_all_blacklistXL_true_domainType1$initiatedType == "AppInitiated"), 
+                                              sum(merged_data_all_blacklistXL_true_domainType1$initiatedType == "NonAppInitiated"),
+                      round(sum(merged_data_all_blacklistXL_true_domainType1$initiatedType == "NonAppInitiated")/ 
+                      nrow(merged_data_all_blacklistXL_true_domainType1),4) * 100),
+  all_domains = c(sum(merged_data_all_more_info$initiatedType == "AppInitiated"), 
+                               sum(merged_data_all_more_info$initiatedType == "NonAppInitiated"),
+                      round(sum(merged_data_all_more_info$initiatedType == "NonAppInitiated")/
+                      nrow(merged_data_all_more_info),4) * 100),
+  ratio = c(round(sum(merged_data_all_blacklistXL_true_domainType1$initiatedType == "AppInitiated") / sum(merged_data_all_more_info$initiatedType == "AppInitiated") * 100,2),
+             round(sum(merged_data_all_blacklistXL_true_domainType1$initiatedType == "NonAppInitiated") / sum(merged_data_all_more_info$initiatedType == "NonAppInitiated") * 100,2),"")
+)
+print(comparison_stats_initiatedType)  
+
+
 # Comparison table
 comparison_stats_merged_data_all <- data.frame(
   total_observations = nrow(merged_data_all_more_info),
