@@ -3773,7 +3773,7 @@ unique(merged_data_all_more_info$AppName[!merged_data_all_more_info$AppName %in%
 table(merged_data_all_more_info$initiatedType)
 
 comparison_stats_initiatedType <- data.frame(
-  condition = c("AppInitiated", "NonAppInitiated", "Ratio"),
+  condition = c("AppInitiated", "NonAppInitiated", "Ratio NonAppIni"),
   tracker_domains = c(sum(merged_data_all_blacklistXL_true_domainType1$initiatedType == "AppInitiated"), 
                                               sum(merged_data_all_blacklistXL_true_domainType1$initiatedType == "NonAppInitiated"),
                       round(sum(merged_data_all_blacklistXL_true_domainType1$initiatedType == "NonAppInitiated")/ 
