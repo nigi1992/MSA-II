@@ -3772,6 +3772,18 @@ unique(merged_data_all_more_info$AppName[!merged_data_all_more_info$AppName %in%
 # Show ratio of AppInitiated vs. NonAppInitiated in merged_data_all_more_info
 table(merged_data_all_more_info$initiatedType)
 
+# Show ratio of AppInitiated vs. NonAppInitiated in merged_data_all_blacklistXL_true_domainType1
+table(merged_data_all_blacklistXL_true_domainType1$initiatedType)
+
+# Show table domainClassification
+table(merged_data_all_more_info$domainClassification)
+
+# Show table domainClassification for suspected trackers (TrackerBlackListXL == TRUE | domainType == 1)
+table(merged_data_all_blacklistXL_true_domainType1$domainClassification)
+
+# Show table domainType
+table(merged_data_all_more_info$domainType)
+
 comparison_stats_initiatedType <- data.frame(
   condition = c("AppInitiated", "NonAppInitiated", "Ratio NonAppIni"),
   tracker_domains = c(sum(merged_data_all_blacklistXL_true_domainType1$initiatedType == "AppInitiated"), 
