@@ -3713,6 +3713,8 @@ comparison_stats_ct_on_off <- data.frame(
                             sum(merged_data_ct_on_more_info$hits[merged_data_ct_on_more_info$TrackerBlackListXL == TRUE | merged_data_ct_on_more_info$domainType == 1])),
   tracker_prevalence_ratio = c(sum(merged_data_ct_off_more_info$TrackerBlackListXL == TRUE | merged_data_ct_off_more_info$domainType == 1) / nrow(merged_data_ct_off_more_info) * 100,
                               sum(merged_data_ct_on_more_info$TrackerBlackListXL == TRUE | merged_data_ct_on_more_info$domainType == 1) / nrow(merged_data_ct_on_more_info) * 100),
+  tracker_hits_ratio = c(sum(merged_data_ct_off_more_info$hits[merged_data_ct_off_more_info$TrackerBlackListXL == TRUE | merged_data_ct_off_more_info$domainType == 1]) / sum(merged_data_ct_off_more_info$hits) * 100,
+                       sum(merged_data_ct_on_more_info$hits[merged_data_ct_on_more_info$TrackerBlackListXL == TRUE | merged_data_ct_on_more_info$domainType == 1]) / sum(merged_data_ct_on_more_info$hits) * 100),
   total_observations = c(nrow(merged_data_ct_off_more_info), nrow(merged_data_ct_on_more_info)),
   unique_bundleIDs = c(length(unique(merged_data_ct_off_more_info$bundleID)), length(unique(merged_data_ct_on_more_info$bundleID))),
   unique_domains = c(length(unique(merged_data_ct_off_more_info$domain)), length(unique(merged_data_ct_on_more_info$domain))),
