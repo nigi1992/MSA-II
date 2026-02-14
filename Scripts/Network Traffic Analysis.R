@@ -3588,7 +3588,7 @@ confusion_matrix_ct_off[1,3] / confusion_matrix_ct_off[3,3]
 confusion_matrix_ct_on[1,3] / confusion_matrix_ct_on[3,3]
 
 
-## Confusion Matrix -------------------------------------------------
+# 6.1 Confusion Matrix -------------------------------------------------
 
 confusion_matrix_ratio <- confusion_matrix
 confusion_matrix_ratio[1,1] <- confusion_matrix[1,1] / confusion_matrix[3,3] * 100
@@ -3698,7 +3698,7 @@ table(merged_data_ct_on_more_info$domainType)
 table(merged_data_ct_on_more_info$domainType, merged_data_ct_on_more_info$TrackerBlackListXL)
 
 
-## Tracker prevalence -------------------
+# 6.2 Tracker prevalence -------------------
 # Statistical comparison CT on/off
 
 # comparing tracker prevalence between conditions
@@ -3726,6 +3726,81 @@ print(comparison_stats_ct_on_off)
 # statistical test for difference
 wilcox.test(merged_data_ct_off_more_info$hits[merged_data_ct_off_more_info$TrackerBlackListXL], 
             merged_data_ct_on_more_info$hits[merged_data_ct_on_more_info$TrackerBlackListXL])
+
+
+## Snap, Google and Meta Comparison ----------------------------------------
+
+# count number of tracker hits for Snap, Google, Meta and Branch in merged_data_ct_off_more_info & merged_data_ct_on_more_info
+comparison_stats_companies <- data.frame(
+  condition = c("ct_off", "ct_on"),
+  Snapchat = c(
+    sum(merged_data_ct_off_more_info$hits[grepl("Snap Inc.", merged_data_ct_off_more_info$DomainOwnerName) & 
+                                            (merged_data_ct_off_more_info$TrackerBlackListXL == TRUE | merged_data_ct_off_more_info$domainType == 1)]),
+    sum(merged_data_ct_on_more_info$hits[grepl("Snap Inc.", merged_data_ct_on_more_info$DomainOwnerName) & 
+                                           (merged_data_ct_on_more_info$TrackerBlackListXL == TRUE | merged_data_ct_on_more_info$domainType == 1)])
+  ),
+  Google = c(
+    sum(merged_data_ct_off_more_info$hits[grepl("Google", merged_data_ct_off_more_info$DomainOwnerName) & 
+                                            (merged_data_ct_off_more_info$TrackerBlackListXL == TRUE | merged_data_ct_off_more_info$domainType == 1)]),
+    sum(merged_data_ct_on_more_info$hits[grepl("Google", merged_data_ct_on_more_info$DomainOwnerName) & 
+                                           (merged_data_ct_on_more_info$TrackerBlackListXL == TRUE | merged_data_ct_on_more_info$domainType == 1)])
+  ),
+  Meta = c(
+    sum(merged_data_ct_off_more_info$hits[grepl("Meta", merged_data_ct_off_more_info$DomainOwnerName) & 
+                                            (merged_data_ct_off_more_info$TrackerBlackListXL == TRUE | merged_data_ct_off_more_info$domainType == 1)]),
+    sum(merged_data_ct_on_more_info$hits[grepl("Meta", merged_data_ct_on_more_info$DomainOwnerName) & 
+                                           (merged_data_ct_on_more_info$TrackerBlackListXL == TRUE | merged_data_ct_on_more_info$domainType == 1)])
+  ),
+  Branch = c(
+    sum(merged_data_ct_off_more_info$hits[grepl("Branch", merged_data_ct_off_more_info$DomainOwnerName) & 
+                                            (merged_data_ct_off_more_info$TrackerBlackListXL == TRUE | merged_data_ct_off_more_info$domainType == 1)]),
+    sum(merged_data_ct_on_more_info$hits[grepl("Branch", merged_data_ct_on_more_info$DomainOwnerName) & 
+                                           (merged_data_ct_on_more_info$TrackerBlackListXL == TRUE | merged_data_ct_on_more_info$domainType == 1)])
+  )
+)
+print(comparison_stats_companies)
+
+# Hits by Top Apps in both df's
+comparison_stats_companies_apps <- data.frame(
+  condition = c("ct_off", "ct_on"),
+  WhatsApp = c(
+    sum(merged_data_ct_off_more_info$hits[grepl("WhatsApp", merged_data_ct_off_more_info$AppName) & 
+                                            (merged_data_ct_off_more_info$TrackerBlackListXL == TRUE | merged_data_ct_off_more_info$domainType == 1)]),
+    sum(merged_data_ct_on_more_info$hits[grepl("WhatsApp", merged_data_ct_on_more_info$AppName) & 
+                                           (merged_data_ct_on_more_info$TrackerBlackListXL == TRUE | merged_data_ct_on_more_info$domainType == 1)])
+  ),
+  Ricardo = c(
+    sum(merged_data_ct_off_more_info$hits[grepl("Ricardo", merged_data_ct_off_more_info$AppName) & 
+                                            (merged_data_ct_off_more_info$TrackerBlackListXL == TRUE | merged_data_ct_off_more_info$domainType == 1)]),
+    sum(merged_data_ct_on_more_info$hits[grepl("Ricardo", merged_data_ct_on_more_info$AppName) & 
+                                           (merged_data_ct_on_more_info$TrackerBlackListXL == TRUE | merged_data_ct_on_more_info$domainType == 1)])
+  ),
+  Spotify = c(
+    sum(merged_data_ct_off_more_info$hits[grepl("Spotify", merged_data_ct_off_more_info$AppName) & 
+                                            (merged_data_ct_off_more_info$TrackerBlackListXL == TRUE | merged_data_ct_off_more_info$domainType == 1)]),
+    sum(merged_data_ct_on_more_info$hits[grepl("Spotify", merged_data_ct_on_more_info$AppName) & 
+                                           (merged_data_ct_on_more_info$TrackerBlackListXL == TRUE | merged_data_ct_on_more_info$domainType == 1)])
+  ),
+  Strava = c(
+    sum(merged_data_ct_off_more_info$hits[grepl("Strava", merged_data_ct_off_more_info$AppName) & 
+                                            (merged_data_ct_off_more_info$TrackerBlackListXL == TRUE | merged_data_ct_off_more_info$domainType == 1)]),
+    sum(merged_data_ct_on_more_info$hits[grepl("Strava", merged_data_ct_on_more_info$AppName) & 
+                                           (merged_data_ct_on_more_info$TrackerBlackListXL == TRUE | merged_data_ct_on_more_info$domainType == 1)])
+  ),
+  YouTube = c(
+    sum(merged_data_ct_off_more_info$hits[grepl("Youtube", merged_data_ct_off_more_info$AppName) & 
+                                            (merged_data_ct_off_more_info$TrackerBlackListXL == TRUE | merged_data_ct_off_more_info$domainType == 1)]),
+    sum(merged_data_ct_on_more_info$hits[grepl("Youtube", merged_data_ct_on_more_info$AppName) & 
+                                           (merged_data_ct_on_more_info$TrackerBlackListXL == TRUE | merged_data_ct_on_more_info$domainType == 1)])
+  ),
+  Snapchat = c(
+    sum(merged_data_ct_off_more_info$hits[grepl("Snapchat", merged_data_ct_off_more_info$AppName) & 
+                                            (merged_data_ct_off_more_info$TrackerBlackListXL == TRUE | merged_data_ct_off_more_info$domainType == 1)]),
+    sum(merged_data_ct_on_more_info$hits[grepl("Snapchat", merged_data_ct_on_more_info$AppName) & 
+                                           (merged_data_ct_on_more_info$TrackerBlackListXL == TRUE | merged_data_ct_on_more_info$domainType == 1)])
+  )
+)  
+print(comparison_stats_companies_apps)
 
 
 # 7. Network Traffic Analysis of complete Df -------------------------------------------------------
